@@ -1,0 +1,14 @@
+2018-03-04 19:56:42 WARN  Bank:11 - test
+2018-03-04 20:35:59 WARN  Bank:16 - test
+2018-03-04 20:35:59 TRACE Bank:17 - Adding some base info to bank
+2018-03-04 20:35:59 TRACE Bank:40 - Testing Serialization
+2018-03-04 20:58:29 TRACE root:36 - Testing reading in file
+2018-03-04 20:58:30 TRACE root:36 - Found HashMap
+2018-03-04 20:58:30 TRACE root:36 - Account [balance=0.0, approved=true, owners= [Joel ]]
+2018-03-04 20:58:30 TRACE root:36 - Account [balance=0.0, approved=true, owners= [Sam ]]
+2018-03-04 20:58:30 TRACE root:36 - Account [balance=0.0, approved=true, owners= [Chris ]]
+2018-03-04 20:58:30 TRACE root:36 - Customer [name=Chris, password=hello, accounts=[Account [balance=0.0, approved=true, owners= [Chris ]]]]
+2018-03-04 20:58:30 TRACE root:36 - Customer [name=Sam, password=passcode, accounts=[Account [balance=0.0, approved=true, owners= [Sam ]]]]
+2018-03-04 20:58:30 TRACE root:36 - Customer [name=Joel, password=12345, accounts=[Account [balance=0.0, approved=true, owners= [Joel ]]]]
+2018-03-04 20:58:30 TRACE root:36 - Employee [customers=[Customer [name=Sam, password=passcode, accounts=[Account [balance=0.0, approved=true, owners= [Sam ]]]], Customer [name=Joel, password=12345, accounts=[Account [balance=0.0, approved=true, owners= [Joel ]]]]], name=null]
+2018-03-04 20:58:30 TRACE root:36 - Employee [customers=[Customer [name=Chris, password=hello, accounts=[Account [balance=0.0, approved=true, owners= [Chris ]]]]], name=null]
