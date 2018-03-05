@@ -85,7 +85,7 @@ public class Admin extends Employee {
 	
 	
 	//returns the customer with the name password combo
-	public static Employee getEmployee(String name, String password) {
+	public static Admin getEmployee(String name, String password) {
 		
 		//go through the bank and find the customer with name and password combo
 		for(Admin a:Bank.getAdmins()) {

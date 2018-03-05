@@ -230,3 +230,22 @@
 2018-03-05 16:25:19 TRACE root:36 - Admin [customers=[Customer [name=Sam, password=passcode, accounts=[Account [id=3, balance=0.0, approved=true, owners= [Sam ]]]]], name=Jake, password=54321]
 2018-03-05 16:25:19 TRACE root:36 - Done
 2018-03-05 16:25:19 TRACE root:36 - database.txt
+2018-03-05 16:58:05 TRACE root:36 - Reading in file
+2018-03-05 16:58:05 TRACE root:36 - Found HashMap
+2018-03-05 16:59:06 TRACE root:36 - Employee Nick logged on
+2018-03-05 16:59:54 TRACE root:36 - Reading in file
+2018-03-05 16:59:54 TRACE root:36 - Found HashMap
+2018-03-05 17:00:04 TRACE root:36 - Employee Nick logged on
+2018-03-05 17:00:47 TRACE root:36 - Reading in file
+2018-03-05 17:00:47 TRACE root:36 - Found HashMap
+2018-03-05 17:00:55 TRACE root:36 - Account [id=2, balance=5.0, approved=true, owners= [Jack ]]
+2018-03-05 17:00:55 TRACE root:36 - Account [id=3, balance=0.0, approved=true, owners= [Sam ]]
+2018-03-05 17:00:55 TRACE root:36 - Account [id=1, balance=10.0, approved=true, owners= [Nick ]]
+2018-03-05 17:00:55 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [id=2, balance=5.0, approved=true, owners= [Jack ]]]]
+2018-03-05 17:00:55 TRACE root:36 - Customer [name=Sam, password=passcode, accounts=[Account [id=3, balance=0.0, approved=true, owners= [Sam ]]]]
+2018-03-05 17:00:55 TRACE root:36 - Customer [name=Nick, password=pass, accounts=[Account [id=1, balance=10.0, approved=true, owners= [Nick ]]]]
+2018-03-05 17:00:55 TRACE root:36 - Customer [name=John, password=Snow, accounts=[]]
+2018-03-05 17:00:55 TRACE root:36 - Employee [customers=[Customer [name=Jack, password=1234, accounts=[Account [id=2, balance=5.0, approved=true, owners= [Jack ]]]], Customer [name=Nick, password=pass, accounts=[Account [id=1, balance=10.0, approved=true, owners= [Nick ]]]]], name=Nick, password=1234]
+2018-03-05 17:00:55 TRACE root:36 - Admin [customers=[Customer [name=Sam, password=passcode, accounts=[Account [id=3, balance=0.0, approved=true, owners= [Sam ]]]]], name=Jake, password=54321]
+2018-03-05 17:00:55 TRACE root:36 - Done
+2018-03-05 17:00:55 TRACE root:36 - database.txt

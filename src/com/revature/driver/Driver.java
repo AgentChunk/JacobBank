@@ -3,6 +3,7 @@ package com.revature.driver;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -28,7 +29,7 @@ public class Driver {
 		serialize.writeIn("database.txt");
 		
 		commands.put('C', () -> runCustomer(scan));
-		commands.put('E', () -> runEmployee());
+		commands.put('E', () -> runEmployee(scan));
 		commands.put('A', () -> runAdmin());
 		commands.put('Q', () -> quit());
 		
@@ -120,10 +121,41 @@ public class Driver {
 	}
 	
 	
-	private static void runEmployee() {
+	private static void runEmployee(Scanner scan) {
+		System.out.println("Press L to login or R to register a new employee account: ");
+		char cmd = scan.next().charAt(0);
+		//If they log in
+				if(cmd =='L') {
+					System.out.print("Enter your employee username : ");
+					String user = scan.next();
+					System.out.print("Enter your password : ");
+					String pass = scan.next();
+					if(Employee.validLogin(user, pass)) {
+						Employee employee = Employee.getEmployee(user, pass);
+						runEmployeeLoggedOn(employee,scan);
+					}else {
+						System.out.println("Invalid username or password");
+					}
+				}
+				else if(cmd=='R') {
+					
+					System.out.print("Enter your employee username : ");
+					String user = scan.next();
+					System.out.print("Enter your password : ");
+					String pass = scan.next();
+					Employee employee = Employee.createEmployee(user, pass);
+					LoggingUtil.logTrace("New employee created "+ employee);
+					System.out.println("Hello "+user+", your new account has been created");
+					runEmployeeLoggedOn(employee,scan);
+					
+				}else {
+					System.out.println("Invalid command");
+				}
 		
 	}
 	
+
+
 	private static void runAdmin() {
 		
 	}
@@ -220,7 +252,7 @@ public class Driver {
 		commands.put('S', ()-> selectAccount(customer, scan));
 		commands.put('Q', ()-> quit());
 		
-		LoggingUtil.logTrace("User " + customer.getName() + " logged on");
+		LoggingUtil.logTrace("Customer " + customer.getName() + " logged on");
 		String user = customer.getName();
 		System.out.println("Hello " + user + ", these are you current accounts and their balances");
 		for(int i=0;i<customer.getAccounts().size();i++) {
@@ -238,6 +270,66 @@ public class Driver {
 	        	commands.get(cmd).run();
 		}	
 	}
+	
+	//runs after employee logs on
+	private static void runEmployeeLoggedOn(Employee employee, Scanner scan) {
+		//map of runnable commands
+		Map<Character,Runnable> commands = new HashMap<Character,Runnable>();
+		char cmd;
+		boolean loggedOn =true;
+		//Fill the map with runnable commands
+		commands.put('V', ()-> viewCustomers(employee));
+		commands.put('A', ()-> accessAccountApplications(employee, scan));
+		commands.put('J', ()-> accessJointApplicatons(employee, scan));
+		commands.put('Q', ()-> quit());
+		
+		LoggingUtil.logTrace("Employee "+ employee.getName()+ " logged on");
+		String user = employee.getName();
+		System.out.println("Hello "+ user );
+		
+		while(loggedOn) {
+			System.out.println("Press V to view your customers, A to access account applications, J to access joint account applications, or Q to logout");
+			cmd = scan.next().charAt(0);
+			if("VAJQ".indexOf(cmd)<0) {
+	        	System.out.println("Invalid command");
+	        }
+	        else if(cmd== 'Q') {
+	        	loggedOn = quit();
+	        }else
+	        	commands.get(cmd).run();
+		}
+		
+	}
+	
+	
+	private static void accessJointApplicatons(Employee employee, Scanner scan) {
+		//print out all of the joint applications
+		System.out.println("Outputing joint account applications...");
+		Set<Account> apps = Bank.getJointApplications().keySet();
+		for(Account a:apps) {
+			System.out.println(a.toString() +"----"+Bank.getJointApplications().get(a).toString());
+		}
+		
+	}
+
+	private static void accessAccountApplications(Employee employee, Scanner scan) {
+		//print out all of the applications
+		System.out.println("Outputing account applications...");
+		Set<Account> apps = Bank.getApplications().keySet();
+		for(Account a:apps) {
+			System.out.println(a.toString() +"----"+Bank.getApplications().get(a).toString());
+		}
+	
+	}
+
+	private static void viewCustomers(Employee employee) {
+		//print out all of the employees customers and their info
+		System.out.println("Outputing employee's customers...");
+		for(Customer c:employee.getCustomers()) {
+			System.out.println(c.toString());
+		}
+	}
+
 	//deposits too the customers account
 	private static void runDeposit(Customer cust,Account acc, Scanner scan) {
 		double deposit;
