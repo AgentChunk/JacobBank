@@ -1,5 +1,8 @@
 package com.revature.driver;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 
 import com.revature.database.Account;
@@ -14,6 +17,17 @@ public class Driver {
 	
 	
 	public static void main(String[] args) {
+		
+		Map<Character,Runnable> commands = new HashMap<Character,Runnable>();
+		LoggingUtil.logTrace("Chose if you are a customer, employee, or admin");
+		LoggingUtil.logTrace("Input C for customer, E for employee, or A for admin, or Q to quit");
+		// Populate commands map
+        commands.put('h', () -> System.out.println("Help"));
+        commands.put('t', () -> System.out.println("Teleport"));
+
+        // Invoke some command
+        char cmd = 't';
+        commands.get(cmd).run();
 		
 		/*
 		LoggingUtil.logTrace("Start");

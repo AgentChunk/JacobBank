@@ -37,7 +37,7 @@ public class Employee implements Serializable {
 	public Employee(String name){
 		customers = new HashSet<Customer>();
 		
-		name = "";
+		this.name = name;
 		
 	}
 	
