@@ -25,11 +25,12 @@ public class Employee implements Serializable {
 	private Set<Customer> customers;
 	
 	private String name;
+	private String password;
 	
 	
 	public Employee(){
 		customers = new HashSet<Customer>();
-		
+		password ="";
 		name = "";
 		
 	}
@@ -38,16 +39,34 @@ public class Employee implements Serializable {
 		customers = new HashSet<Customer>();
 		
 		this.name = name;
+		password="";
 		
+	}
+	
+	public Employee(String name,String password) {
+		customers = new HashSet<Customer>();
+		this.name = name;
+		this.password = password;
 	}
 	
 	
 	public Employee(String name, HashSet<Customer> customers) {
 		this.customers = customers;
 		this.name = name;
+		password = "";
 		
 		
 	}
+	
+	
+	//Use this to create new Employees
+	//returns an employee and adds them to the bank
+	public static Employee createEmployee(String name, String password) {
+		Employee employee = new Employee(name,password);
+		Bank.getEmployees().add(employee);
+		return employee;
+	}
+	
 	
 	
 	//approve or deny requests
@@ -128,9 +147,44 @@ public class Employee implements Serializable {
 		this.customers = customers;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	
 	@Override
 	public String toString() {
-		return "Employee [customers=" + customers + ", name=" + name + "]";
+		return "Employee [customers=" + customers + ", name=" + name + ", password=" + password + "]";
+	}
+
+	//Checks if an employee with name and password exists
+	public static boolean validLogin(String name, String password) {
+		//go from the bank list and check if the password username combo exists
+		for(Employee c:Bank.getEmployees()) {
+			if(c.name.equals(name) && c.password.equals(password)) {
+				return true;
+			}
+			
+		}
+		return false;
+	}
+	
+	
+	//returns the customer with the name password combo
+	public static Employee getEmployee(String name, String password) {
+		
+		//go through the bank and find the customer with name and password combo
+		for(Employee e:Bank.getEmployees()) {
+			if(e.name.equals(name) && e.password.equals(password)) {
+				return e;
+			}
+		}
+		
+		return null;
 	}
 
 	

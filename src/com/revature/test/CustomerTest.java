@@ -146,7 +146,7 @@ class CustomerTest {
 		test.setAccounts(accounts);
 		a1.deposit(20.0);
 		a2.deposit(10.0);
-		test.transfer(10, 0 ,1);
+		test.transfer(10, a1 ,a2);
 		assertEquals(20,a2.getBalance());
 		assertEquals(10,a1.getBalance());
 	}
@@ -163,7 +163,7 @@ class CustomerTest {
 		test.setAccounts(accounts);
 		a1.deposit(20.0);
 		a2.deposit(10.0);
-		test.transfer(10, 0 ,1);
+		test.transfer(10, a1 ,a2);
 		assertEquals(10,a2.getBalance());
 		assertEquals(20,a1.getBalance());
 	}
@@ -179,7 +179,7 @@ class CustomerTest {
 		test.setAccounts(accounts);
 		a1.deposit(20.0);
 		a2.deposit(10.0);
-		test.transfer(10, 0 ,1);
+		test.transfer(10, a1 ,a2);
 		assertEquals(10,a2.getBalance());
 		assertEquals(20,a1.getBalance());
 	}
@@ -199,10 +199,12 @@ class CustomerTest {
 		a2.deposit(10.0);
 		
 		Assertions.assertThrows(IllegalArgumentException.class, ()->{
-			test.transfer(30, 0,1);
+			test.transfer(30, a1,a2);
 		});
 		
 	}
+	
+	
 	
 	@Test
 	void testCustomerToSring() {

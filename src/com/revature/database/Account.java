@@ -11,6 +11,8 @@ public class Account implements Serializable{
 	 */
 	private static final long serialVersionUID = 5869631646022235354L;
 	
+	private static int numberOfAccounts=0;
+	private int id;
 	private double balance;
 	private boolean approved;
 	private List<Customer> owners;
@@ -19,14 +21,20 @@ public class Account implements Serializable{
 		balance =0;
 		approved =false;
 		owners = new ArrayList<Customer>();
+		id=0;
 	}
 	
 	public Account(double money) {
 		balance = money;
 		approved=false;
 		owners = new ArrayList<Customer>();
+		id=0;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
 	
 	public double getBalance() {
 		return balance;
@@ -71,7 +79,7 @@ public class Account implements Serializable{
 
 	@Override
 	public String toString() {
-		String string = "Account [balance=" + balance + ", approved=" + approved + ", owners= [";
+		String string = "Account [id="+id +", balance=" + balance + ", approved=" + approved + ", owners= [";
 		for(Customer o: owners) {
 			String temp = o.getName()+ " ";
 			string = string.concat(temp);
@@ -84,10 +92,17 @@ public class Account implements Serializable{
 		return approved;
 	}
 
+	//only when account is approved give the account it's id
 	public void setApproved(boolean approved) {
 		this.approved = approved;
+		if(approved) {
+			numberOfAccounts++;
+			id=numberOfAccounts;
+		}
 	}
-	
+	public static void updateCount() {
+		numberOfAccounts = Bank.getAccounts().size();
+	}
 	
 	
 }

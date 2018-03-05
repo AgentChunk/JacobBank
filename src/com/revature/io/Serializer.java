@@ -57,6 +57,7 @@ public class Serializer {
 			LoggingUtil.logTrace("Found HashMap");
 			objects =bank;
 			fillBank();
+			Account.updateCount();
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

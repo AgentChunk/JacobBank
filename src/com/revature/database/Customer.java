@@ -7,7 +7,7 @@ import java.util.List;
 /*
  * Customers register with a username and password and can apply for an account
  */
-public class Customer implements Serializable {
+public class Customer implements Serializable{
 
 	/**
 	 * 
@@ -31,6 +31,16 @@ public class Customer implements Serializable {
 		
 	}
 	
+	//Use this to make new customers
+	//Creates a customer and adds them to the Bank
+	public static Customer createCustomer(String name, String password) {
+		Customer customer = new Customer(name,password);
+		Bank.getCustomers().add(customer);
+		return customer;
+	}
+	
+	
+	
 	//apply for an account
 	public Account applyForAccount() {
 		
@@ -53,23 +63,23 @@ public class Customer implements Serializable {
 	}
 	
 	//adds add to account if account is approved
-	public void deposit(double add, int index) throws IllegalArgumentException {
-		if(accounts.get(index).isApproved()) {
-			accounts.get(index).deposit(add);
+	public void deposit(double add, Account acc) throws IllegalArgumentException {
+		if(acc.isApproved() && accounts.contains(acc)) {
+			acc.deposit(add);
 		}
 	}
 	
 	//subtracts subtract if account is approved
-	public void withdraw(double subtract, int index) throws IllegalArgumentException {
-		if(accounts.get(index).isApproved()) {
-			accounts.get(index).withdraw(subtract);
+	public void withdraw(double subtract, Account acc) throws IllegalArgumentException {
+		if(acc.isApproved()) {
+			acc.withdraw(subtract);
 		}
 	}
 	
 	//transfers transfer from a1 to a2 if both accounts are approved
-	public void transfer(double transfer, int a1, int a2) throws IllegalArgumentException {
-		if(accounts.get(a1).isApproved() && accounts.get(a2).isApproved()) {
-			accounts.get(a1).transfer(transfer, accounts.get(a2));
+	public void transfer(double transfer, Account a1, Account a2) throws IllegalArgumentException {
+		if(a1.isApproved() && a2.isApproved()) {
+			a1.transfer(transfer, a2);
 		}
 	}
 	
@@ -99,6 +109,32 @@ public class Customer implements Serializable {
 	@Override
 	public String toString() {
 		return "Customer [name=" + name + ", password=" + password + ", accounts=" + accounts + "]";
+	}
+
+	//Checks if a customer with name and password exists
+	public static boolean validLogin(String name, String password) {
+		//go from the bank list and check if the password username combo exists
+		for(Customer c:Bank.getCustomers()) {
+			if(c.name.equals(name) && c.password.equals(password)) {
+				return true;
+			}
+			
+		}
+		return false;
+	}
+	
+	
+	//returns the customer with the name password combo
+	public static Customer getCustomer(String name, String password) {
+		
+		//go through the bank and find the customer with name and password combo
+		for(Customer c:Bank.getCustomers()) {
+			if(c.name.equals(name) && c.password.equals(password)) {
+				return c;
+			}
+		}
+		
+		return null;
 	}
 	
 	
