@@ -99,22 +99,6 @@ public class Employee implements Serializable {
 		
 	}
 	
-	//Employees should be able to get their customers account info
-	public List<Account> getCustomerAccount(Customer cust) throws IllegalArgumentException {
-		if(!customers.contains(cust)) {
-			throw new IllegalArgumentException();
-		}
-		
-		return cust.getAccounts();
-	}
-	
-	
-	//Employees should be able to get their customers info
-		public void printCustomers() {
-		for(Customer c: customers) {
-			System.out.println(c.toString());
-		}
-	}
 	
 	public String getName() {
 		return name;

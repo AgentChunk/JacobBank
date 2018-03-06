@@ -11,6 +11,7 @@ import com.revature.database.Account;
 import com.revature.database.Bank;
 import com.revature.database.Customer;
 import com.revature.database.Employee;
+import com.revature.io.LoggingUtil;
 
 import org.junit.After;
 import org.junit.Before;
@@ -29,6 +30,14 @@ public class EmployeeTest {
 		Bank.getAccounts().clear();
 		Bank.getCustomers().clear();
 		Bank.getEmployees().clear();
+		Bank.getApplications().clear();
+		Bank.getJointApplications().clear();
+	}
+	
+	@Test
+	public void testToString() {
+		Employee employee = new Employee();
+		assertEquals(employee.toString(),"Employee [customers=[], name=, password=]");
 	}
 	
 	@Test
@@ -37,6 +46,27 @@ public class EmployeeTest {
 		assertTrue(Bank.getEmployees().contains(james));
 	}
 	
+	@Test
+	public void testValidLogin() {
+		Employee.createEmployee("James", "1234");
+		assertTrue(Employee.validLogin("James", "1234"));
+	}
+	
+	@Test
+	public void testInvalidLoign() {
+		assertFalse(Employee.validLogin("James", "1234"));
+	}
+	
+	@Test
+	public void testGetEmployee() {
+		Employee employee=Employee.createEmployee("James", "1234");
+		assertEquals(employee,Employee.getEmployee("James", "1234"));
+	}
+	
+	@Test
+	public void testGetEmployeeInvalid() {
+		assertEquals(null,Employee.getEmployee("James", "1234"));
+	}
 	
 	
 	
@@ -145,22 +175,4 @@ public class EmployeeTest {
 	     //System.setOut(System.out);
 	}
 
-	@Test
-	public void testPrintCustomers() throws Exception {
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-	    System.setOut(new PrintStream(outContent));
-		Employee james = new Employee();
-		Customer joe = new Customer("Joe","Pass");
-		Customer jointRequester = new Customer("Joint","123");
-		Account joint = joe.applyForAccount();
-		james.processRequest(true, joint);
-		jointRequester.applyForJointAccount(joint);
-		james.processJointRequest(true, joint);
-		
-		james.printCustomers();
-		
-	    
-	    assertEquals("Customer [name=Joint, password=123, accounts=[Account [balance=0.0, approved=true, owners= [Joe Joint ]]]]\r\n" +
-	    		"Customer [name=Joe, password=Pass, accounts=[Account [balance=0.0, approved=true, owners= [Joe Joint ]]]]\r\n", outContent.toString());	
-	}
 }
