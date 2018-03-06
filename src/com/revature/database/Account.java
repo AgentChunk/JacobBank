@@ -3,6 +3,7 @@ package com.revature.database;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 //an account holds money
 public class Account implements Serializable{	
@@ -11,8 +12,7 @@ public class Account implements Serializable{
 	 */
 	private static final long serialVersionUID = 5869631646022235354L;
 	
-	private static int numberOfAccounts=0;
-	private int id;
+	private String uniqueID;
 	private double balance;
 	private boolean approved;
 	private List<Customer> owners;
@@ -21,18 +21,18 @@ public class Account implements Serializable{
 		balance =0;
 		approved =false;
 		owners = new ArrayList<Customer>();
-		id=0;
+		uniqueID = UUID.randomUUID().toString();
 	}
 	
 	public Account(double money) {
 		balance = money;
 		approved=false;
 		owners = new ArrayList<Customer>();
-		id=0;
+		uniqueID = UUID.randomUUID().toString();
 	}
 	
-	public int getId() {
-		return id;
+	public String getUniqueID() {
+		return uniqueID;
 	}
 
 	
@@ -79,7 +79,7 @@ public class Account implements Serializable{
 
 	@Override
 	public String toString() {
-		String string = "Account [id="+id +", balance=" + balance + ", approved=" + approved + ", owners= [";
+		String string = "Account [uniqueID="+uniqueID +", balance=" + balance + ", approved=" + approved + ", owners= [";
 		for(Customer o: owners) {
 			String temp = o.getName()+ " ";
 			string = string.concat(temp);
@@ -95,13 +95,6 @@ public class Account implements Serializable{
 	//only when account is approved give the account it's id
 	public void setApproved(boolean approved) {
 		this.approved = approved;
-		if(approved) {
-			numberOfAccounts++;
-			id=numberOfAccounts;
-		}
-	}
-	public static void updateCount() {
-		numberOfAccounts = Bank.getAccounts().size();
 	}
 	
 	

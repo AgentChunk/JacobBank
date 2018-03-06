@@ -64,7 +64,7 @@ public class Driver {
 		
 		}
 		
-		Admin tester = new Admin();
+		
 		
 		
 		
@@ -173,21 +173,20 @@ public class Driver {
 	
 	//applies for a joint account
 	private static void applyForJointAccount(Customer cust, Scanner scan) {
-		System.out.println("Enter the account id of the account applying for");
-		int id = scan.nextInt();
-		boolean exists = false;
-		for(Account a:Bank.getAccounts()) {
-			if(a.getId()==id) {
-				exists = true;
-				cust.applyForJointAccount(a);
-				LoggingUtil.logTrace("Customer "+ cust.getName()+" applied for jointAccount with id "+ id );
-				System.out.println("Your joint appliaction has been submitted");
+		String id;
+		scan.nextLine();
+		do {
+			System.out.println("Enter the account id of the account applying for");
+			id = scan.nextLine();
+			if(!bankHasAccountId(id,Bank.getAccounts())) {
+				System.out.println("Invalid ID");
 			}
-		}
-		if(!exists) {
-			LoggingUtil.logWarn("Customer "+ cust.getName()+" attempted to apply for jointAccount with invalid id "+ id );
-			System.out.println("Invalid account id");
-		}
+		}while(!bankHasAccountId(id,Bank.getAccounts()));
+		
+		Account apply = accountWithId(id,Bank.getAccounts());
+		cust.applyForJointAccount(apply);
+		LoggingUtil.logTrace("Customer "+ cust.getName()+" applied for jointAccount with id "+ id );
+		System.out.println("Your joint appliaction has been submitted");
 		
 	}
 	
@@ -198,11 +197,11 @@ public class Driver {
 		
 		
 		System.out.println("Enter the id of the account you wish to select :");
-		int id = scan.nextInt();
+		String id = scan.nextLine();
 		boolean exists = false;
 		Account a1 = null;
 		for(Account a: cust.getAccounts()) {
-			if(a.getId()==id) {
+			if(a.getUniqueID().equals(id)) {
 				exists = true;
 				a1=a;
 			}
@@ -256,7 +255,7 @@ public class Driver {
 		String user = customer.getName();
 		System.out.println("Hello " + user + ", these are you current accounts and their balances");
 		for(int i=0;i<customer.getAccounts().size();i++) {
-			System.out.println("Account :"+ customer.getAccounts().get(i).getId()+ " Balance :" +customer.getAccounts().get(i).getBalance());
+			System.out.println("Account :"+ customer.getAccounts().get(i).getUniqueID()+ " Balance :" +customer.getAccounts().get(i).getBalance());
 		}
 		while(loggedOn) {
 			System.out.println("Press A to apply for an account, J to apply for a joint account, S to select an account, or Q to logout");
@@ -306,9 +305,35 @@ public class Driver {
 		//print out all of the joint applications
 		System.out.println("Outputing joint account applications...");
 		Set<Account> apps = Bank.getJointApplications().keySet();
+		String id;
+		scan.nextLine();
+		
 		for(Account a:apps) {
 			System.out.println(a.toString() +"----"+Bank.getJointApplications().get(a).toString());
 		}
+		do {
+			System.out.println("Enter an account id to approve or deny an account");
+			id = scan.nextLine();
+			LoggingUtil.logDebug(id);
+			if(!bankHasAccountId(id,Bank.getJointApplications().keySet())) System.out.println("Invalid id");
+		}while(!bankHasAccountId(id,Bank.getJointApplications().keySet()));
+		Account processing = accountWithId(id,Bank.getJointApplications().keySet());
+		char approve;
+		do{
+			System.out.println("Approve? (Y/N)");
+			approve = scan.next().charAt(0);
+			if(approve!='Y' && approve!='N') {
+				System.out.println("Invalid input");
+			}
+			
+		}while(approve!='Y' && approve!='N');
+		
+		if(approve=='Y') {
+			employee.processJointRequest(true, processing);
+		}else if(approve =='N') {
+			employee.processJointRequest(false, processing);
+		}
+		
 		
 	}
 
@@ -316,9 +341,34 @@ public class Driver {
 		//print out all of the applications
 		System.out.println("Outputing account applications...");
 		Set<Account> apps = Bank.getApplications().keySet();
+		String id;
+		
 		for(Account a:apps) {
 			System.out.println(a.toString() +"----"+Bank.getApplications().get(a).toString());
 		}
+		do {
+			System.out.println("Enter an account id to approve or deny an account");
+			id = scan.nextLine();
+			LoggingUtil.logDebug(id);
+			if(!bankHasAccountId(id,Bank.getApplications().keySet())) System.out.println("Invalid id");
+		}while(!bankHasAccountId(id,Bank.getApplications().keySet()));
+		Account processing = accountWithId(id,Bank.getApplications().keySet());
+		char approve;
+		do{
+			System.out.println("Approve? (Y/N)");
+			approve = scan.next().charAt(0);
+			if(approve!='Y' && approve!='N') {
+				System.out.println("Invalid input");
+			}
+			
+		}while(approve!='Y' && approve!='N');
+		
+		if(approve=='Y') {
+			employee.processRequest(true, processing);
+		}else if(approve =='N') {
+			employee.processRequest(false, processing);
+		}
+		
 	
 	}
 
@@ -341,7 +391,7 @@ public class Driver {
 			}
 		}while(deposit<0);
 		cust.deposit(deposit, acc);
-		LoggingUtil.logTrace("Customer "+cust.getName()+" deposited "+ deposit+" to account "+acc.getId());
+		LoggingUtil.logTrace("Customer "+cust.getName()+" deposited "+ deposit+" to account "+acc.getUniqueID());
 		System.out.println("Succefully deposited. New balance is :"+acc.getBalance());
 	}
 	
@@ -356,14 +406,14 @@ public class Driver {
 			}
 		}while(withdraw<0 || withdraw>acc.getBalance());
 		cust.withdraw(withdraw, acc);
-		LoggingUtil.logTrace("Customer "+cust.getName()+" deposited "+ withdraw+" to account "+acc.getId());
+		LoggingUtil.logTrace("Customer "+cust.getName()+" deposited "+ withdraw+" to account "+acc.getUniqueID());
 		System.out.println("Succefully withdrew. New balance is :"+acc.getBalance());
 	}
 	
 	//transfers from the customers account to the account with the given id
 	private static void runTransfer(Customer cust,Account acc, Scanner scan) {
 		double transfer;
-		int id;
+		String id;
 		do {
 			System.out.println("Enter amount to transfer :");
 			transfer = scan.nextDouble();
@@ -373,27 +423,28 @@ public class Driver {
 		}while(transfer<0 || transfer>acc.getBalance());
 		do {
 			System.out.println("Enter id of account to transfer too :");
-			id = scan.nextInt();
-			if(!bankHasAccountId(id)) {
+			id = scan.nextLine();
+			if(!bankHasAccountId(id,Bank.getAccounts())) {
 				System.out.println("Invalid account id");
 			}
-		}while(!bankHasAccountId(id));
+		}while(!bankHasAccountId(id,Bank.getAccounts()));
 		
-		cust.transfer(transfer, acc, accountWithId(id));
-		LoggingUtil.logTrace("Customer "+cust.getName()+" transfered "+ transfer+" from account "+ acc.getId()+" to account "+id);
+		cust.transfer(transfer, acc, accountWithId(id,Bank.getAccounts()));
+		LoggingUtil.logTrace("Customer "+cust.getName()+" transfered "+ transfer+" from account "+ acc.getUniqueID()+" to account "+id);
 		System.out.println("Succefully withdrew. New balance is :"+acc.getBalance());
 	}
 	
-	private static boolean bankHasAccountId(int id) {
-		for(Account a:Bank.getAccounts()) {
-			if(a.getId()==id) return true;
+	
+	private static boolean bankHasAccountId(String id,Set<Account> accounts) {
+		for(Account a:accounts) {
+			if(a.getUniqueID().equals(id)) return true;
 		}
 		return false;
 	}
 	
-	private static Account accountWithId(int id) {
-		for(Account a:Bank.getAccounts()) {
-			if(a.getId()==id) return a;
+	private static Account accountWithId(String id,Set<Account> accounts) {
+		for(Account a:accounts) {
+			if(a.getUniqueID().equals(id)) return a;
 		}
 		return null;
 	}
