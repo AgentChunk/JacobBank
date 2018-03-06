@@ -1,12 +1,11 @@
 package com.revature.test;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
 
 import com.revature.database.Account;
 import com.revature.database.Bank;
@@ -16,21 +15,33 @@ import com.revature.database.Employee;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
-
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-class EmployeeTest {
+public class EmployeeTest {
 	
 	@Rule
-	public ExpectedException thrown = ExpectedException.none();
+	public ExpectedException expectedException= ExpectedException.none();
 
 	
-
+	@After
+	public void clear() {
+		Bank.getAccounts().clear();
+		Bank.getCustomers().clear();
+		Bank.getEmployees().clear();
+	}
+	
+	@Test
+	public void testCreateEmployee() {
+		Employee james = Employee.createEmployee("James", "1234");
+		assertTrue(Bank.getEmployees().contains(james));
+	}
+	
 	
 	
 	
 	@Test
-	void testProcessRequest() {
+	public void testProcessRequest() {
 		Employee james = new Employee();
 		Customer joe = new Customer();
 		Account toAdd = joe.applyForAccount();
@@ -42,7 +53,7 @@ class EmployeeTest {
 	}
 	
 	@Test
-	void testProcessRequestDenied() {
+	public void testProcessRequestDenied() {
 		Employee james = new Employee();
 		Customer joe = new Customer();
 		Account toAdd = joe.applyForAccount();
@@ -53,7 +64,7 @@ class EmployeeTest {
 	}
 	
 	@Test
-	void testProcessJointRequest(){
+	public void testProcessJointRequest(){
 		Employee james = new Employee();
 		Customer joe = new Customer();
 		Customer jointRequester = new Customer();
@@ -67,7 +78,7 @@ class EmployeeTest {
 	}
 	
 	@Test
-	void testProcessJointRequestDenied() {
+	public void testProcessJointRequestDenied() {
 		Employee james = new Employee();
 		Customer joe = new Customer();
 		Customer jointRequester = new Customer();
@@ -81,42 +92,42 @@ class EmployeeTest {
 	}
 	
 	@Test
-	void testPJRNoApplication() {
+	public void testPJRNoApplication() {
 		Employee james = new Employee();
 		Customer joe = new Customer();
 		
 		Account joint = joe.applyForAccount();
 		james.processRequest(true, joint);
 		
-		Assertions.assertThrows(IllegalArgumentException.class, ()->{
-			james.processJointRequest(true, joint);
-		});
+		expectedException.expect(IllegalArgumentException.class);
+		james.processJointRequest(true, joint);
+		
 	}
 	
 	@Test
-	void testPJRNoSuchAccount() {
+	public void testPJRNoSuchAccount() {
 		Employee james = new Employee();
 		Account joint = new Account();
 		
-		Assertions.assertThrows(IllegalArgumentException.class, ()->{
-			james.processJointRequest(true,joint);
-		});
+		expectedException.expect(IllegalArgumentException.class);
+		james.processJointRequest(true,joint);
+		
 	}
 	
 	
 	
 	@Test
-	void testIllegalArgumentProcessRequest() {
+	public void testIllegalArgumentProcessRequest() {
 		Employee james = new Employee();
 		Customer joe = new Customer();
 		Account toAdd = new Account();
 		
-		Assertions.assertThrows(IllegalArgumentException.class, ()->{
-		james.processRequest(true, toAdd);});
+		expectedException.expect(IllegalArgumentException.class);
+		james.processRequest(true, toAdd);
 	}
 	
 	@Test
-	public void printTest() throws Exception {
+	public void printTest() {
 	      //ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	      //System.setOut(new PrintStream(outContent));
 
@@ -135,7 +146,7 @@ class EmployeeTest {
 	}
 
 	@Test
-	void testPrintCustomers() throws Exception {
+	public void testPrintCustomers() throws Exception {
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	    System.setOut(new PrintStream(outContent));
 		Employee james = new Employee();

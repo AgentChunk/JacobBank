@@ -456,6 +456,7 @@ public class Driver {
 		}
 		do {
 			System.out.println("Enter an account id to approve or deny an account");
+			scan.nextLine();
 			id = scan.nextLine();
 			LoggingUtil.logDebug(id);
 			if(!bankHasAccountId(id,Bank.getApplications().keySet())) System.out.println("Invalid id");
@@ -560,6 +561,7 @@ public class Driver {
 		}while(transfer<0 || transfer>acc.getBalance());
 		do {
 			System.out.println("Enter id of account to transfer too :");
+			scan.nextLine();
 			id = scan.nextLine();
 			if(!bankHasAccountId(id,Bank.getAccounts())) {
 				System.out.println("Invalid account id");
@@ -584,6 +586,7 @@ public class Driver {
 		}while(transfer<0 || transfer>acc.getBalance());
 		do {
 			System.out.println("Enter id of account to transfer too :");
+			scan.nextLine();
 			id = scan.nextLine();
 			if(!bankHasAccountId(id,Bank.getAccounts())) {
 				System.out.println("Invalid account id");

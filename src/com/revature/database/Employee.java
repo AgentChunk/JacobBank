@@ -35,13 +35,6 @@ public class Employee implements Serializable {
 		
 	}
 	
-	public Employee(String name){
-		customers = new HashSet<Customer>();
-		
-		this.name = name;
-		password="";
-		
-	}
 	
 	public Employee(String name,String password) {
 		customers = new HashSet<Customer>();
@@ -49,14 +42,6 @@ public class Employee implements Serializable {
 		this.password = password;
 	}
 	
-	
-	public Employee(String name, HashSet<Customer> customers) {
-		this.customers = customers;
-		this.name = name;
-		password = "";
-		
-		
-	}
 	
 	
 	//Use this to create new Employees
