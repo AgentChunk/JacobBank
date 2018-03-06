@@ -30,7 +30,7 @@ public class Driver {
 		
 		commands.put('C', () -> runCustomer(scan));
 		commands.put('E', () -> runEmployee(scan));
-		commands.put('A', () -> runAdmin());
+		commands.put('A', () -> runAdmin(scan));
 		commands.put('Q', () -> quit());
 		
 		/*
@@ -155,11 +155,81 @@ public class Driver {
 	}
 	
 
-
-	private static void runAdmin() {
-		
+	
+	private static void runAdmin(Scanner scan) {
+		System.out.println("Press L to login or R to register a new Admin account: ");
+		char cmd = scan.next().charAt(0);
+		//If they log in
+				if(cmd =='L') {
+					System.out.print("Enter your admin username : ");
+					String user = scan.next();
+					System.out.print("Enter your password : ");
+					String pass = scan.next();
+					if(Admin.validLogin(user, pass)) {
+						Admin admin = Admin.getEmployee(user, pass);
+						runAdminLoggedOn(admin,scan);
+					}else {
+						System.out.println("Invalid username or password");
+					}
+				}
+				else if(cmd=='R') {
+					
+					System.out.print("Enter your Admin username : ");
+					String user = scan.next();
+					System.out.print("Enter your password : ");
+					String pass = scan.next();
+					Admin admin = Admin.createAdmin(user, pass);
+					LoggingUtil.logTrace("New Admin created "+ admin);
+					System.out.println("Hello "+user+", your new account has been created");
+					runAdminLoggedOn(admin,scan);
+					
+				}else {
+					System.out.println("Invalid command");
+				}
 	}
 	
+	//runs after Admin logs on
+	private static void runAdminLoggedOn(Admin admin, Scanner scan) {
+		//map of runnable commands
+				Map<Character,Runnable> commands = new HashMap<Character,Runnable>();
+				char cmd;
+				boolean loggedOn =true;
+				//Fill the map with runnable commands
+				commands.put('V', ()-> viewCustomers(admin));
+				commands.put('A', ()-> viewAllAccounts());
+				commands.put('P', ()-> accessAccountApplications(admin, scan));
+				commands.put('J', ()-> accessJointApplicatons(admin, scan));
+				commands.put('Q', ()-> quit());
+				
+				LoggingUtil.logTrace("Admin "+ admin.getName()+ " logged on");
+				String user = admin.getName();
+				System.out.println("Hello "+ user );
+				
+				while(loggedOn) {
+					System.out.println("Press V to view your customers,A to access all accounts, P to access account applications, J to access joint account applications, or Q to logout");
+					cmd = scan.next().charAt(0);
+					if("VAPJQ".indexOf(cmd)<0) {
+			        	System.out.println("Invalid command");
+			        }
+			        else if(cmd== 'Q') {
+			        	loggedOn = quit();
+			        }else if(cmd =='A') {
+			        	commands.get(cmd).run();
+			        	selectAccount(admin, scan);
+			        }else
+			        	commands.get(cmd).run();
+				}
+		
+	}
+
+	private static void viewAllAccounts() {
+		System.out.println("Outputing all bank accounts...");
+		for(Account a:Bank.getAccounts()) {
+			System.out.println(a.toString());
+		}
+		
+	}
+
 	private static boolean quit() {
 		return false;
 	}
@@ -189,6 +259,44 @@ public class Driver {
 		System.out.println("Your joint appliaction has been submitted");
 		
 	}
+	
+	private static void selectAccount(Admin admin, Scanner scan) {
+		Map<Character,Runnable> commands = new HashMap<Character,Runnable>();
+		boolean acc =true;
+		char cmd;
+		String id = scan.nextLine();
+		do {
+			System.out.println("Enter the id of the account you wish to select :");
+			id = scan.nextLine();
+			if(!bankHasAccountId(id,Bank.getAccounts())) {
+				System.out.println("Invalid account id");
+			}
+		}while(!bankHasAccountId(id,Bank.getAccounts()));
+		Account account = accountWithId(id,Bank.getAccounts());
+		
+		System.out.println("Account "+ id +" selected");
+		System.out.println(account);
+		
+		commands.put('D', ()->runDeposit(admin,account,scan));
+		commands.put('W', ()->runWithdraw(admin,account,scan));
+		commands.put('T', ()->runTransfer(admin,account,scan));
+		commands.put('Q', ()->quit());
+		
+		while(acc) {
+			System.out.println("Enter D to deposit, W to withdraw, T to transfer, or Q to go back");
+			cmd = scan.next().charAt(0);
+			if("DWTQ".indexOf(cmd)<0) {
+				System.out.println("Invalid Command");
+			}else if(cmd=='Q') {
+				acc =false;
+			}else {
+				
+				commands.get(cmd).run();
+			}
+		}
+		
+	}
+	
 	
 	private static void selectAccount(Customer cust, Scanner scan) {
 		Map<Character,Runnable> commands = new HashMap<Character,Runnable>();
@@ -379,6 +487,21 @@ public class Driver {
 			System.out.println(c.toString());
 		}
 	}
+	
+	//lets admin deposit to the account
+	private static void runDeposit(Admin admin,Account acc, Scanner scan) {
+		double deposit;
+		do {
+			System.out.println("Enter amount to deposit :");
+			deposit = scan.nextDouble();
+			if(deposit<0) {
+				System.out.println("Invalid amount");
+			}
+		}while(deposit<0);
+		admin.deposit(deposit, acc);
+		LoggingUtil.logTrace("Admin "+admin.getName()+" deposited "+ deposit+" to account "+acc.getUniqueID());
+		System.out.println("Succefully deposited. New balance is :"+acc.getBalance());
+	}
 
 	//deposits too the customers account
 	private static void runDeposit(Customer cust,Account acc, Scanner scan) {
@@ -395,6 +518,21 @@ public class Driver {
 		System.out.println("Succefully deposited. New balance is :"+acc.getBalance());
 	}
 	
+	//lets admin withdraw from accounts
+	private static void runWithdraw(Admin admin, Account acc, Scanner scan) {
+		double withdraw;
+		do {
+			System.out.println("Enter amount to withdraw :");
+			withdraw = scan.nextDouble();
+			if(withdraw<0 || withdraw>acc.getBalance()) {
+				System.out.println("Invalid amount");
+			}
+		}while(withdraw<0 || withdraw>acc.getBalance());
+		admin.withdraw(withdraw, acc);
+		LoggingUtil.logTrace("Admin "+admin.getName()+" deposited "+ withdraw+" to account "+acc.getUniqueID());
+		System.out.println("Succefully withdrew. New balance is :"+acc.getBalance());
+	}
+	
 	//withdraws from the customers account
 	private static void runWithdraw(Customer cust, Account acc, Scanner scan) {
 		double withdraw;
@@ -407,6 +545,29 @@ public class Driver {
 		}while(withdraw<0 || withdraw>acc.getBalance());
 		cust.withdraw(withdraw, acc);
 		LoggingUtil.logTrace("Customer "+cust.getName()+" deposited "+ withdraw+" to account "+acc.getUniqueID());
+		System.out.println("Succefully withdrew. New balance is :"+acc.getBalance());
+	}
+	
+	private static void runTransfer(Admin cust,Account acc, Scanner scan) {
+		double transfer;
+		String id;
+		do {
+			System.out.println("Enter amount to transfer :");
+			transfer = scan.nextDouble();
+			if(transfer<0 || transfer>acc.getBalance()) {
+				System.out.println("Invalid amount");
+			}
+		}while(transfer<0 || transfer>acc.getBalance());
+		do {
+			System.out.println("Enter id of account to transfer too :");
+			id = scan.nextLine();
+			if(!bankHasAccountId(id,Bank.getAccounts())) {
+				System.out.println("Invalid account id");
+			}
+		}while(!bankHasAccountId(id,Bank.getAccounts()));
+		
+		cust.transfer(transfer, acc, accountWithId(id,Bank.getAccounts()));
+		LoggingUtil.logTrace("Admin "+cust.getName()+" transfered "+ transfer+" from account "+ acc.getUniqueID()+" to account "+id);
 		System.out.println("Succefully withdrew. New balance is :"+acc.getBalance());
 	}
 	
