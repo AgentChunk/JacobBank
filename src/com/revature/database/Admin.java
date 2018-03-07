@@ -19,9 +19,6 @@ public class Admin extends Employee {
 		super();
 	}
 	
-	public Admin(String name){
-		super(name);
-	}
 	
 	public Admin(String name, String  password) {
 		super(name,password);

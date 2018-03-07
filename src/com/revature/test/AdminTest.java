@@ -1,97 +1,128 @@
 package com.revature.test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.revature.database.Account;
 import com.revature.database.Admin;
 import com.revature.database.Bank;
 import com.revature.database.Customer;
+import com.revature.io.LoggingUtil;
 
-class AdminTest {
+public class AdminTest {
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
+
+	@After
+	public void clear() {
+		Bank.getAccounts().clear();
+		Bank.getCustomers().clear();
+		Bank.getEmployees().clear();
+		Bank.getAdmins().clear();
+		Bank.getApplications().clear();
+		Bank.getJointApplications().clear();
 	}
-
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-	}
-
-	@BeforeEach
-	void setUp() throws Exception {
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-	}
-
+	
 	@Test
-	void testWithdraw() {
+	public void testGetAdmin() {
+		Admin admin =Admin.createAdmin("Name", "password");
+		assertEquals(admin,Admin.getEmployee("Name", "password"));
+	}
+	
+	@Test
+	public void testGetAdminNull() {
+		assertEquals(null,Admin.getEmployee("", ""));
+	}
+	
+	@Test
+	public void testValidLogin() {
+		Admin.createAdmin("Name", "password");
+		assertTrue(Admin.validLogin("Name", "password"));
+	}
+	@Test
+	public void testInvalidLogin() {
+		assertFalse(Admin.validLogin("Name", "password"));
+	}
+	
+	
+	@Test
+	public void testCreateAdmin() {
+		Admin test = Admin.createAdmin("Name", "password");
+		assertTrue(Bank.getAdmins().contains(test));
+	}
+	
+	@Test
+	public void testToString() {
+		Admin test = new Admin();
+		LoggingUtil.logDebug(test.toString());
+		assertEquals(test.toString(),"Admin [customers=[], name=, password=]");
+	}
+	
+	@Test
+	public void testWithdraw() {
 		Account test = new Account(10);
 		Admin admin = new Admin();
 		admin.withdraw(5, test);
-		assertEquals(5,test.getBalance());
+		assertEquals(5,test.getBalance(),0);
 		
 	}
 	
 	@Test
-	void testInvalidWithdraw() {
+	public void testInvalidWithdraw() {
 		Account test = new Account(20.0);
 		Admin admin = new Admin();
 		
-		Assertions.assertThrows(IllegalArgumentException.class, ()->{
-			admin.withdraw(30.0, test);
-		});
+		expectedException.expect(IllegalArgumentException.class);
+		admin.withdraw(30.0, test);
+		
 		
 		
 	}
 	
 	@Test
-	void testDeposit() {
+	public void testDeposit() {
 		Account test = new Account();
 		Admin admin = new Admin();
 		admin.deposit(10, test);
-		assertEquals(10,test.getBalance());
+		assertEquals(10,test.getBalance(),0);
 	}
 	
 	@Test
-	void testInvalidDepost() {
+	public void testInvalidDepost() {
 		Account test = new Account();
 		Admin admin = new Admin();
-		Assertions.assertThrows(IllegalArgumentException.class, ()->{
-			admin.deposit(-10, test);
-		});
+		expectedException.expect(IllegalArgumentException.class);
+		admin.deposit(-10, test);
+		
 	}
 	
 	@Test
-	void testTransfer() {
+	public void testTransfer() {
 		Account a1 = new Account(20);
 		Account a2 = new Account(30);
 		Admin admin = new Admin();
 		admin.transfer(10, a1, a2);
-		assertEquals(10,a1.getBalance());
-		assertEquals(40,a2.getBalance());
+		assertEquals(10,a1.getBalance(),0);
+		assertEquals(40,a2.getBalance(),0);
 	}
 	
 	@Test
-	void testInvalidTransfer() {
+	public void testInvalidTransfer() {
 		Account a1 = new Account(20);
 		Account a2 = new Account(30);
 		Admin admin = new Admin();
-		Assertions.assertThrows(IllegalArgumentException.class, ()->{
+		expectedException.expect(IllegalArgumentException.class);
 			admin.transfer(30, a1, a2);
-		});
+		
 	}
 	
 	@Test
-	void testCancelAccount() {
+	public void testCancelAccount() {
 		Account a1 = new Account();
 		Bank.getAccounts().add(a1);
 		Admin admin = new Admin();
@@ -100,7 +131,7 @@ class AdminTest {
 	}
 	
 	@Test
-	void printAccounts() {
+	public void printAccounts() {
 		Admin admin = new Admin();
 		Customer c1 = new Customer("Joe","123");
 		Customer c2 = new Customer("Bob","Pass");
@@ -113,7 +144,7 @@ class AdminTest {
 	}
 	
 	@Test
-	void printCustomers() {
+	public void printCustomers() {
 		Admin admin = new Admin();
 		Customer c1 = new Customer("Joe","123");
 		Customer c2 = new Customer("Bob","Pass");

@@ -35,13 +35,6 @@ public class Employee implements Serializable {
 		
 	}
 	
-	public Employee(String name){
-		customers = new HashSet<Customer>();
-		
-		this.name = name;
-		password="";
-		
-	}
 	
 	public Employee(String name,String password) {
 		customers = new HashSet<Customer>();
@@ -49,14 +42,6 @@ public class Employee implements Serializable {
 		this.password = password;
 	}
 	
-	
-	public Employee(String name, HashSet<Customer> customers) {
-		this.customers = customers;
-		this.name = name;
-		password = "";
-		
-		
-	}
 	
 	
 	//Use this to create new Employees
@@ -114,22 +99,6 @@ public class Employee implements Serializable {
 		
 	}
 	
-	//Employees should be able to get their customers account info
-	public List<Account> getCustomerAccount(Customer cust) throws IllegalArgumentException {
-		if(!customers.contains(cust)) {
-			throw new IllegalArgumentException();
-		}
-		
-		return cust.getAccounts();
-	}
-	
-	
-	//Employees should be able to get their customers info
-		public void printCustomers() {
-		for(Customer c: customers) {
-			System.out.println(c.toString());
-		}
-	}
 	
 	public String getName() {
 		return name;
