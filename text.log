@@ -357,3 +357,151 @@
 2018-03-05 21:35:46 TRACE root:36 - Admin [customers=[Customer [name=Jack, password=1234, accounts=[Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=0.0, approved=true, owners= [Jack ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=6.199999999999999, approved=true, owners= [Jack Sam ]]]], Customer [name=Sam, password=passcode, accounts=[Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=6.199999999999999, approved=true, owners= [Jack Sam ]]]]], name=Jake, password=54321]
 2018-03-05 21:35:46 TRACE root:36 - Done
 2018-03-05 21:35:46 TRACE root:36 - database.txt
+2018-03-06 10:58:01 DEBUG root:31 - Account [uniqueID=7e298dbd-ef9f-4be2-ac60-a61e412d0cda, balance=0.0, approved=false, owners= []]
+2018-03-06 10:58:02 DEBUG root:31 - Account [uniqueID=dfacdcc8-7af7-4867-ae54-8c2ac2da755a, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 10:58:18 DEBUG root:31 - Account [uniqueID=e7a77cdb-22f3-4901-baf6-b087fd92ce18, balance=0.0, approved=false, owners= []]
+2018-03-06 10:58:18 DEBUG root:31 - Account [uniqueID=4b454727-5bda-492d-b8fa-90839868ba66, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 11:03:21 DEBUG root:31 - Account [uniqueID=343ff6f8-dee6-4c1c-80e2-fcab227cde2e, balance=0.0, approved=false, owners= []]
+2018-03-06 11:03:21 DEBUG root:31 - Account [uniqueID=2f751ce6-5c17-47ac-bf1e-d56bc0b668d9, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 11:03:36 DEBUG root:31 - Account [uniqueID=9909d691-a862-4e81-ac5d-0156c89f338d, balance=0.0, approved=false, owners= []]
+2018-03-06 11:03:36 DEBUG root:31 - Account [uniqueID=a84dca54-711c-4689-9fd1-1570bc1d6d57, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 11:04:04 DEBUG root:31 - Account [uniqueID=ca0e430b-c634-4860-ad24-423c1ce780db, balance=0.0, approved=false, owners= []]
+2018-03-06 11:04:04 DEBUG root:31 - Account [uniqueID=c308d070-0863-426b-b5da-35e0be42c06c, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 11:04:42 DEBUG root:31 - Account [uniqueID=e23d70d2-db85-43c1-a132-8f12ac0903e9, balance=0.0, approved=false, owners= []]
+2018-03-06 11:04:42 DEBUG root:31 - Account [uniqueID=1d4776cd-6fde-44ed-ab73-3257d67aacfb, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 11:07:43 DEBUG root:31 - Account [uniqueID=6e89dfd0-f5dd-4f8a-86a6-5bb9adcce6b7, balance=0.0, approved=false, owners= []]
+2018-03-06 11:07:43 DEBUG root:31 - Account [uniqueID=6e870cc7-8ec5-44fb-9413-07ad410d324e, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 11:13:03 DEBUG root:31 - Account [uniqueID=8063b219-a08e-4088-8a34-f4a694b6a492, balance=0.0, approved=false, owners= []]
+2018-03-06 11:13:03 DEBUG root:31 - Account [uniqueID=110ada9b-effe-4f1c-89a5-8db9b8cb241c, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 11:13:25 DEBUG root:31 - Account [uniqueID=4a36e676-98f1-4359-abb4-575887a9c2d4, balance=0.0, approved=false, owners= []]
+2018-03-06 11:13:25 DEBUG root:31 - Account [uniqueID=c037ad69-073c-417f-9976-7130b8ee840b, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 11:14:48 DEBUG root:31 - Account [uniqueID=f06d599a-76b1-4c2a-ba86-ac40eb1aca07, balance=0.0, approved=false, owners= []]
+2018-03-06 11:14:48 DEBUG root:31 - Account [uniqueID=4f19d709-e0a3-4057-bc65-54173ec5c0f2, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 11:15:01 DEBUG root:31 - Account [uniqueID=140579df-b2ea-4517-a47d-b41d560fe775, balance=0.0, approved=false, owners= []]
+2018-03-06 11:15:01 DEBUG root:31 - Account [uniqueID=67b5bdb2-a4d6-47a5-b6b7-69e0963241e1, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 11:25:45 DEBUG root:31 - Account [uniqueID=53ef5e9f-c216-4e6f-8a7a-4db9fa2efe7b, balance=0.0, approved=false, owners= []]
+2018-03-06 11:25:45 DEBUG root:31 - Account [uniqueID=94973dd3-7661-407e-b2a7-d336da1d971b, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 11:36:58 DEBUG root:31 - Account [uniqueID=b6e21e8a-dcb9-4f83-93c7-947d108dedfa, balance=0.0, approved=false, owners= []]
+2018-03-06 11:36:58 DEBUG root:31 - Account [uniqueID=88350832-7795-4f94-b3eb-0f55ca3b1a7c, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 11:49:24 DEBUG root:31 - Account [uniqueID=1487818c-cd99-4977-92ed-420c11678718, balance=0.0, approved=false, owners= []]
+2018-03-06 11:49:24 DEBUG root:31 - Account [uniqueID=64326dae-1286-4ba4-af68-65cccb919ea1, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 11:49:32 DEBUG root:31 - Account [uniqueID=6117479e-363b-4324-8d48-6af4171f273e, balance=0.0, approved=false, owners= []]
+2018-03-06 11:49:32 DEBUG root:31 - Account [uniqueID=ac42d177-5f77-4f83-b9dd-21c37b01814c, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 12:37:51 DEBUG root:31 - Account [uniqueID=ad323cb9-a0bd-4055-be75-f73a4080bdf8, balance=0.0, approved=false, owners= []]
+2018-03-06 12:37:51 DEBUG root:31 - Account [uniqueID=863b8218-0e4f-4b9e-9814-6338603d32cc, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 13:03:45 DEBUG root:31 - Customer [name=, password=, accounts=[]]
+2018-03-06 13:03:45 DEBUG root:31 - Customer [name=Name, password=Password, accounts=[]]
+2018-03-06 13:03:45 DEBUG root:31 - Customer [name=User, password=Password, accounts=[]]
+2018-03-06 13:04:45 DEBUG root:31 - Customer [name=, password=, accounts=[]]
+2018-03-06 13:08:35 DEBUG root:31 - Customer [name=, password=, accounts=[]]
+2018-03-06 13:08:51 DEBUG root:31 - Customer [name=, password=, accounts=[]]
+2018-03-06 13:12:03 DEBUG root:31 - Customer [name=, password=, accounts=[]]
+2018-03-06 13:13:56 DEBUG root:31 - Customer [name=, password=, accounts=[]]
+2018-03-06 13:14:29 DEBUG root:31 - Customer [name=, password=, accounts=[]]
+2018-03-06 13:15:19 DEBUG root:31 - Customer [name=, password=, accounts=[]]
+2018-03-06 13:23:07 DEBUG root:31 - Customer [name=, password=, accounts=[]]
+2018-03-06 13:23:32 DEBUG root:31 - Account [uniqueID=84885d24-e9aa-4762-bf2b-f4e6cee25469, balance=0.0, approved=false, owners= []]
+2018-03-06 13:23:32 DEBUG root:31 - Account [uniqueID=ad8bf84b-ff99-4411-9418-2c454804bcef, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 13:23:32 DEBUG root:31 - Customer [name=, password=, accounts=[]]
+2018-03-06 13:36:45 DEBUG root:31 - Account [uniqueID=14ada085-5728-47f9-8c53-c4f50f3cfb9a, balance=0.0, approved=false, owners= []]
+2018-03-06 13:36:45 DEBUG root:31 - Account [uniqueID=49a5bb66-e52b-452c-8abb-73ebd6c698ba, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 13:36:45 DEBUG root:31 - Customer [name=, password=, accounts=[]]
+2018-03-06 13:38:48 DEBUG root:31 - Employee [customers=[], name=, password=]
+2018-03-06 14:08:51 DEBUG root:31 - Admin [customers=[], name=, password=]
+2018-03-06 14:09:35 DEBUG root:31 - Admin [customers=[], name=, password=]
+2018-03-06 14:17:21 DEBUG root:31 - Admin [customers=[], name=, password=]
+2018-03-06 14:17:47 DEBUG root:31 - Admin [customers=[], name=, password=]
+2018-03-06 14:21:20 DEBUG root:31 - Admin [customers=[], name=, password=]
+2018-03-06 14:21:30 DEBUG root:31 - Account [uniqueID=6ccc940d-e6b5-4c1a-9b79-6dc72cb277e6, balance=0.0, approved=false, owners= []]
+2018-03-06 14:21:30 DEBUG root:31 - Account [uniqueID=b640753f-958f-4eeb-b511-6826518dc056, balance=0.0, approved=false, owners= [User ]]
+2018-03-06 14:21:30 DEBUG root:31 - Admin [customers=[], name=, password=]
+2018-03-06 14:21:30 DEBUG root:31 - Customer [name=, password=, accounts=[]]
+2018-03-06 21:07:14 TRACE root:36 - Reading in file
+2018-03-06 21:07:15 TRACE root:36 - Found HashMap
+2018-03-06 21:07:39 TRACE root:36 - Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]]
+2018-03-06 21:07:39 TRACE root:36 - Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=0.0, approved=true, owners= [Jack ]]
+2018-03-06 21:07:39 TRACE root:36 - Account [uniqueID=4cc8ac19-0e52-40a5-acab-18d6a9e26dc0, balance=0.0, approved=true, owners= [Nick ]]
+2018-03-06 21:07:39 TRACE root:36 - Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=6.199999999999999, approved=true, owners= [Jack Sam ]]
+2018-03-06 21:07:39 TRACE root:36 - Customer [name=Nick, password=pass, accounts=[Account [uniqueID=4cc8ac19-0e52-40a5-acab-18d6a9e26dc0, balance=0.0, approved=true, owners= [Nick ]]]]
+2018-03-06 21:07:39 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=0.0, approved=true, owners= [Jack ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=6.199999999999999, approved=true, owners= [Jack Sam ]]]]
+2018-03-06 21:07:39 TRACE root:36 - Customer [name=Sam, password=passcode, accounts=[Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=6.199999999999999, approved=true, owners= [Jack Sam ]]]]
+2018-03-06 21:07:39 TRACE root:36 - Employee [customers=[Customer [name=Nick, password=pass, accounts=[Account [uniqueID=4cc8ac19-0e52-40a5-acab-18d6a9e26dc0, balance=0.0, approved=true, owners= [Nick ]]]], Customer [name=Jack, password=1234, accounts=[Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=0.0, approved=true, owners= [Jack ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=6.199999999999999, approved=true, owners= [Jack Sam ]]]], Customer [name=Sam, password=passcode, accounts=[Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=6.199999999999999, approved=true, owners= [Jack Sam ]]]]], name=Nick, password=1234]
+2018-03-06 21:07:39 TRACE root:36 - Admin [customers=[Customer [name=Jack, password=1234, accounts=[Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=0.0, approved=true, owners= [Jack ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=6.199999999999999, approved=true, owners= [Jack Sam ]]]], Customer [name=Sam, password=passcode, accounts=[Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=6.199999999999999, approved=true, owners= [Jack Sam ]]]]], name=Jake, password=54321]
+2018-03-06 21:07:39 TRACE root:36 - Done
+2018-03-06 21:07:39 TRACE root:36 - database.txt
+2018-03-06 21:08:08 TRACE root:36 - Reading in file
+2018-03-06 21:08:08 TRACE root:36 - Found HashMap
+2018-03-06 21:08:26 TRACE root:36 - Customer Jack logged on
+2018-03-06 21:08:31 TRACE root:36 - Customer Jack applied for an account
+2018-03-06 21:08:40 WARN  root:21 - User attempted to access invalid id 
+2018-03-06 21:10:29 TRACE root:36 - Reading in file
+2018-03-06 21:10:29 TRACE root:36 - Found HashMap
+2018-03-06 21:10:39 TRACE root:36 - Customer Jack logged on
+2018-03-06 21:10:46 TRACE root:36 - Customer Jack applied for an account
+2018-03-06 21:11:34 TRACE root:36 - Customer Jack deposited 15.0 to account c0180247-c4cd-411c-b973-a225cd671313
+2018-03-06 21:11:48 TRACE root:36 - Customer Jack deposited 11.11 to account c0180247-c4cd-411c-b973-a225cd671313
+2018-03-06 21:12:32 TRACE root:36 - Customer Jack transfered 0.9 from account c0180247-c4cd-411c-b973-a225cd671313 to account 58c2fca7-e6f8-491c-81cd-b912ff53b59d
+2018-03-06 21:13:25 TRACE root:36 - Employee Nick logged on
+2018-03-06 21:13:45 DEBUG root:31 - 
+2018-03-06 21:13:56 DEBUG root:31 - 
+2018-03-06 21:14:02 DEBUG root:31 - 
+2018-03-06 21:15:02 DEBUG root:31 - 11ed02c4-8bd6-4660-af6b-6a2c1db3a14c
+2018-03-06 21:15:33 TRACE root:36 - Admin Jake logged on
+2018-03-06 21:16:59 TRACE root:36 - Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]]
+2018-03-06 21:16:59 TRACE root:36 - Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=2.9900000000000007, approved=true, owners= [Jack ]]
+2018-03-06 21:16:59 TRACE root:36 - Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]]
+2018-03-06 21:16:59 TRACE root:36 - Account [uniqueID=4cc8ac19-0e52-40a5-acab-18d6a9e26dc0, balance=0.0, approved=true, owners= [Nick ]]
+2018-03-06 21:16:59 TRACE root:36 - Account [uniqueID=11ed02c4-8bd6-4660-af6b-6a2c1db3a14c, balance=0.0, approved=true, owners= [Jack ]]
+2018-03-06 21:16:59 TRACE root:36 - Customer [name=Nick, password=pass, accounts=[Account [uniqueID=4cc8ac19-0e52-40a5-acab-18d6a9e26dc0, balance=0.0, approved=true, owners= [Nick ]]]]
+2018-03-06 21:16:59 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=2.9900000000000007, approved=true, owners= [Jack ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]], Account [uniqueID=11ed02c4-8bd6-4660-af6b-6a2c1db3a14c, balance=0.0, approved=true, owners= [Jack ]]]]
+2018-03-06 21:16:59 TRACE root:36 - Customer [name=Sam, password=passcode, accounts=[Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]]]]
+2018-03-06 21:16:59 TRACE root:36 - Employee [customers=[Customer [name=Nick, password=pass, accounts=[Account [uniqueID=4cc8ac19-0e52-40a5-acab-18d6a9e26dc0, balance=0.0, approved=true, owners= [Nick ]]]], Customer [name=Jack, password=1234, accounts=[Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=2.9900000000000007, approved=true, owners= [Jack ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]], Account [uniqueID=11ed02c4-8bd6-4660-af6b-6a2c1db3a14c, balance=0.0, approved=true, owners= [Jack ]]]], Customer [name=Sam, password=passcode, accounts=[Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]]]]], name=Nick, password=1234]
+2018-03-06 21:16:59 TRACE root:36 - Admin [customers=[Customer [name=Jack, password=1234, accounts=[Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=2.9900000000000007, approved=true, owners= [Jack ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]], Account [uniqueID=11ed02c4-8bd6-4660-af6b-6a2c1db3a14c, balance=0.0, approved=true, owners= [Jack ]]]], Customer [name=Sam, password=passcode, accounts=[Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]]]]], name=Jake, password=54321]
+2018-03-06 21:16:59 TRACE root:36 - Done
+2018-03-06 21:16:59 TRACE root:36 - database.txt
+2018-03-06 21:22:53 TRACE root:36 - Reading in file
+2018-03-06 21:22:53 TRACE root:36 - Found HashMap
+2018-03-06 21:23:05 TRACE root:36 - Customer Jack logged on
+2018-03-06 21:23:19 WARN  root:21 - User attempted to access invalid id 11ed02c4-8bd6-4660-af6b-6a2c1db3a14
+2018-03-06 21:23:57 TRACE root:36 - Customer Jack deposited 20.5 to account 11ed02c4-8bd6-4660-af6b-6a2c1db3a14c
+2018-03-06 21:24:06 TRACE root:36 - Customer Jack deposited 10.5 to account 11ed02c4-8bd6-4660-af6b-6a2c1db3a14c
+2018-03-06 21:25:20 TRACE root:36 - Reading in file
+2018-03-06 21:25:20 TRACE root:36 - Found HashMap
+2018-03-06 21:25:27 TRACE root:36 - Customer Jack logged on
+2018-03-06 21:26:11 TRACE root:36 - Customer Jack transfered 0.0 from account 11ed02c4-8bd6-4660-af6b-6a2c1db3a14c to account 11ed02c4-8bd6-4660-af6b-6a2c1db3a14c
+2018-03-06 21:26:21 TRACE root:36 - Customer Jack deposited 20.0 to account 11ed02c4-8bd6-4660-af6b-6a2c1db3a14c
+2018-03-06 21:26:45 TRACE root:36 - Customer Jack transfered 10.0 from account 11ed02c4-8bd6-4660-af6b-6a2c1db3a14c to account c0180247-c4cd-411c-b973-a225cd671313
+2018-03-06 21:27:09 TRACE root:36 - Admin Jake logged on
+2018-03-06 21:27:47 TRACE root:36 - Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]]
+2018-03-06 21:27:47 TRACE root:36 - Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=12.99, approved=true, owners= [Jack ]]
+2018-03-06 21:27:47 TRACE root:36 - Account [uniqueID=4cc8ac19-0e52-40a5-acab-18d6a9e26dc0, balance=0.0, approved=true, owners= [Nick ]]
+2018-03-06 21:27:47 TRACE root:36 - Account [uniqueID=11ed02c4-8bd6-4660-af6b-6a2c1db3a14c, balance=10.0, approved=true, owners= [Jack ]]
+2018-03-06 21:27:47 TRACE root:36 - Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]]
+2018-03-06 21:27:47 TRACE root:36 - Customer [name=Nick, password=pass, accounts=[Account [uniqueID=4cc8ac19-0e52-40a5-acab-18d6a9e26dc0, balance=0.0, approved=true, owners= [Nick ]]]]
+2018-03-06 21:27:47 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=12.99, approved=true, owners= [Jack ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]], Account [uniqueID=11ed02c4-8bd6-4660-af6b-6a2c1db3a14c, balance=10.0, approved=true, owners= [Jack ]]]]
+2018-03-06 21:27:47 TRACE root:36 - Customer [name=Sam, password=passcode, accounts=[Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]]]]
+2018-03-06 21:27:47 TRACE root:36 - Employee [customers=[Customer [name=Nick, password=pass, accounts=[Account [uniqueID=4cc8ac19-0e52-40a5-acab-18d6a9e26dc0, balance=0.0, approved=true, owners= [Nick ]]]], Customer [name=Jack, password=1234, accounts=[Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=12.99, approved=true, owners= [Jack ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]], Account [uniqueID=11ed02c4-8bd6-4660-af6b-6a2c1db3a14c, balance=10.0, approved=true, owners= [Jack ]]]], Customer [name=Sam, password=passcode, accounts=[Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]]]]], name=Nick, password=1234]
+2018-03-06 21:27:47 TRACE root:36 - Admin [customers=[Customer [name=Jack, password=1234, accounts=[Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=12.99, approved=true, owners= [Jack ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]], Account [uniqueID=11ed02c4-8bd6-4660-af6b-6a2c1db3a14c, balance=10.0, approved=true, owners= [Jack ]]]], Customer [name=Sam, password=passcode, accounts=[Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]]]]], name=Jake, password=54321]
+2018-03-06 21:27:47 TRACE root:36 - Done
+2018-03-06 21:27:47 TRACE root:36 - database.txt
+2018-03-06 21:32:47 TRACE root:36 - Reading in file
+2018-03-06 21:32:47 TRACE root:36 - Found HashMap
+2018-03-06 21:32:58 TRACE root:36 - Admin Jake logged on
+2018-03-06 21:34:05 TRACE root:36 - Reading in file
+2018-03-06 21:34:05 TRACE root:36 - Found HashMap
+2018-03-06 21:34:24 TRACE root:36 - Admin Jake logged on
+2018-03-06 21:34:43 TRACE root:36 - Account 11ed02c4-8bd6-4660-af6b-6a2c1db3a14c terminated 
+2018-03-06 21:34:50 TRACE root:36 - Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]]
+2018-03-06 21:34:50 TRACE root:36 - Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=12.99, approved=true, owners= [Jack ]]
+2018-03-06 21:34:50 TRACE root:36 - Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]]
+2018-03-06 21:34:50 TRACE root:36 - Account [uniqueID=4cc8ac19-0e52-40a5-acab-18d6a9e26dc0, balance=0.0, approved=true, owners= [Nick ]]
+2018-03-06 21:34:50 TRACE root:36 - Customer [name=Nick, password=pass, accounts=[Account [uniqueID=4cc8ac19-0e52-40a5-acab-18d6a9e26dc0, balance=0.0, approved=true, owners= [Nick ]]]]
+2018-03-06 21:34:50 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=12.99, approved=true, owners= [Jack ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]], Account [uniqueID=11ed02c4-8bd6-4660-af6b-6a2c1db3a14c, balance=10.0, approved=true, owners= [Jack ]]]]
+2018-03-06 21:34:50 TRACE root:36 - Customer [name=Sam, password=passcode, accounts=[Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]]]]
+2018-03-06 21:34:50 TRACE root:36 - Employee [customers=[Customer [name=Nick, password=pass, accounts=[Account [uniqueID=4cc8ac19-0e52-40a5-acab-18d6a9e26dc0, balance=0.0, approved=true, owners= [Nick ]]]], Customer [name=Jack, password=1234, accounts=[Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=12.99, approved=true, owners= [Jack ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]], Account [uniqueID=11ed02c4-8bd6-4660-af6b-6a2c1db3a14c, balance=10.0, approved=true, owners= [Jack ]]]], Customer [name=Sam, password=passcode, accounts=[Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]]]]], name=Nick, password=1234]
+2018-03-06 21:34:50 TRACE root:36 - Admin [customers=[Customer [name=Jack, password=1234, accounts=[Account [uniqueID=c0180247-c4cd-411c-b973-a225cd671313, balance=12.99, approved=true, owners= [Jack ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]], Account [uniqueID=11ed02c4-8bd6-4660-af6b-6a2c1db3a14c, balance=10.0, approved=true, owners= [Jack ]]]], Customer [name=Sam, password=passcode, accounts=[Account [uniqueID=c01e5e9a-09a3-48ed-a13f-c0753e8ebe6b, balance=1.5, approved=true, owners= [Sam ]], Account [uniqueID=58c2fca7-e6f8-491c-81cd-b912ff53b59d, balance=7.1, approved=true, owners= [Jack Sam ]]]]], name=Jake, password=54321]
+2018-03-06 21:34:50 TRACE root:36 - Done
+2018-03-06 21:34:50 TRACE root:36 - database.txt
+2018-03-06 21:35:56 TRACE root:36 - Reading in file
+2018-03-06 21:35:56 TRACE root:36 - Found HashMap
+2018-03-06 22:23:25 TRACE root:36 - Customer Jack logged on
