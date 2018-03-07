@@ -54,6 +54,7 @@ public class Driver {
 	
 	        // Invoke some command
 	        char cmd = scan.next().charAt(0);
+	        scan.nextLine();
 	        if("CEAQ".indexOf(cmd)<0) {
 	        	System.out.println("Invalid command");
 	        }
@@ -89,13 +90,16 @@ public class Driver {
 		//Customer logs in or registers a new account
 		System.out.println("Press L to login or R to register a  new account: ");
 		char cmd = scan.next().charAt(0);
+		scan.nextLine();
 		
 		//If they log in
 		if(cmd =='L') {
 			System.out.print("Enter your customer username : ");
 			String user = scan.next();
+			scan.nextLine();
 			System.out.print("Enter your password : ");
 			String pass = scan.next();
+			scan.nextLine();
 			if(Customer.validLogin(user, pass)) {
 				Customer customer = Customer.getCustomer(user, pass);
 				runCustomerLoggedOn(customer,scan);
@@ -107,8 +111,10 @@ public class Driver {
 			
 			System.out.print("Enter your customer username : ");
 			String user = scan.next();
+			scan.nextLine();
 			System.out.print("Enter your password : ");
 			String pass = scan.next();
+			scan.nextLine();
 			Customer customer = Customer.createCustomer(user, pass);
 			LoggingUtil.logTrace("New customer created "+ customer);
 			System.out.println("Hello "+user+", your new account has been created");
@@ -124,12 +130,15 @@ public class Driver {
 	private static void runEmployee(Scanner scan) {
 		System.out.println("Press L to login or R to register a new employee account: ");
 		char cmd = scan.next().charAt(0);
+		scan.nextLine();
 		//If they log in
 				if(cmd =='L') {
 					System.out.print("Enter your employee username : ");
 					String user = scan.next();
+					scan.nextLine();
 					System.out.print("Enter your password : ");
 					String pass = scan.next();
+					scan.nextLine();
 					if(Employee.validLogin(user, pass)) {
 						Employee employee = Employee.getEmployee(user, pass);
 						runEmployeeLoggedOn(employee,scan);
@@ -141,8 +150,10 @@ public class Driver {
 					
 					System.out.print("Enter your employee username : ");
 					String user = scan.next();
+					scan.nextLine();
 					System.out.print("Enter your password : ");
 					String pass = scan.next();
+					scan.nextLine();
 					Employee employee = Employee.createEmployee(user, pass);
 					LoggingUtil.logTrace("New employee created "+ employee);
 					System.out.println("Hello "+user+", your new account has been created");
@@ -159,12 +170,15 @@ public class Driver {
 	private static void runAdmin(Scanner scan) {
 		System.out.println("Press L to login or R to register a new Admin account: ");
 		char cmd = scan.next().charAt(0);
+		scan.nextLine();
 		//If they log in
 				if(cmd =='L') {
 					System.out.print("Enter your admin username : ");
 					String user = scan.next();
+					scan.nextLine();
 					System.out.print("Enter your password : ");
 					String pass = scan.next();
+					scan.nextLine();
 					if(Admin.validLogin(user, pass)) {
 						Admin admin = Admin.getEmployee(user, pass);
 						runAdminLoggedOn(admin,scan);
@@ -176,8 +190,10 @@ public class Driver {
 					
 					System.out.print("Enter your Admin username : ");
 					String user = scan.next();
+					scan.nextLine();
 					System.out.print("Enter your password : ");
 					String pass = scan.next();
+					scan.nextLine();
 					Admin admin = Admin.createAdmin(user, pass);
 					LoggingUtil.logTrace("New Admin created "+ admin);
 					System.out.println("Hello "+user+", your new account has been created");
@@ -206,8 +222,9 @@ public class Driver {
 				System.out.println("Hello "+ user );
 				
 				while(loggedOn) {
-					System.out.println("Press V to view your customers,A to access all accounts, P to access account applications, J to access joint account applications, or Q to logout");
+					System.out.println("Press V to view your customers, A to access all accounts, P to access account applications, J to access joint account applications, or Q to logout");
 					cmd = scan.next().charAt(0);
+					scan.nextLine();
 					if("VAPJQ".indexOf(cmd)<0) {
 			        	System.out.println("Invalid command");
 			        }
@@ -244,7 +261,7 @@ public class Driver {
 	//applies for a joint account
 	private static void applyForJointAccount(Customer cust, Scanner scan) {
 		String id;
-		scan.nextLine();
+		
 		do {
 			System.out.println("Enter the account id of the account applying for");
 			id = scan.nextLine();
@@ -264,7 +281,7 @@ public class Driver {
 		Map<Character,Runnable> commands = new HashMap<Character,Runnable>();
 		boolean acc =true;
 		char cmd;
-		String id = scan.nextLine();
+		String id;
 		do {
 			System.out.println("Enter the id of the account you wish to select :");
 			id = scan.nextLine();
@@ -280,12 +297,14 @@ public class Driver {
 		commands.put('D', ()->runDeposit(admin,account,scan));
 		commands.put('W', ()->runWithdraw(admin,account,scan));
 		commands.put('T', ()->runTransfer(admin,account,scan));
+		commands.put('C', ()->runCancelAccount(admin,account,scan));
 		commands.put('Q', ()->quit());
 		
 		while(acc) {
-			System.out.println("Enter D to deposit, W to withdraw, T to transfer, or Q to go back");
+			System.out.println("Enter D to deposit, W to withdraw, T to transfer, C to cancel acccount, or Q to go back");
 			cmd = scan.next().charAt(0);
-			if("DWTQ".indexOf(cmd)<0) {
+			scan.nextLine();
+			if("DWTCQ".indexOf(cmd)<0) {
 				System.out.println("Invalid Command");
 			}else if(cmd=='Q') {
 				acc =false;
@@ -305,6 +324,7 @@ public class Driver {
 		
 		
 		System.out.println("Enter the id of the account you wish to select :");
+		
 		String id = scan.nextLine();
 		boolean exists = false;
 		Account a1 = null;
@@ -330,6 +350,7 @@ public class Driver {
 			while(acc) {
 				System.out.println("Enter D to deposit, W to withdraw, T to transfer, or Q to go back");
 				cmd = scan.next().charAt(0);
+				scan.nextLine();
 				if("DWTQ".indexOf(cmd)<0) {
 					System.out.println("Invalid Command");
 				}else if(cmd=='Q') {
@@ -368,6 +389,7 @@ public class Driver {
 		while(loggedOn) {
 			System.out.println("Press A to apply for an account, J to apply for a joint account, S to select an account, or Q to logout");
 			cmd = scan.next().charAt(0);
+			scan.nextLine();
 			if("AJSQ".indexOf(cmd)<0) {
 	        	System.out.println("Invalid command");
 	        }
@@ -397,6 +419,7 @@ public class Driver {
 		while(loggedOn) {
 			System.out.println("Press V to view your customers, A to access account applications, J to access joint account applications, or Q to logout");
 			cmd = scan.next().charAt(0);
+			scan.nextLine();
 			if("VAJQ".indexOf(cmd)<0) {
 	        	System.out.println("Invalid command");
 	        }
@@ -414,7 +437,7 @@ public class Driver {
 		System.out.println("Outputing joint account applications...");
 		Set<Account> apps = Bank.getJointApplications().keySet();
 		String id;
-		scan.nextLine();
+		
 		
 		for(Account a:apps) {
 			System.out.println(a.toString() +"----"+Bank.getJointApplications().get(a).toString());
@@ -430,6 +453,7 @@ public class Driver {
 		do{
 			System.out.println("Approve? (Y/N)");
 			approve = scan.next().charAt(0);
+			scan.nextLine();
 			if(approve!='Y' && approve!='N') {
 				System.out.println("Invalid input");
 			}
@@ -456,7 +480,6 @@ public class Driver {
 		}
 		do {
 			System.out.println("Enter an account id to approve or deny an account");
-			scan.nextLine();
 			id = scan.nextLine();
 			LoggingUtil.logDebug(id);
 			if(!bankHasAccountId(id,Bank.getApplications().keySet())) System.out.println("Invalid id");
@@ -466,6 +489,7 @@ public class Driver {
 		do{
 			System.out.println("Approve? (Y/N)");
 			approve = scan.next().charAt(0);
+			scan.nextLine();
 			if(approve!='Y' && approve!='N') {
 				System.out.println("Invalid input");
 			}
@@ -561,7 +585,7 @@ public class Driver {
 		}while(transfer<0 || transfer>acc.getBalance());
 		do {
 			System.out.println("Enter id of account to transfer too :");
-			scan.nextLine();
+			
 			id = scan.nextLine();
 			if(!bankHasAccountId(id,Bank.getAccounts())) {
 				System.out.println("Invalid account id");
@@ -580,13 +604,14 @@ public class Driver {
 		do {
 			System.out.println("Enter amount to transfer :");
 			transfer = scan.nextDouble();
+			scan.nextLine();
 			if(transfer<0 || transfer>acc.getBalance()) {
 				System.out.println("Invalid amount");
 			}
 		}while(transfer<0 || transfer>acc.getBalance());
 		do {
 			System.out.println("Enter id of account to transfer too :");
-			scan.nextLine();
+			
 			id = scan.nextLine();
 			if(!bankHasAccountId(id,Bank.getAccounts())) {
 				System.out.println("Invalid account id");
@@ -596,6 +621,12 @@ public class Driver {
 		cust.transfer(transfer, acc, accountWithId(id,Bank.getAccounts()));
 		LoggingUtil.logTrace("Customer "+cust.getName()+" transfered "+ transfer+" from account "+ acc.getUniqueID()+" to account "+id);
 		System.out.println("Succefully withdrew. New balance is :"+acc.getBalance());
+	}
+	
+	private static void runCancelAccount(Admin admin,Account account,Scanner scan) {
+		admin.cancelAccount(account);
+		System.out.println("Account canceled");
+		LoggingUtil.logTrace("Account "+ account.getUniqueID() +" terminated " );
 	}
 	
 	
