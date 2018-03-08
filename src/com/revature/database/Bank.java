@@ -120,7 +120,19 @@ public class Bank implements Serializable {
 		Bank.admins = admins;
 	}
 	
+	public static boolean bankHasAccountId(String id,Set<Account> accounts) {
+		for(Account a:accounts) {
+			if(a.getUniqueID().equals(id)) return true;
+		}
+		return false;
+	}
 	
+	public static Account accountWithId(String id,Set<Account> accounts) {
+		for(Account a:accounts) {
+			if(a.getUniqueID().equals(id)) return a;
+		}
+		return null;
+	}
 	
 	
 }

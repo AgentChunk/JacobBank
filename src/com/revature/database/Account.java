@@ -1,9 +1,13 @@
 package com.revature.database;
 
 import java.io.Serializable;
+import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.UUID;
+
+import com.revature.io.LoggingUtil;
 
 //an account holds money
 public class Account implements Serializable{	
@@ -97,5 +101,52 @@ public class Account implements Serializable{
 		this.approved = approved;
 	}
 	
+	//gets amount to deposit
+	public static double scanDeposit(Account acc, Scanner scan) {
+		double deposit;
+		do {
+			System.out.println("Enter amount to deposit :");
+			deposit = scan.nextDouble();
+			if(deposit<0) {
+				System.out.println("Invalid amount");
+			}
+		}while(deposit<0);
+		
+		return deposit;
+	}
 	
+	public static double scanWithdraw(Account acc, Scanner scan) {
+		double withdraw;
+		do {
+			System.out.println("Enter amount to withdraw :");
+			withdraw = scan.nextDouble();
+			if(withdraw<0 || withdraw>acc.getBalance()) {
+				System.out.println("Invalid amount");
+			}
+		}while(withdraw<0 || withdraw>acc.getBalance());
+		return withdraw;
+	}
+	
+	public static Pair<Double,Account> scanTransfer(Account acc, Scanner scan){
+		String id;
+		double transfer;
+		do {
+			System.out.println("Enter amount to transfer :");
+			transfer = scan.nextDouble();
+			scan.nextLine();
+			if(transfer<0 || transfer>acc.getBalance()) {
+				System.out.println("Invalid amount");
+			}
+		}while(transfer<0 || transfer>acc.getBalance());
+		do {
+			System.out.println("Enter id of account to transfer too :");
+			
+			id = scan.nextLine();
+			if(!Bank.bankHasAccountId(id,Bank.getAccounts())) {
+				System.out.println("Invalid account id");
+			}
+		}while(!Bank.bankHasAccountId(id,Bank.getAccounts()));
+		Account acc1 = Bank.accountWithId(id, Bank.getAccounts());
+		return new Pair<Double, Account>(transfer,acc1);
+	}
 }

@@ -1,13 +1,19 @@
 package com.revature.database;
 
 import java.io.Serializable;
+import javafx.util.Pair;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+import com.revature.io.LoggingUtil;
 
 /*
  * Customers register with a username and password and can apply for an account
  */
-public class Customer implements Serializable{
+public class Customer implements Serializable, Login{
 
 	/**
 	 * 
@@ -66,6 +72,7 @@ public class Customer implements Serializable{
 	public void deposit(double add, Account acc) throws IllegalArgumentException {
 		if(acc.isApproved() && accounts.contains(acc)) {
 			acc.deposit(add);
+			LoggingUtil.logTrace("Customer "+name+" deposited "+ add+" to account "+acc.getUniqueID());
 		}
 	}
 	
@@ -73,6 +80,7 @@ public class Customer implements Serializable{
 	public void withdraw(double subtract, Account acc) throws IllegalArgumentException {
 		if(acc.isApproved()) {
 			acc.withdraw(subtract);
+			LoggingUtil.logTrace("Customer "+name+" deposited "+ subtract +" to account "+acc.getUniqueID());
 		}
 	}
 	
@@ -80,6 +88,7 @@ public class Customer implements Serializable{
 	public void transfer(double transfer, Account a1, Account a2) throws IllegalArgumentException {
 		if(a1.isApproved() && a2.isApproved()) {
 			a1.transfer(transfer, a2);
+			LoggingUtil.logTrace("Customer "+name+" transfered "+ transfer+" from account "+ a1.getUniqueID()+" to account "+a2.getUniqueID());
 		}
 	}
 	
@@ -112,7 +121,7 @@ public class Customer implements Serializable{
 	}
 
 	//Checks if a customer with name and password exists
-	public static boolean validLogin(String name, String password) {
+	public boolean validLogin(String name, String password) {
 		//go from the bank list and check if the password username combo exists
 		for(Customer c:Bank.getCustomers()) {
 			if(c.name.equals(name) && c.password.equals(password)) {
@@ -125,7 +134,7 @@ public class Customer implements Serializable{
 	
 	
 	//returns the customer with the name password combo
-	public static Customer getCustomer(String name, String password) {
+	public Customer login(String name, String password) {
 		
 		//go through the bank and find the customer with name and password combo
 		for(Customer c:Bank.getCustomers()) {
@@ -136,6 +145,126 @@ public class Customer implements Serializable{
 		
 		return null;
 	}
+	
+	
+	
+	//this is run when the user logs on
+	public void runLoggedOn(Scanner scan) {
+		
+		char cmd;
+		boolean loggedOn =true;		
+		
+		LoggingUtil.logTrace("Customer " + name + " logged on");
+		
+		System.out.println("Hello " + name + ", these are you current accounts and their balances");
+		for(int i=0;i<accounts.size();i++) {
+			System.out.println("Account :"+ accounts.get(i).getUniqueID()+ " Balance :" + accounts.get(i).getBalance());
+		}
+		while(loggedOn) {
+			System.out.println("Press A to apply for an account, J to apply for a joint account, S to select an account, or Q to logout");
+			cmd = scan.next().charAt(0);
+			scan.nextLine();
+			switch(cmd){
+				//User chose apply for account
+				case 'A':
+					applyForAccount();
+					LoggingUtil.logTrace("Customer "+ name +" applied for an account");
+					System.out.println("Your application has been submited");
+					break;
+				//User chose apply for joint account	
+				case 'J':
+					String id;
+					
+					do {
+						System.out.println("Enter the account id of the account applying for");
+						id = scan.nextLine();
+						if(!Bank.bankHasAccountId(id,Bank.getAccounts())) {
+							System.out.println("Invalid ID");
+						}
+					}while(!Bank.bankHasAccountId(id,Bank.getAccounts()));
+					
+					Account apply = Bank.accountWithId(id,Bank.getAccounts());
+					this.applyForJointAccount(apply);
+					LoggingUtil.logTrace("Customer "+ name +" applied for jointAccount with id "+ id );
+					System.out.println("Your joint appliaction has been submitted");
+					break;
+				
+				//User chose to select an account	
+				case 'S':
+					selectAccount(scan);
+					break;
+				case 'Q':
+					loggedOn = false;
+					break;
+			
+				default:
+					System.out.println("Invalid command");
+			}		
+		}
+	}
+	
+	private void selectAccount(Scanner scan) {
+		boolean acc =true;
+		char cmd;
+		
+		System.out.println("Enter the id of the account you wish to select :");
+		
+		String id = scan.nextLine();
+		boolean exists = false;
+		Account a1 = null;
+		for(Account a: accounts) {
+			if(a.getUniqueID().equals(id)) {
+				exists = true;
+				a1=a;
+			}
+		}
+		
+		if(exists) {
+			//Once account is found it is printed
+			System.out.println("Account "+ id +" selected");
+			System.out.println(a1);
+			//Then the user is asked what they want to do with the account
+			
+			
+			while(acc) {
+				System.out.println("Enter D to deposit, W to withdraw, T to transfer, or Q to go back");
+				cmd = scan.next().charAt(0);
+				scan.nextLine();
+				
+				switch(cmd) {
+					case 'D':
+						double deposit = Account.scanDeposit(a1, scan);
+						deposit(deposit, a1);
+						System.out.println("Succefully deposited. New balance is :"+ String.format("%.2f",a1.getBalance()));
+						break;
+						
+					case 'W':
+						double withdraw= Account.scanWithdraw(a1,scan);
+						withdraw(withdraw,a1);				
+						System.out.println("Succefully withdrew. New balance is :"+String.format("%.2f",a1.getBalance()));
+						break;
+						
+					case 'T':
+						Pair<Double,Account> transfer = Account.scanTransfer(a1, scan);
+						transfer(transfer.getKey(), a1, transfer.getValue());
+						System.out.println("Succefully withdrew. New balance is :"+ String.format("%.2f",a1.getBalance()));
+						break;
+					
+					case 'Q':		
+						acc = false;
+						break;
+					default:
+						System.out.println("Invalid Command");
+				}
+			}
+			
+		}else {
+			System.out.println("Invalid id");
+			LoggingUtil.logWarn("User attempted to access invalid id " +id);
+		}
+	}
+	
+	
 	
 	
 	

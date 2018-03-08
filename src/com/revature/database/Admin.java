@@ -1,6 +1,13 @@
 package com.revature.database;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
+
+import com.revature.io.LoggingUtil;
+
+import javafx.util.Pair;
 
 /**
  * 
@@ -53,14 +60,17 @@ public class Admin extends Employee {
 	
 	public void withdraw(double amount,Account acc) throws IllegalArgumentException {
 		acc.withdraw(amount);
+		LoggingUtil.logTrace("Admin "+getName()+" deposited "+ amount+" to account "+acc.getUniqueID());
 	}
 	
 	public void deposit(double amount, Account acc) throws IllegalArgumentException {
 		acc.deposit(amount);
+		LoggingUtil.logTrace("Admin "+getName()+" deposited "+ amount +" to account "+ acc.getUniqueID());
 	}
 	
 	public void transfer(double amount, Account a1, Account a2) throws IllegalArgumentException {
 		a1.transfer(amount,a2);
+		LoggingUtil.logTrace("Admin "+getName()+" transfered "+ amount+" from account "+ a1.getUniqueID()+" to account "+a2.getUniqueID());
 	}
 	
 	@Override
@@ -69,7 +79,7 @@ public class Admin extends Employee {
 	}
 	
 	//Check if an admin with the name password combo exists
-	public static boolean validLogin(String name, String password) {
+	public boolean validLogin(String name, String password) {
 		//go from the bank list and check if the password username combo exists
 		for(Admin a:Bank.getAdmins()) {
 			if(a.getName().equals(name) && a.getPassword().equals(password)) {
@@ -82,7 +92,7 @@ public class Admin extends Employee {
 	
 	
 	//returns the customer with the name password combo
-	public static Admin getEmployee(String name, String password) {
+	public Admin login(String name, String password) {
 		
 		//go through the bank and find the customer with name and password combo
 		for(Admin a:Bank.getAdmins()) {
@@ -91,8 +101,110 @@ public class Admin extends Employee {
 			}
 		}
 		
-		
-		
 		return null;
+	}
+	
+	//Runs the UI for when the user logs on
+	public void runLoggedOn(Scanner scan) {
+		Map<Character,Runnable> commands = new HashMap<Character,Runnable>();
+		char cmd;
+		boolean loggedOn =true;
+		//Fill the map with runnable commands
+		commands.put('V', ()-> viewCustomers());
+		commands.put('A', ()-> viewAllAccounts());
+		commands.put('P', ()-> accessAccountApplications(scan));
+		commands.put('J', ()-> accessJointApplicatons(scan));
+		
+		LoggingUtil.logTrace("Admin "+ this.getName()+ " logged on");
+		System.out.println("Hello "+ this.getName() );
+		
+		while(loggedOn) {
+			System.out.println("Press V to view your customers, A to access all accounts, P to access account applications, J to access joint account applications, or Q to logout");
+			cmd = scan.next().charAt(0);
+			scan.nextLine();
+			if("VAPJQ".indexOf(cmd)<0) {
+	        	System.out.println("Invalid command");
+	        }
+	        else if(cmd== 'Q') {
+	        	loggedOn = false;
+	        }else if(cmd =='A') {
+	        	commands.get(cmd).run();
+	        	selectAccount(scan);
+	        }else
+	        	commands.get(cmd).run();
+		}
+		
+	}
+
+
+	public void viewAllAccounts() {
+		System.out.println("Outputing all bank accounts...");
+		for(Account a:Bank.getAccounts()) {
+			System.out.println(a.toString());
+		}	
+	}
+	
+	public void selectAccount(Scanner scan) {
+	
+		boolean acc =true;
+		char cmd;
+		String id;
+		do {
+			System.out.println("Enter the id of the account you wish to select or Q to go back :");
+			id = scan.nextLine();
+			if(!Bank.bankHasAccountId(id,Bank.getAccounts()) && !id.equals("Q")) {
+				System.out.println("Invalid account id");
+			}
+		}while(!Bank.bankHasAccountId(id,Bank.getAccounts()) && !id.equals("Q"));
+		if(!id.equals("Q")) {
+			Account account = Bank.accountWithId(id,Bank.getAccounts());
+			
+			System.out.println("Account "+ id +" selected");
+			System.out.println(account);
+			
+			
+			while(acc) {
+				System.out.println("Enter D to deposit, W to withdraw, T to transfer, C to cancel acccount, or Q to go back");
+				cmd = scan.next().charAt(0);
+				scan.nextLine();
+				
+				switch(cmd) {
+					case 'D':
+						double deposit = Account.scanDeposit(account, scan);
+						deposit(deposit, account);
+						System.out.println("Succefully deposited. New balance is :"+String.format("%.2f",account.getBalance()));
+						break;
+						
+					case 'W':
+						double withdraw= Account.scanWithdraw(account,scan);
+						withdraw(withdraw,account);				
+						System.out.println("Succefully withdrew. New balance is :"+String.format("%.2f",account.getBalance()));
+						break;
+						
+					case 'T':
+						Pair<Double,Account> transfer = Account.scanTransfer(account, scan);
+						transfer(transfer.getKey(), account, transfer.getValue());
+						System.out.println("Succefully withdrew. New balance is :"+ String.format("%.2f",account.getBalance()));
+						break;
+					
+					case 'Q':		
+						acc = false;
+						break;
+					case 'C':
+						runCancelAccount(account,scan);
+						acc = false;
+						break;
+					default:
+						System.out.println("Invalid Command");
+				}
+				
+			}
+		}	
+	}
+	
+	public void runCancelAccount(Account account,Scanner scan) {
+		cancelAccount(account);
+		System.out.println("Account canceled");
+		LoggingUtil.logTrace("Account "+ account.getUniqueID() +" terminated " );
 	}
 }
