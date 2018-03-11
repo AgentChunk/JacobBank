@@ -247,7 +247,7 @@ public class Customer implements Serializable, Login{
 					case 'T':
 						Pair<Double,Account> transfer = Account.scanTransfer(a1, scan);
 						transfer(transfer.getKey(), a1, transfer.getValue());
-						System.out.println("Succefully withdrew. New balance is :"+ String.format("%.2f",a1.getBalance()));
+						System.out.println("Succefully transfered. New balance is :"+ String.format("%.2f",a1.getBalance()));
 						break;
 					
 					case 'Q':		

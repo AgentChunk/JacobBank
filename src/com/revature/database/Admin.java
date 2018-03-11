@@ -1,6 +1,7 @@
 package com.revature.database;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -42,6 +43,10 @@ public class Admin extends Employee {
 	
 	public void cancelAccount(Account account) {
 		Bank.getAccounts().remove(account);
+		List<Customer> customers = account.getOwners();
+		for(Customer c: customers){
+			c.getAccounts().remove(account);
+		}
 	}
 	
 	public void printAccounts() {

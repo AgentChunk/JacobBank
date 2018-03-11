@@ -81,7 +81,7 @@ public class Employee implements Serializable, Login {
 		} 
 		//remove from applications after being processsed
 		Bank.getApplications().remove(acc);
-		LoggingUtil.logTrace("Account application "+acc.getUniqueID()+" disapproved by "+name);
+		
 	}
 	
 	public void processJointRequest(boolean boo,Account acc) throws IllegalArgumentException{
@@ -101,7 +101,7 @@ public class Employee implements Serializable, Login {
 		}
 		//remove from applications after being processed
 		Bank.getJointApplications().remove(acc);
-		LoggingUtil.logTrace("Joint application "+acc.getUniqueID()+" approved by "+name);
+		
 	}
 	
 	
