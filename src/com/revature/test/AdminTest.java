@@ -29,25 +29,28 @@ public class AdminTest {
 	}
 	
 	@Test
-	public void testGetAdmin() {
+	public void testLogin() {
 		Admin admin =Admin.createAdmin("Name", "password");
-		assertEquals(admin,Admin.getEmployee("Name", "password"));
+		assertEquals(admin,admin.login("Name", "password"));
 	}
 	
+	/*
 	@Test
 	public void testGetAdminNull() {
+		Admin admin = 
 		assertEquals(null,Admin.getEmployee("", ""));
 	}
+	*/
 	
 	@Test
 	public void testValidLogin() {
-		Admin.createAdmin("Name", "password");
-		assertTrue(Admin.validLogin("Name", "password"));
+		Admin admin =Admin.createAdmin("Name", "password");
+		assertTrue(admin.validLogin("Name", "password"));
 	}
-	@Test
-	public void testInvalidLogin() {
-		assertFalse(Admin.validLogin("Name", "password"));
-	}
+//	@Test
+//	public void testInvalidLogin() {
+//		assertFalse(Admin.validLogin("Name", "password"));
+//	}
 	
 	
 	@Test

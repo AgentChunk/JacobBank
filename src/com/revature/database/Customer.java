@@ -19,6 +19,7 @@ public class Customer implements Serializable, Login{
 	 * 
 	 */
 	private static final long serialVersionUID = 7900604410002075094L;
+	private int id;
 	private String name;
 	private String password;
 	private List<Account> accounts;
@@ -37,10 +38,25 @@ public class Customer implements Serializable, Login{
 		
 	}
 	
+	public Customer(int id, String name, String password) {
+		this.id = id;
+		this.name = name;
+		this.password = password;
+		this.accounts = new ArrayList<Account>();
+	}
+	
 	//Use this to make new customers
 	//Creates a customer and adds them to the Bank
 	public static Customer createCustomer(String name, String password) {
-		Customer customer = new Customer(name,password);
+		Customer customer = new Customer(Bank.newUserId(0),name,password);
+		Bank.getCustomers().add(customer);
+		return customer;
+	}
+
+	//Throws exception if the id is already being used in the bank. 
+	public static Customer createCustomer(int id, String name, String password) throws IllegalArgumentException {
+		if(!Bank.validUserId(id)) throw new IllegalArgumentException();
+		Customer customer = new Customer(Bank.newUserId(id),name,password);
 		Bank.getCustomers().add(customer);
 		return customer;
 	}
@@ -51,8 +67,10 @@ public class Customer implements Serializable, Login{
 	public Account applyForAccount() {
 		
 		Account toApprove = new Account();
+		Application app = new Application(toApprove,this);
 		//add the application to the bank
-		Bank.addApplication(toApprove,this);
+		Bank.addApplication(app);
+		Bank.addAccount(toApprove);
 	
 		return toApprove;
 		
@@ -65,14 +83,15 @@ public class Customer implements Serializable, Login{
 		if(!Bank.getAccounts().contains(joint)) {
 			throw new IllegalArgumentException();
 		}
-		Bank.addJointApplication(joint, this);
+		Application app = new Application(joint,this);
+		Bank.addApplication(app);
 	}
 	
 	//adds add to account if account is approved
 	public void deposit(double add, Account acc) throws IllegalArgumentException {
 		if(acc.isApproved() && accounts.contains(acc)) {
 			acc.deposit(add);
-			LoggingUtil.logTrace("Customer "+name+" deposited "+ add+" to account "+acc.getUniqueID());
+			LoggingUtil.logTrace("Customer "+name+" deposited "+ add+" to account "+acc.getID());
 		}
 	}
 	
@@ -80,7 +99,7 @@ public class Customer implements Serializable, Login{
 	public void withdraw(double subtract, Account acc) throws IllegalArgumentException {
 		if(acc.isApproved()) {
 			acc.withdraw(subtract);
-			LoggingUtil.logTrace("Customer "+name+" deposited "+ subtract +" to account "+acc.getUniqueID());
+			LoggingUtil.logTrace("Customer "+name+" deposited "+ subtract +" to account "+acc.getID());
 		}
 	}
 	
@@ -88,7 +107,7 @@ public class Customer implements Serializable, Login{
 	public void transfer(double transfer, Account a1, Account a2) throws IllegalArgumentException {
 		if(a1.isApproved() && a2.isApproved()) {
 			a1.transfer(transfer, a2);
-			LoggingUtil.logTrace("Customer "+name+" transfered "+ transfer+" from account "+ a1.getUniqueID()+" to account "+a2.getUniqueID());
+			LoggingUtil.logTrace("Customer "+name+" transfered "+ transfer+" from account "+ a1.getID()+" to account "+a2.getID());
 		}
 	}
 	
@@ -113,6 +132,10 @@ public class Customer implements Serializable, Login{
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	@Override
@@ -158,7 +181,7 @@ public class Customer implements Serializable, Login{
 		
 		System.out.println("Hello " + name + ", these are you current accounts and their balances");
 		for(int i=0;i<accounts.size();i++) {
-			System.out.println("Account :"+ accounts.get(i).getUniqueID()+ " Balance :" + accounts.get(i).getBalance());
+			System.out.println("Account :"+ accounts.get(i).getID()+ " Balance :" + accounts.get(i).getBalance());
 		}
 		while(loggedOn) {
 			System.out.println("Press A to apply for an account, J to apply for a joint account, S to select an account, or Q to logout");
@@ -173,11 +196,11 @@ public class Customer implements Serializable, Login{
 					break;
 				//User chose apply for joint account	
 				case 'J':
-					String id;
+					int id=0;
 					
 					do {
 						System.out.println("Enter the account id of the account applying for");
-						id = scan.nextLine();
+						id = scan.nextInt();
 						if(!Bank.bankHasAccountId(id,Bank.getAccounts())) {
 							System.out.println("Invalid ID");
 						}
@@ -209,11 +232,11 @@ public class Customer implements Serializable, Login{
 		
 		System.out.println("Enter the id of the account you wish to select :");
 		
-		String id = scan.nextLine();
+		int id = scan.nextInt();
 		boolean exists = false;
 		Account a1 = null;
 		for(Account a: accounts) {
-			if(a.getUniqueID().equals(id)) {
+			if(a.getID()==id) {
 				exists = true;
 				a1=a;
 			}

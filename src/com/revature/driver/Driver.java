@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.revature.dao.BankDaoImp;
 import com.revature.database.Account;
 import com.revature.database.Admin;
 import com.revature.database.Bank;
@@ -14,6 +15,7 @@ import com.revature.database.Login;
 import com.revature.database.LoginFactory;
 import com.revature.io.LoggingUtil;
 import com.revature.io.Serializer;
+import com.revature.util.ConnectionFactory;
 
 public class Driver {
 	
@@ -24,10 +26,17 @@ public class Driver {
 		Map<Character,Runnable> commands = new HashMap<Character,Runnable>();
 		boolean run = true;
 		Serializer serialize = new Serializer();
+		BankDaoImp bd = new BankDaoImp();
+		
 		
 	
-		LoggingUtil.logTrace("Reading in file");
-		serialize.writeIn("database.txt");
+		//get data from the database
+		Bank.sortUsers();
+		Bank.setAccounts(bd.retrieveAllAccounts());
+		bd.getAccountCustomerLink();
+		
+//		LoggingUtil.logTrace("Reading in file");
+//		serialize.writeIn("database.txt");
 		
 		commands.put('C', () -> runLogin("customer",scan));
 		commands.put('E', () -> runLogin("employee",scan));

@@ -814,3 +814,67 @@
 2018-03-08 11:47:42 TRACE root:36 - Admin [customers=[Customer [name=Sam, password=passcode, accounts=[Account [uniqueID=6f94aa21-f548-4a75-b461-9a30de0704d8, balance=2.0, approved=true, owners= [Sam ]]]]], name=Jake, password=54321]
 2018-03-08 11:47:42 TRACE root:36 - Done
 2018-03-08 11:47:42 TRACE root:36 - database.txt
+2018-03-11 00:59:43 TRACE root:36 - Reading in file
+2018-03-11 00:59:43 TRACE root:36 - Found HashMap
+2018-03-11 01:00:48 TRACE root:36 - Reading in file
+2018-03-11 01:00:48 TRACE root:36 - Found HashMap
+2018-03-11 13:01:25 TRACE root:36 - Reading in file
+2018-03-11 13:01:25 TRACE root:36 - Found HashMap
+2018-03-11 13:43:09 TRACE root:36 - Reading in file
+2018-03-11 13:43:09 TRACE root:36 - Found HashMap
+2018-03-11 15:40:06 DEBUG root:31 - 1Jack12341234
+2018-03-11 15:41:09 DEBUG root:31 - 1Jack12341
+2018-03-11 15:41:09 DEBUG root:31 - Retrieving Customer
+2018-03-11 16:01:29 DEBUG root:31 - 1Jack12341
+2018-03-11 16:01:29 DEBUG root:31 - Retrieving Customer
+2018-03-11 16:03:50 DEBUG root:31 - 1Jack12341
+2018-03-11 16:03:50 DEBUG root:31 - Retrieving Customer
+2018-03-11 16:05:14 DEBUG root:31 - Customer found
+2018-03-11 16:05:14 DEBUG root:31 - Customer found
+2018-03-11 16:05:14 DEBUG root:31 - Customer found
+2018-03-11 16:05:14 DEBUG root:31 - Employee found
+2018-03-11 16:05:14 DEBUG root:31 - Employee found
+2018-03-11 16:05:14 DEBUG root:31 - Admin found
+2018-03-11 16:05:14 DEBUG root:31 - 1Jack12341
+2018-03-11 16:07:55 DEBUG root:31 - Customer found
+2018-03-11 16:07:55 DEBUG root:31 - Customer found
+2018-03-11 16:07:55 DEBUG root:31 - Customer found
+2018-03-11 16:07:55 DEBUG root:31 - Employee found
+2018-03-11 16:07:55 DEBUG root:31 - Employee found
+2018-03-11 16:07:55 DEBUG root:31 - Admin found
+2018-03-11 16:07:55 DEBUG root:31 - 1Jack12341
+2018-03-11 16:07:55 DEBUG root:31 - Retrieving Customer
+2018-03-11 17:24:04 DEBUG root:31 - Customer found
+2018-03-11 17:24:04 DEBUG root:31 - Customer found
+2018-03-11 17:24:04 DEBUG root:31 - Customer found
+2018-03-11 17:24:04 DEBUG root:31 - Employee found
+2018-03-11 17:24:04 DEBUG root:31 - Employee found
+2018-03-11 17:24:04 DEBUG root:31 - Admin found
+2018-03-11 17:24:05 DEBUG root:31 - 1Jack12341
+2018-03-11 17:24:05 DEBUG root:31 - Retrieving Customer
+2018-03-11 17:36:48 DEBUG root:31 - Customer found
+2018-03-11 17:36:48 DEBUG root:31 - Customer found
+2018-03-11 17:36:48 DEBUG root:31 - Customer found
+2018-03-11 17:36:48 DEBUG root:31 - Employee found
+2018-03-11 17:36:48 DEBUG root:31 - Employee found
+2018-03-11 17:36:48 DEBUG root:31 - Admin found
+2018-03-11 17:36:48 DEBUG root:31 - 1Jack12341
+2018-03-11 17:36:48 DEBUG root:31 - Retrieving Customer
+2018-03-11 20:30:06 DEBUG root:31 - Customer found
+2018-03-11 20:30:06 DEBUG root:31 - Customer found
+2018-03-11 20:30:06 DEBUG root:31 - Customer found
+2018-03-11 20:30:06 DEBUG root:31 - Employee found
+2018-03-11 20:30:06 DEBUG root:31 - Employee found
+2018-03-11 20:30:06 DEBUG root:31 - Admin found
+2018-03-11 20:31:14 DEBUG root:31 - Customer found
+2018-03-11 20:31:14 DEBUG root:31 - Customer found
+2018-03-11 20:31:14 DEBUG root:31 - Customer found
+2018-03-11 20:31:14 DEBUG root:31 - Employee found
+2018-03-11 20:31:14 DEBUG root:31 - Employee found
+2018-03-11 20:31:14 DEBUG root:31 - Admin found
+2018-03-11 20:32:02 DEBUG root:31 - Customer found
+2018-03-11 20:32:02 DEBUG root:31 - Customer found
+2018-03-11 20:32:02 DEBUG root:31 - Customer found
+2018-03-11 20:32:02 DEBUG root:31 - Employee found
+2018-03-11 20:32:02 DEBUG root:31 - Employee found
+2018-03-11 20:32:02 DEBUG root:31 - Admin found

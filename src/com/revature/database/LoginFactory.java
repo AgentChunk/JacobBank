@@ -37,4 +37,22 @@ public class LoginFactory {
 	      
 	      return null;
 	   }
+	   
+	 //use getLogin method to get object of type Login
+	   public Login getLogin(String loginType, int id, String user, String password){
+	      if(loginType == null){
+	         return null;
+	      }		
+	      if(loginType.equalsIgnoreCase("CUSTOMER")){
+	         return Customer.createCustomer(id,user, password);
+	         
+	      } else if(loginType.equalsIgnoreCase("EMPLOYEE")){
+	         return Employee.createEmployee(id,user, password);
+	         
+	      } else if(loginType.equalsIgnoreCase("ADMIN")){
+	         return Admin.createAdmin(id,user, password);
+	      }
+	      
+	      return null;
+	   }
 }

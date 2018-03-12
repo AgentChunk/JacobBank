@@ -11,4 +11,8 @@ public interface Login {
 	//runs the UI for when the user logs on
 	public void runLoggedOn(Scanner scan);
 	
+	public String getName();
+	
+	public String getPassword();
+	
 }

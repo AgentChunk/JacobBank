@@ -32,10 +32,22 @@ public class Admin extends Employee {
 		super(name,password);
 	}
 	
+	public Admin(int id, String name, String password) {
+		super(id,name,password);
+	}
+	
 	//Use this to create a new Admin
 	//returns a new Admin and adds it to the bank
 	public static Admin createAdmin(String name,String password) {
-		Admin admin = new Admin(name,password);
+		Admin admin = new Admin(Bank.newUserId(0),name,password);
+		Bank.getAdmins().add(admin);
+		return admin;
+	}
+	
+	//Throws exception if the id is already being used in the bank. 
+	public static Admin createAdmin(int id, String name, String password) throws IllegalArgumentException {
+		if(!Bank.validUserId(id)) throw new IllegalArgumentException();
+		Admin admin = new Admin(Bank.newUserId(id),name,password);
 		Bank.getAdmins().add(admin);
 		return admin;
 	}
@@ -65,17 +77,17 @@ public class Admin extends Employee {
 	
 	public void withdraw(double amount,Account acc) throws IllegalArgumentException {
 		acc.withdraw(amount);
-		LoggingUtil.logTrace("Admin "+getName()+" deposited "+ amount+" to account "+acc.getUniqueID());
+		LoggingUtil.logTrace("Admin "+getName()+" deposited "+ amount+" to account "+acc.getID());
 	}
 	
 	public void deposit(double amount, Account acc) throws IllegalArgumentException {
 		acc.deposit(amount);
-		LoggingUtil.logTrace("Admin "+getName()+" deposited "+ amount +" to account "+ acc.getUniqueID());
+		LoggingUtil.logTrace("Admin "+getName()+" deposited "+ amount +" to account "+ acc.getID());
 	}
 	
 	public void transfer(double amount, Account a1, Account a2) throws IllegalArgumentException {
 		a1.transfer(amount,a2);
-		LoggingUtil.logTrace("Admin "+getName()+" transfered "+ amount+" from account "+ a1.getUniqueID()+" to account "+a2.getUniqueID());
+		LoggingUtil.logTrace("Admin "+getName()+" transfered "+ amount+" from account "+ a1.getID()+" to account "+a2.getID());
 	}
 	
 	@Override
@@ -118,13 +130,12 @@ public class Admin extends Employee {
 		commands.put('V', ()-> viewCustomers());
 		commands.put('A', ()-> viewAllAccounts());
 		commands.put('P', ()-> accessAccountApplications(scan));
-		commands.put('J', ()-> accessJointApplicatons(scan));
 		
 		LoggingUtil.logTrace("Admin "+ this.getName()+ " logged on");
 		System.out.println("Hello "+ this.getName() );
 		
 		while(loggedOn) {
-			System.out.println("Press V to view your customers, A to access all accounts, P to access account applications, J to access joint account applications, or Q to logout");
+			System.out.println("Press V to view your customers, A to access all accounts, P to access account applications, or Q to logout");
 			cmd = scan.next().charAt(0);
 			scan.nextLine();
 			if("VAPJQ".indexOf(cmd)<0) {
@@ -153,15 +164,15 @@ public class Admin extends Employee {
 	
 		boolean acc =true;
 		char cmd;
-		String id;
+		int id;
 		do {
-			System.out.println("Enter the id of the account you wish to select or Q to go back :");
-			id = scan.nextLine();
-			if(!Bank.bankHasAccountId(id,Bank.getAccounts()) && !id.equals("Q")) {
+			System.out.println("Enter the id of the account you wish to select or 0 to go back :");
+			id = scan.nextInt();
+			if(!Bank.bankHasAccountId(id,Bank.getAccounts()) && id!=0) {
 				System.out.println("Invalid account id");
 			}
-		}while(!Bank.bankHasAccountId(id,Bank.getAccounts()) && !id.equals("Q"));
-		if(!id.equals("Q")) {
+		}while(!Bank.bankHasAccountId(id,Bank.getAccounts()) && id!=0);
+		if(id!=0) {
 			Account account = Bank.accountWithId(id,Bank.getAccounts());
 			
 			System.out.println("Account "+ id +" selected");
@@ -210,6 +221,6 @@ public class Admin extends Employee {
 	public void runCancelAccount(Account account,Scanner scan) {
 		cancelAccount(account);
 		System.out.println("Account canceled");
-		LoggingUtil.logTrace("Account "+ account.getUniqueID() +" terminated " );
+		LoggingUtil.logTrace("Account "+ account.getID() +" terminated " );
 	}
 }

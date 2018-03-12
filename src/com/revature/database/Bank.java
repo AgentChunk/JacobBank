@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.revature.dao.BankDaoImp;
+
 /**
  * 
  * @author Jacob Lathrop
@@ -24,18 +26,53 @@ public class Bank implements Serializable {
 	 */
 	private static final long serialVersionUID = -4458500791896096728L;
 	private static Set<Account> accounts = new HashSet<Account>();
-	private static Map<Account,Customer> applications = new HashMap<Account,Customer>();
 	private static Map<Account,Customer> jointApplications = new HashMap<Account,Customer>();
+	private static List<Application> applications = new ArrayList<Application>();
 	private static Set<Customer> customers = new HashSet<Customer>();
 	private static Set<Employee> employees = new HashSet<Employee>();
 	private static Set<Admin> admins = new HashSet<Admin>();
+	private static int userId;
+	private static int accId;
 	
+	public static int newAccId(int i) {
+		if(i>accId) {
+			accId=i;
+		}else {
+			accId++;
+		}
+		return accId;
+	}
+	
+	public static boolean validAccId(int i) {
+		return i>accId;
+	}
+	
+	public static void resestAccId() {
+		accId=0;
+	}
+	
+	public static int newUserId(int i) {
+		if(i>userId) {
+			userId=i;
+		}else {
+			userId++;
+		}
+		return userId;
+	}
+	
+	public static boolean validUserId(int i) {
+		return i>userId;
+	}
+	
+	public static void resestUserId() {
+		userId=0;
+	}
 	
 	public static void addAccount(Account toAdd) {
 		accounts.add(toAdd);
 	}
-	public static void addApplication(Account toAdd, Customer cust) {
-		applications.put(toAdd, cust);
+	public static void addApplication(Application toAdd) {
+		applications.add(toAdd);
 	}
 	
 	public static void addJointApplication(Account toAdd, Customer cust) {
@@ -82,7 +119,7 @@ public class Bank implements Serializable {
 		return accounts;
 	}
 	
-	public static Map<Account,Customer> getApplications(){
+	public static List<Application> getApplications(){
 		return applications; 
 	}
 	
@@ -104,7 +141,7 @@ public class Bank implements Serializable {
 	public static void setAccounts(Set<Account> accounts) {
 		Bank.accounts = accounts;
 	}
-	public static void setApplications(Map<Account, Customer> applications) {
+	public static void setApplications(List<Application> applications) {
 		Bank.applications = applications;
 	}
 	public static void setJointApplications(Map<Account, Customer> jointApplications) {
@@ -120,19 +157,51 @@ public class Bank implements Serializable {
 		Bank.admins = admins;
 	}
 	
-	public static boolean bankHasAccountId(String id,Set<Account> accounts) {
+	public static boolean bankHasAccountId(int id,Set<Account> accounts) {
 		for(Account a:accounts) {
-			if(a.getUniqueID().equals(id)) return true;
+			if(a.getID() == id) return true;
 		}
 		return false;
 	}
 	
-	public static Account accountWithId(String id,Set<Account> accounts) {
+	public static Account accountWithId(int id,Set<Account> accounts) {
 		for(Account a:accounts) {
-			if(a.getUniqueID().equals(id)) return a;
+			if(a.getID() ==id) return a;
 		}
 		return null;
 	}
 	
+	public static Customer customerWithId(int id,Set<Customer> customers) {
+		for(Customer c:customers) {
+			if(c.getId()==id) return c;
+		}
+		return null;
+	}
+	
+	//call at start to get the list of all users and sort them into correct 
+	//bank sets
+	public static void sortUsers() {
+		BankDaoImp bd = new BankDaoImp();
+		Set<Customer> cust = new HashSet<Customer>();
+		Set<Employee> empl = new HashSet<Employee>();
+		Set<Admin> adm = new HashSet<Admin>();
+		
+		List<Login> users = bd.retrieveAllUsers();
+		for(Login u:users) {
+			if(u instanceof Customer) {
+				cust.add((Customer) u);
+			}
+			else if(u instanceof Admin) {
+				adm.add((Admin) u);
+			}
+			else if(u instanceof Employee) {
+				empl.add((Employee) u);
+			}
+		}
+		Bank.setCustomers(cust);
+		Bank.setEmployees(empl);
+		Bank.setAdmins(adm);
+		
+	}
 	
 }

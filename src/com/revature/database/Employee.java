@@ -26,7 +26,7 @@ public class Employee implements Serializable, Login {
 	 */
 	private static final long serialVersionUID = -7231838518518177640L;
 	private Set<Customer> customers;
-	
+	private int id;
 	private String name;
 	private String password;
 	
@@ -45,12 +45,27 @@ public class Employee implements Serializable, Login {
 		this.password = password;
 	}
 	
+	public Employee(int id, String name, String password) {
+		customers = new HashSet<Customer>();
+		this.id =id;
+		this.name = name;
+		this.password = password;
+	}
+	
 	
 	
 	//Use this to create new Employees
 	//returns an employee and adds them to the bank
 	public static Employee createEmployee(String name, String password) {
-		Employee employee = new Employee(name,password);
+		Employee employee = new Employee(Bank.newUserId(0),name,password);
+		Bank.getEmployees().add(employee);
+		return employee;
+	}
+	
+	//Throws exception if the id is already being used in the bank. 
+	public static Employee createEmployee(int id, String name, String password) throws IllegalArgumentException {
+		if(!Bank.validUserId(id)) throw new IllegalArgumentException();
+		Employee employee = new Employee(Bank.newUserId(id),name,password);
 		Bank.getEmployees().add(employee);
 		return employee;
 	}
@@ -61,46 +76,28 @@ public class Employee implements Serializable, Login {
 	//if approved put the account into the customers accounts list
 	//if approved put the customer into the accounts customer list
 	//add the customer to the employees customers if not there already
-	public void processRequest(boolean boo,Account acc) throws IllegalArgumentException {
+	public void processRequest(boolean boo,Application app) throws IllegalArgumentException {
 		//if the account isn't in the bank's applications
-		if(!Bank.getApplications().containsKey(acc)) {
+		if(!Bank.getApplications().contains(app)) {
 			throw new IllegalArgumentException();
 		}
-		
-		Customer processing = Bank.getApplications().get(acc);
+		Account acc = app.getAccount();
+		Customer processing = app.getCustomer();
 		customers.add(processing);
-		acc.setApproved(boo);
 		
+		if(!acc.isApproved()) {
+			acc.setApproved(boo);
+		}
+			
 		if(boo) {
 			//if approved add to the customers account and the Bank's accounts
 			
 			processing.getAccounts().add(acc);
 			acc.getOwners().add(processing);
-			Bank.getAccounts().add(acc);
-			LoggingUtil.logTrace("Account application "+acc.getUniqueID()+" approved by "+name);
+			LoggingUtil.logTrace("Account application "+acc.getID()+" approved by "+name);
 		} 
 		//remove from applications after being processsed
-		Bank.getApplications().remove(acc);
-		
-	}
-	
-	public void processJointRequest(boolean boo,Account acc) throws IllegalArgumentException{
-		//If the account isn't in the bank or the jointApplication throw an exception
-		if(!Bank.getJointApplications().containsKey(acc) || !Bank.getAccounts().contains(acc) ) {
-			throw new IllegalArgumentException();
-		}
-		
-		Customer processing = Bank.getJointApplications().get(acc);
-		customers.add(processing);
-		
-		//If approved add to the customers account
-		if(boo) {
-			processing.getAccounts().add(acc);
-			acc.getOwners().add(processing);
-			LoggingUtil.logTrace("Joint application "+acc.getUniqueID()+" approved by "+name);
-		}
-		//remove from applications after being processed
-		Bank.getJointApplications().remove(acc);
+		Bank.getApplications().remove(app);
 		
 	}
 	
@@ -172,7 +169,7 @@ public class Employee implements Serializable, Login {
 		System.out.println("Hello "+ name );
 		
 		while(loggedOn) {
-			System.out.println("Press V to view your customers, A to access account applications, J to access joint account applications, or Q to logout");
+			System.out.println("Press V to view your customers, A to access account applications, or Q to logout");
 			cmd = scan.next().charAt(0);
 			scan.nextLine();
 			
@@ -182,9 +179,6 @@ public class Employee implements Serializable, Login {
 					break;
 				case 'A':
 					accessAccountApplications(scan);
-					break;
-				case 'J':
-					accessJointApplicatons(scan);
 					break;
 				case 'Q':
 					loggedOn =false;
@@ -209,21 +203,21 @@ public class Employee implements Serializable, Login {
 	public void accessAccountApplications(Scanner scan) {
 		//print out all of the applications
 		
-		Set<Account> apps = Bank.getApplications().keySet();
-		String id="";
+		List<Application> apps = Bank.getApplications();
+		int id=0;
 		
 		if(!Bank.getApplications().isEmpty()) {
 				System.out.println("Outputing account applications...");
-			for(Account a:apps) {
-				System.out.println(a.toString() +"----"+Bank.getApplications().get(a).toString());
+			for(int i=0;i<apps.size();i++) {
+				System.out.println(i +": "+ apps.get(i).getAccount().toString() +"----"+apps.get(i).getCustomer().toString());
 			}
-			while(!Bank.bankHasAccountId(id,Bank.getApplications().keySet())) {
-				System.out.println("Enter an account id to approve or deny an account");
-				id = scan.nextLine();
-				LoggingUtil.logDebug(id);
-				if(!Bank.bankHasAccountId(id,Bank.getApplications().keySet())) System.out.println("Invalid id");
+			while(id>=apps.size()) {
+				System.out.println("Enter application number to approve or deny request");
+				id = scan.nextInt();
+				LoggingUtil.logDebug(""+id);
+				if(id>=apps.size()) System.out.println("Invalid id");
 			}
-			Account processing = Bank.accountWithId(id,Bank.getApplications().keySet());
+			Application processing = apps.get(id);
 			char approve;
 			do{
 				System.out.println("Approve? (Y/N)");
@@ -246,44 +240,5 @@ public class Employee implements Serializable, Login {
 		}
 	}
 
-	//UI for accessing and processing joint applications
-	public void accessJointApplicatons(Scanner scan) {
-		//print out all of the joint applications
-		System.out.println("Outputing joint account applications...");
-		Set<Account> apps = Bank.getJointApplications().keySet();
-		String id;
-		
-		if(!Bank.getJointApplications().isEmpty()) {
-		
-			for(Account a:apps) {
-				System.out.println(a.toString() +"----"+Bank.getJointApplications().get(a).toString());
-			}
-			do {
-				System.out.println("Enter an account id to approve or deny an account");
-				id = scan.nextLine();
-				LoggingUtil.logDebug(id);
-				if(!Bank.bankHasAccountId(id,Bank.getJointApplications().keySet())) System.out.println("Invalid id");
-			}while(!Bank.bankHasAccountId(id,Bank.getJointApplications().keySet()));
-			Account processing = Bank.accountWithId(id,Bank.getJointApplications().keySet());
-			char approve;
-			do{
-				System.out.println("Approve? (Y/N)");
-				approve = scan.next().charAt(0);
-				scan.nextLine();
-				if(approve!='Y' && approve!='N') {
-					System.out.println("Invalid input");
-				}
-				
-			}while(approve!='Y' && approve!='N');
-			
-			if(approve=='Y') {
-				processJointRequest(true, processing);
-			}else if(approve =='N') {
-				processJointRequest(false, processing);
-			}
-		}else {
-			System.out.println("Joint Applications is empty");
-		}
-	}
 
 }

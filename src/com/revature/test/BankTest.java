@@ -165,4 +165,12 @@ public class BankTest {
 		assertTrue(Bank.getAdmins().equals(admins));
 	}
 	
+	@Test
+	public void testSortUsers() {
+		Bank.sortUsers();
+		assertEquals(3,Bank.getCustomers().size());
+		assertEquals(2,Bank.getEmployees().size());
+		assertEquals(1,Bank.getAdmins().size());
+	}
+	
 }

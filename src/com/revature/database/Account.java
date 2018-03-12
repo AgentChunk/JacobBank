@@ -16,7 +16,7 @@ public class Account implements Serializable{
 	 */
 	private static final long serialVersionUID = 5869631646022235354L;
 	
-	private String uniqueID;
+	private int accId;
 	private double balance;
 	private boolean approved;
 	private List<Customer> owners;
@@ -25,21 +25,30 @@ public class Account implements Serializable{
 		balance =0;
 		approved =false;
 		owners = new ArrayList<Customer>();
-		uniqueID = UUID.randomUUID().toString();
 	}
 	
 	public Account(double money) {
 		balance = money;
 		approved=false;
 		owners = new ArrayList<Customer>();
-		uniqueID = UUID.randomUUID().toString();
+		
 	}
 	
-	public String getUniqueID() {
-		return uniqueID;
+	public Account(int id) {
+		balance=0;
+		approved =false;
+		owners= new ArrayList<Customer>();
+		accId = id;
+	}
+	
+	public int getID() {
+		return accId;
+	}
+	
+	public void setID(int id) {
+		accId=id;
 	}
 
-	
 	public double getBalance() {
 		return balance;
 	}
@@ -83,7 +92,7 @@ public class Account implements Serializable{
 
 	@Override
 	public String toString() {
-		String string = "Account [uniqueID="+uniqueID +", balance=" + balance + ", approved=" + approved + ", owners= [";
+		String string = "Account [uniqueID="+accId +", balance=" + balance + ", approved=" + approved + ", owners= [";
 		for(Customer o: owners) {
 			String temp = o.getName()+ " ";
 			string = string.concat(temp);
@@ -128,7 +137,7 @@ public class Account implements Serializable{
 	}
 	
 	public static Pair<Double,Account> scanTransfer(Account acc, Scanner scan){
-		String id;
+		int id;
 		double transfer;
 		do {
 			System.out.println("Enter amount to transfer :");
@@ -141,7 +150,7 @@ public class Account implements Serializable{
 		do {
 			System.out.println("Enter id of account to transfer too :");
 			
-			id = scan.nextLine();
+			id = scan.nextInt();
 			if(!Bank.bankHasAccountId(id,Bank.getAccounts())) {
 				System.out.println("Invalid account id");
 			}
