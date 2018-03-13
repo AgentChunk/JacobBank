@@ -20,18 +20,18 @@ public interface BankDao {
 	
 	public void deleteUser(int id);
 	
-	public void createUserPreparedStmt(Login user);
+	public int createUserPreparedStmt(Login user);
 	
 	//account methods
 	public Account retrieveAccountById(int id);
 	
-	public Set<Account> retrieveAllAccounts();
+	public List<Account> retrieveAllAccounts();
 	
 	public void updateAccount(Account acc);
 	
 	public void deleteAccount(int id);
 	
-	public void createAccountPreparedStmt(Account acc);
+	public int createAccountPreparedStmt(Account acc);
 	
 	//applications methods
 	public List<Application> retrieveApplications();
@@ -45,6 +45,11 @@ public interface BankDao {
 	
 	public void createAccountUserRow(int accId,int userId);
 	
+	//Use Account procedures
+	public void deposit(int id, double add);
 	
+	public void withdraw(int id,double sub);
+	
+	public void transfer(int a1, int a2, double transfer);
 	
 }

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import com.revature.dao.BankDao;
+import com.revature.dao.BankDaoImp;
 import com.revature.io.LoggingUtil;
 
 /*
@@ -48,15 +50,21 @@ public class Customer implements Serializable, Login{
 	//Use this to make new customers
 	//Creates a customer and adds them to the Bank
 	public static Customer createCustomer(String name, String password) {
-		Customer customer = new Customer(Bank.newUserId(0),name,password);
+		Customer customer = new Customer(name,password);
+		BankDao bd = new BankDaoImp();
+		//create the user in the database and retrieve its id
+		int id=bd.createUserPreparedStmt(customer);
+		customer.id=id;
+		
+		//add the customer to the bank
 		Bank.getCustomers().add(customer);
 		return customer;
 	}
 
-	//Throws exception if the id is already being used in the bank. 
-	public static Customer createCustomer(int id, String name, String password) throws IllegalArgumentException {
-		if(!Bank.validUserId(id)) throw new IllegalArgumentException();
-		Customer customer = new Customer(Bank.newUserId(id),name,password);
+
+	public static Customer createCustomer(int id, String name, String password) {
+		
+		Customer customer = new Customer(id,name,password);
 		Bank.getCustomers().add(customer);
 		return customer;
 	}
@@ -65,13 +73,20 @@ public class Customer implements Serializable, Login{
 	
 	//apply for an account
 	public Account applyForAccount() {
-		
+		BankDao bd = new BankDaoImp();
 		Account toApprove = new Account();
 		Application app = new Application(toApprove,this);
+		//create the account in the table and get it's generate id
+		int id=bd.createAccountPreparedStmt(toApprove);
+		toApprove.setID(id);
+		
 		//add the application to the bank
 		Bank.addApplication(app);
 		Bank.addAccount(toApprove);
-	
+		
+		//add the application to the database
+		bd.createAppPreparedStmt(app);
+		
 		return toApprove;
 		
 	}
@@ -83,13 +98,19 @@ public class Customer implements Serializable, Login{
 		if(!Bank.getAccounts().contains(joint)) {
 			throw new IllegalArgumentException();
 		}
+		BankDao bd = new BankDaoImp();
 		Application app = new Application(joint,this);
+		//add the app to the database
+		bd.createAppPreparedStmt(app);
+		//add app to the bank
 		Bank.addApplication(app);
 	}
 	
 	//adds add to account if account is approved
 	public void deposit(double add, Account acc) throws IllegalArgumentException {
 		if(acc.isApproved() && accounts.contains(acc)) {
+			BankDao bd = new BankDaoImp();
+			bd.deposit(acc.getID(), add);
 			acc.deposit(add);
 			LoggingUtil.logTrace("Customer "+name+" deposited "+ add+" to account "+acc.getID());
 		}
@@ -98,6 +119,8 @@ public class Customer implements Serializable, Login{
 	//subtracts subtract if account is approved
 	public void withdraw(double subtract, Account acc) throws IllegalArgumentException {
 		if(acc.isApproved()) {
+			BankDao bd = new BankDaoImp();
+			bd.withdraw(acc.getID(), subtract);
 			acc.withdraw(subtract);
 			LoggingUtil.logTrace("Customer "+name+" deposited "+ subtract +" to account "+acc.getID());
 		}
@@ -106,6 +129,8 @@ public class Customer implements Serializable, Login{
 	//transfers transfer from a1 to a2 if both accounts are approved
 	public void transfer(double transfer, Account a1, Account a2) throws IllegalArgumentException {
 		if(a1.isApproved() && a2.isApproved()) {
+			BankDao bd = new BankDaoImp();
+			bd.transfer(a1.getID(), a2.getID(),transfer);
 			a1.transfer(transfer, a2);
 			LoggingUtil.logTrace("Customer "+name+" transfered "+ transfer+" from account "+ a1.getID()+" to account "+a2.getID());
 		}

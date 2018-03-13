@@ -1,5 +1,6 @@
 package com.revature.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -127,28 +128,33 @@ public class BankDaoImp implements BankDao {
 
 	@Override
 	public void deleteUser(int id) {
-		// TODO Auto-generated method stub	
-		String sql = "DELETE FROM \"USER\" WHERE USERID =?";
 		
+		String sql = "DELETE FROM \"USER\" WHERE USERID =?";
+		Connection conn = null;
+		Savepoint s = null;
 		
 		try {
-			Connection conn = ConnectionFactory.getInstance().getConnection();
+			conn = ConnectionFactory.getInstance().getConnection();
 			conn.setAutoCommit(false);
-			Savepoint s = conn.setSavepoint("updateSavepoint");
+			s = conn.setSavepoint("updateSavepoint");
 			
 			PreparedStatement ps = 
 					conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			ps.executeUpdate();
 			
-			conn.rollback(s);
 			
 			conn.commit();
 			
 			conn.setAutoCommit(true);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			try {
+				conn.rollback(s);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
 	}
@@ -156,20 +162,22 @@ public class BankDaoImp implements BankDao {
 	
 
 	@Override
-	public void createUserPreparedStmt(Login user) {
-		String sql = "INSERT INTO \"USER\" (USERNAME, USERPASSWORD, USERTYPE) VALUES(?, ?, ?)";
-		
+	public int createUserPreparedStmt(Login user) {
+		String sql = "{CALL CREATE_USER (?,?,?,?)}";
+		Connection conn = null;
+		Savepoint s = null;
+		int id =0;
 		try {
 			
-			Connection conn = ConnectionFactory.getInstance().getConnection();
+			conn = ConnectionFactory.getInstance().getConnection();
 			
 			conn.setAutoCommit(false);
 			
-			Savepoint s = conn.setSavepoint("myFirstSavepoint");
+			s = conn.setSavepoint("myFirstSavepoint");
 			
 			String type;
 			
-		
+			
 			if(user instanceof Employee) {
 				type = "2";		
 			} else if (user instanceof Admin) {
@@ -179,14 +187,15 @@ public class BankDaoImp implements BankDao {
 			}
 			
 			
-			PreparedStatement ps = 
-					conn.prepareStatement(sql);
-			ps.setString(1, user.getName());
-			ps.setString(2, user.getPassword());
-			ps.setString(3, type);
-			ps.executeUpdate();
+			CallableStatement cs = 
+					conn.prepareCall(sql);
+			cs.setString(1, user.getName());
+			cs.setString(2, user.getPassword());
+			cs.setString(3, type);
+			cs.registerOutParameter(4, java.sql.Types.INTEGER);
+			cs.executeUpdate();
 			
-			conn.rollback(s);
+			id = cs.getInt(4);
 			
 			conn.commit();
 			
@@ -194,10 +203,15 @@ public class BankDaoImp implements BankDao {
 			
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			try {
+				conn.rollback(s);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
-
+		return id;
 	}
 
 	@Override
@@ -214,11 +228,8 @@ public class BankDaoImp implements BankDao {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()){
-				if(Bank.validAccId(rs.getInt(1))) {
-					account.setID(Bank.newAccId(rs.getInt(1)));
-				} else {
-					account.setID(Bank.newAccId(0));
-				}
+				
+				account.setID(rs.getInt(1));
 				account.setBalance(rs.getDouble(2));
 				account.setApproved(rs.getBoolean(3));			
 			}
@@ -233,8 +244,8 @@ public class BankDaoImp implements BankDao {
 	}
 
 	@Override
-	public Set<Account> retrieveAllAccounts() {
-		Set<Account> list = new HashSet<Account>();
+	public List<Account> retrieveAllAccounts() {
+		List<Account> list = new ArrayList<Account>();
 		
 		String sql = "SELECT * FROM ACCOUNTS";
 		
@@ -246,11 +257,7 @@ public class BankDaoImp implements BankDao {
 			
 			while (rs.next()) {
 				Account temp = new Account();
-				if(Bank.validAccId(rs.getInt(1))) {
-					temp.setID(Bank.newAccId(rs.getInt(1)));
-				} else {
-					temp.setID(Bank.newAccId(0));
-				}
+				temp.setID(rs.getInt(1));
 				temp.setBalance(rs.getDouble(2));
 				temp.setApproved(rs.getBoolean(3));
 				list.add(temp);
@@ -268,12 +275,13 @@ public class BankDaoImp implements BankDao {
 	@Override
 	public void updateAccount(Account acc) {
 		String sql = "UPDATE ACCOUNTS SET BALANCE =?, APPROVED =? WHERE ACCOUNT_ID =?";
-		
+		Connection conn = null;
+		Savepoint s = null;
 		
 		try {
-			Connection conn = ConnectionFactory.getInstance().getConnection();
+			conn = ConnectionFactory.getInstance().getConnection();
 			conn.setAutoCommit(false);
-			Savepoint s = conn.setSavepoint("updateSavepoint");
+			s = conn.setSavepoint("updateSavepoint");
 			
 			PreparedStatement ps = 
 					conn.prepareStatement(sql);
@@ -281,14 +289,18 @@ public class BankDaoImp implements BankDao {
 			ps.setBoolean(2, acc.isApproved());
 			ps.setInt(3, acc.getID());
 			
-			conn.rollback(s);
-			
+	
 			conn.commit();
 			
 			conn.setAutoCommit(true);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			try {
+				conn.rollback(s);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
 
@@ -297,62 +309,75 @@ public class BankDaoImp implements BankDao {
 	@Override
 	public void deleteAccount(int id) {
 		String sql = "DELETE FROM ACCOUNTS WHERE ACCOUNT_ID =?";
-		
+		Connection conn = null;
+		Savepoint s = null;
 		
 		try {
-			Connection conn = ConnectionFactory.getInstance().getConnection();
+			conn = ConnectionFactory.getInstance().getConnection();
 			conn.setAutoCommit(false);
-			Savepoint s = conn.setSavepoint("updateSavepoint");
+			s = conn.setSavepoint("updateSavepoint");
 			
 			PreparedStatement ps = 
 					conn.prepareStatement(sql);
 			ps.setLong(1, id);
 			ps.executeUpdate();
 			
-			conn.rollback(s);
+			
 			
 			conn.commit();
 			
 			conn.setAutoCommit(true);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			try {
+				conn.rollback(s);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
 
 	}
 
+	//creates an account in the table
+	//returns the account stored in the table with ACCOUNT_ID
 	@Override
-	public void createAccountPreparedStmt(Account acc) {
-		String sql = "INSERT INTO ACCOUNT (ACCOUNT_ID, BALANCE, APPROVED) VALUES(?, ?, ?)";
-		
+	public int createAccountPreparedStmt(Account acc) {
+		String sql = "{CALL CREATE_ACCOUNT(?,?,?)}";
+		int id=0;
+		Savepoint s = null;
+		Connection conn =null;
 		try {
 			
-			Connection conn = ConnectionFactory.getInstance().getConnection();
+			conn = ConnectionFactory.getInstance().getConnection();
 			
 			conn.setAutoCommit(false);
 			
-			Savepoint s = conn.setSavepoint("myFirstSavepoint");
+			s = conn.setSavepoint("myFirstSavepoint");
 			
-			PreparedStatement ps = 
-					conn.prepareStatement(sql);
-			ps.setInt(1, acc.getID());
-			ps.setDouble(2, acc.getBalance());
-			ps.setBoolean(3, acc.isApproved());
-			ps.executeUpdate();
-			
-			conn.rollback(s);
-			
+			CallableStatement cs = 
+					conn.prepareCall(sql);		
+			cs.setDouble(1, acc.getBalance());
+			cs.setBoolean(2, acc.isApproved());
+			cs.registerOutParameter(3, java.sql.Types.NUMERIC);
+			cs.executeUpdate();
+			id = cs.getInt(3);			
 			conn.commit();
 			
 			conn.setAutoCommit(true);
 			
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			try {
+				conn.rollback(s);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
-
+		return id;
 	}
 	
 	
@@ -388,13 +413,16 @@ public class BankDaoImp implements BankDao {
 	}
 	
 	public void deleteApplication(Application app) {
-		String sql = "DELETE FROM APPLICATION WHERE ACCOUNT_ID=?, USER_ID=?";
+		String sql = "DELETE FROM APPLICATION WHERE ACCOUNT_ID=? AND USER_ID=?";
 		int accId = app.getAccount().getID();
 		int userId = app.getCustomer().getId();
+		Connection conn = null;
+		Savepoint s = null;
+		
 		try {
-			Connection conn = ConnectionFactory.getInstance().getConnection();
+			conn = ConnectionFactory.getInstance().getConnection();
 			conn.setAutoCommit(false);
-			Savepoint s = conn.setSavepoint("updateSavepoint");
+			s = conn.setSavepoint("updateSavepoint");
 			
 			PreparedStatement ps = 
 					conn.prepareStatement(sql);
@@ -402,14 +430,18 @@ public class BankDaoImp implements BankDao {
 			ps.setInt(2, userId);
 			ps.executeUpdate();
 			
-			conn.rollback(s);
 			
 			conn.commit();
 			
 			conn.setAutoCommit(true);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			try {
+				conn.rollback(s);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
 	}
@@ -418,13 +450,15 @@ public class BankDaoImp implements BankDao {
 		String sql = "INSERT INTO APPLICATION (ACCOUNT_ID, USER_ID) VALUES(?, ?)";
 		int accId =app.getAccount().getID();
 		int userId = app.getCustomer().getId();
+		Connection conn = null;
+		Savepoint s = null;
 		try {
 			
-			Connection conn = ConnectionFactory.getInstance().getConnection();
+			conn = ConnectionFactory.getInstance().getConnection();
 			
 			conn.setAutoCommit(false);
 			
-			Savepoint s = conn.setSavepoint("myFirstSavepoint");
+			s = conn.setSavepoint("myFirstSavepoint");
 			
 			PreparedStatement ps = 
 					conn.prepareStatement(sql);
@@ -434,7 +468,7 @@ public class BankDaoImp implements BankDao {
 		
 			ps.executeUpdate();
 			
-			conn.rollback(s);
+			
 			
 			conn.commit();
 			
@@ -442,12 +476,18 @@ public class BankDaoImp implements BankDao {
 			
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			try {
+				conn.rollback(s);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}
 
 	}
 	
+	//link the accounts and the customers using the ACCOUNT_USER composite table
 	public void getAccountCustomerLink() {
 		String sql = "SELECT * FROM ACCOUNT_USER";
 		
@@ -480,13 +520,15 @@ public class BankDaoImp implements BankDao {
 	
 	public void createAccountUserRow(int accId,int userId) {
 		String sql = "INSERT INTO ACCOUNT_USER VALUES(?,?)";
+		Connection conn = null;
+		Savepoint s = null;
 		try {
 			
-			Connection conn = ConnectionFactory.getInstance().getConnection();
+			conn = ConnectionFactory.getInstance().getConnection();
 			
 			conn.setAutoCommit(false);
 			
-			Savepoint s = conn.setSavepoint("myFirstSavepoint");
+			s = conn.setSavepoint("myFirstSavepoint");
 			
 			PreparedStatement ps = 
 					conn.prepareStatement(sql);
@@ -495,17 +537,133 @@ public class BankDaoImp implements BankDao {
 		
 			ps.executeUpdate();
 			
-			conn.rollback(s);
-			
 			conn.commit();
 			
 			conn.setAutoCommit(true);
 			
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			try {
+				conn.rollback(s);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}		
+		
+	}
+	
+	//account transactions
+	public void deposit(int id,double add) {
+		String sql = "{CALL DEPOSIT(?,?)}";
+	
+		Savepoint s = null;
+		Connection conn =null;
+		
+		try {
+			
+			conn = ConnectionFactory.getInstance().getConnection();
+			
+			conn.setAutoCommit(false);
+			
+			s = conn.setSavepoint("myFirstSavepoint");
+			
+			CallableStatement cs = 
+					conn.prepareCall(sql);		
+			cs.setInt(1, id);
+			cs.setDouble(2, add);
+			cs.executeUpdate();
+					
+			conn.commit();
+			
+			conn.setAutoCommit(true);
+			
+			
+		} catch (SQLException e) {
+			try {
+				conn.rollback(s);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void withdraw(int id, double sub) {
+		String sql = "{CALL WITHDRAW(?,?)}";
+		
+		Savepoint s = null;
+		Connection conn =null;
+		
+		try {
+			
+			conn = ConnectionFactory.getInstance().getConnection();
+			
+			conn.setAutoCommit(false);
+			
+			s = conn.setSavepoint("myFirstSavepoint");
+			
+			CallableStatement cs = 
+					conn.prepareCall(sql);		
+			cs.setInt(1, id);
+			cs.setDouble(2, sub);
+			cs.executeUpdate();
+					
+			conn.commit();
+			
+			conn.setAutoCommit(true);
+			
+			
+		} catch (SQLException e) {
+			try {
+				conn.rollback(s);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void transfer(int a1, int a2, double transfer) {
+		String sql = "{CALL Transfer(?,?,?)}";
+		
+		Savepoint s = null;
+		Connection conn =null;
+		
+		try {
+			
+			conn = ConnectionFactory.getInstance().getConnection();
+			
+			conn.setAutoCommit(false);
+			
+			s = conn.setSavepoint("myFirstSavepoint");
+			
+			CallableStatement cs = 
+					conn.prepareCall(sql);		
+			cs.setInt(1, a1);
+			cs.setInt(2, a2);
+			cs.setDouble(3, transfer);
+			cs.executeUpdate();
+					
+			conn.commit();
+			
+			conn.setAutoCommit(true);
+			
+			
+		} catch (SQLException e) {
+			try {
+				conn.rollback(s);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
 		
 	}
 

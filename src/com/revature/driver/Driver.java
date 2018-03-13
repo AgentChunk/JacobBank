@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import org.apache.log4j.PropertyConfigurator;
+
 import com.revature.dao.BankDaoImp;
 import com.revature.database.Account;
 import com.revature.database.Admin;
@@ -21,7 +23,7 @@ public class Driver {
 	
 	
 	public static void main(String[] args) {
-		
+		PropertyConfigurator.configure("log4j.properties");
 		Scanner scan = new Scanner(System.in);
 		Map<Character,Runnable> commands = new HashMap<Character,Runnable>();
 		boolean run = true;
@@ -33,8 +35,10 @@ public class Driver {
 		//get data from the database
 		Bank.sortUsers();
 		Bank.setAccounts(bd.retrieveAllAccounts());
+		//links accounts with their owners
 		bd.getAccountCustomerLink();
-		
+		//retrieve the applications
+		Bank.setApplications(bd.retrieveApplications());
 //		LoggingUtil.logTrace("Reading in file");
 //		serialize.writeIn("database.txt");
 		
@@ -89,7 +93,6 @@ public class Driver {
 			LoggingUtil.logTrace(a.toString());
 		}
 		
-		serialize.writeOut("database.txt");
 	}
 	
 	private static void runLogin(String type, Scanner scan) {

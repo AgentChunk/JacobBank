@@ -25,48 +25,48 @@ public class Bank implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -4458500791896096728L;
-	private static Set<Account> accounts = new HashSet<Account>();
+	private static List<Account> accounts = new ArrayList<Account>();
 	private static Map<Account,Customer> jointApplications = new HashMap<Account,Customer>();
 	private static List<Application> applications = new ArrayList<Application>();
 	private static Set<Customer> customers = new HashSet<Customer>();
 	private static Set<Employee> employees = new HashSet<Employee>();
 	private static Set<Admin> admins = new HashSet<Admin>();
-	private static int userId;
-	private static int accId;
+//	private static int userId;
+//	private static int accId;
 	
-	public static int newAccId(int i) {
-		if(i>accId) {
-			accId=i;
-		}else {
-			accId++;
-		}
-		return accId;
-	}
+//	public static int newAccId(int i) {
+//		if(i>accId) {
+//			accId=i;
+//		}else {
+//			accId++;
+//		}
+//		return accId;
+//	}
+//	
+//	public static boolean validAccId(int i) {
+//		return i>accId;
+//	}
+//	
+//	public static void resestAccId() {
+//		accId=0;
+//	}
 	
-	public static boolean validAccId(int i) {
-		return i>accId;
-	}
-	
-	public static void resestAccId() {
-		accId=0;
-	}
-	
-	public static int newUserId(int i) {
-		if(i>userId) {
-			userId=i;
-		}else {
-			userId++;
-		}
-		return userId;
-	}
-	
-	public static boolean validUserId(int i) {
-		return i>userId;
-	}
-	
-	public static void resestUserId() {
-		userId=0;
-	}
+//	public static int newUserId(int i) {
+//		if(i>userId) {
+//			userId=i;
+//		}else {
+//			userId++;
+//		}
+//		return userId;
+//	}
+//	
+//	public static boolean validUserId(int i) {
+//		return i>userId;
+//	}
+//	
+//	public static void resestUserId() {
+//		userId=0;
+//	}
 	
 	public static void addAccount(Account toAdd) {
 		accounts.add(toAdd);
@@ -115,7 +115,7 @@ public class Bank implements Serializable {
 		admins.remove(toDel);
 	}
 
-	public static Set<Account> getAccounts() {
+	public static List<Account> getAccounts() {
 		return accounts;
 	}
 	
@@ -138,7 +138,7 @@ public class Bank implements Serializable {
 	public static Map<Account,Customer> getJointApplications(){
 		return jointApplications;
 	}
-	public static void setAccounts(Set<Account> accounts) {
+	public static void setAccounts(List<Account> accounts) {
 		Bank.accounts = accounts;
 	}
 	public static void setApplications(List<Application> applications) {
@@ -157,14 +157,14 @@ public class Bank implements Serializable {
 		Bank.admins = admins;
 	}
 	
-	public static boolean bankHasAccountId(int id,Set<Account> accounts) {
+	public static boolean bankHasAccountId(int id,List<Account> accounts) {
 		for(Account a:accounts) {
 			if(a.getID() == id) return true;
 		}
 		return false;
 	}
 	
-	public static Account accountWithId(int id,Set<Account> accounts) {
+	public static Account accountWithId(int id,List<Account> accounts) {
 		for(Account a:accounts) {
 			if(a.getID() ==id) return a;
 		}

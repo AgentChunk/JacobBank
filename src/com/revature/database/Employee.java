@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.revature.dao.BankDao;
+import com.revature.dao.BankDaoImp;
 import com.revature.io.LoggingUtil;
 
 
@@ -57,20 +59,27 @@ public class Employee implements Serializable, Login {
 	//Use this to create new Employees
 	//returns an employee and adds them to the bank
 	public static Employee createEmployee(String name, String password) {
-		Employee employee = new Employee(Bank.newUserId(0),name,password);
+		BankDao bd = new BankDaoImp();
+		Employee employee = new Employee(name,password);
+		
+		//gets the database generated id and adds the employee to the user table
+		int id = bd.createUserPreparedStmt(employee);
+		employee.id=id;
+		
+		//add employee to bank employees
 		Bank.getEmployees().add(employee);
 		return employee;
 	}
 	
-	//Throws exception if the id is already being used in the bank. 
-	public static Employee createEmployee(int id, String name, String password) throws IllegalArgumentException {
-		if(!Bank.validUserId(id)) throw new IllegalArgumentException();
-		Employee employee = new Employee(Bank.newUserId(id),name,password);
+	//Use this to create employees already in the database
+	//returns an employee and adds them to the bank
+	public static Employee createEmployee(int id,String name, String password) {
+		Employee employee = new Employee(id,name,password);
+		
+		//add employee to bank employees
 		Bank.getEmployees().add(employee);
 		return employee;
-	}
-	
-	
+	}	
 	
 	//approve or deny requests
 	//if approved put the account into the customers accounts list
@@ -81,12 +90,17 @@ public class Employee implements Serializable, Login {
 		if(!Bank.getApplications().contains(app)) {
 			throw new IllegalArgumentException();
 		}
+		BankDao bd = new BankDaoImp();
 		Account acc = app.getAccount();
 		Customer processing = app.getCustomer();
 		customers.add(processing);
 		
+		//if the account isn't approved this is a new application
 		if(!acc.isApproved()) {
+			//set approved to the new value
 			acc.setApproved(boo);
+			//update the account
+			bd.updateAccount(acc);
 		}
 			
 		if(boo) {
@@ -94,11 +108,18 @@ public class Employee implements Serializable, Login {
 			
 			processing.getAccounts().add(acc);
 			acc.getOwners().add(processing);
+			// add row to composite table
+			bd.createAccountUserRow(acc.getID(), processing.getId());
 			LoggingUtil.logTrace("Account application "+acc.getID()+" approved by "+name);
-		} 
+		} else if(!acc.isApproved()) {
+			//if the application is not approved and the account hasn't already been approved
+			//delete the account
+			bd.deleteAccount(acc.getID());
+			Bank.getAccounts().remove(acc);
+		}
 		//remove from applications after being processsed
 		Bank.getApplications().remove(app);
-		
+		bd.deleteApplication(app);
 	}
 	
 	
@@ -125,8 +146,17 @@ public class Employee implements Serializable, Login {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Employee [customers=" + customers + ", name=" + name + ", password=" + password + "]";
@@ -194,7 +224,7 @@ public class Employee implements Serializable, Login {
 	public void viewCustomers() {
 		//print out all of the employees customers and their info
 		System.out.println("Outputing employee's customers...");
-		for(Customer c: customers) {
+		for(Customer c: Bank.getCustomers()) {
 			System.out.println(c.toString());
 		}
 	}
@@ -204,14 +234,14 @@ public class Employee implements Serializable, Login {
 		//print out all of the applications
 		
 		List<Application> apps = Bank.getApplications();
-		int id=0;
+		int id=-1;
 		
 		if(!Bank.getApplications().isEmpty()) {
 				System.out.println("Outputing account applications...");
 			for(int i=0;i<apps.size();i++) {
-				System.out.println(i +": "+ apps.get(i).getAccount().toString() +"----"+apps.get(i).getCustomer().toString());
+				System.out.println(i +": "+ apps.get(i).getAccount().toString() +"----"+apps.get(i).getCustomer().getName());
 			}
-			while(id>=apps.size()) {
+			while(id>= apps.size() || id<0) {
 				System.out.println("Enter application number to approve or deny request");
 				id = scan.nextInt();
 				LoggingUtil.logDebug(""+id);

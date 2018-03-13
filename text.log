@@ -878,3 +878,437 @@
 2018-03-11 20:32:02 DEBUG root:31 - Employee found
 2018-03-11 20:32:02 DEBUG root:31 - Employee found
 2018-03-11 20:32:02 DEBUG root:31 - Admin found
+2018-03-12 14:27:59 DEBUG root:31 - Customer found
+2018-03-12 14:27:59 DEBUG root:31 - Customer found
+2018-03-12 14:27:59 DEBUG root:31 - Employee found
+2018-03-12 14:27:59 DEBUG root:31 - Employee found
+2018-03-12 14:27:59 DEBUG root:31 - Admin found
+2018-03-12 14:27:59 DEBUG root:31 - 1Jack12341
+2018-03-12 14:27:59 DEBUG root:31 - Retrieving Customer
+2018-03-12 14:28:41 DEBUG root:31 - Customer found
+2018-03-12 14:28:41 DEBUG root:31 - Customer found
+2018-03-12 14:28:42 DEBUG root:31 - Employee found
+2018-03-12 14:28:42 DEBUG root:31 - Employee found
+2018-03-12 14:28:42 DEBUG root:31 - Admin found
+2018-03-12 14:28:42 DEBUG root:31 - 1Jack12341
+2018-03-12 14:28:42 DEBUG root:31 - Retrieving Customer
+2018-03-12 14:28:42 DEBUG root:31 - 0
+2018-03-12 14:29:57 DEBUG root:31 - Customer found
+2018-03-12 14:29:57 DEBUG root:31 - Customer found
+2018-03-12 14:29:57 DEBUG root:31 - Employee found
+2018-03-12 14:29:57 DEBUG root:31 - Employee found
+2018-03-12 14:29:57 DEBUG root:31 - Admin found
+2018-03-12 14:29:57 DEBUG root:31 - 1Jack12341
+2018-03-12 14:29:57 DEBUG root:31 - Retrieving Customer
+2018-03-12 14:29:58 DEBUG root:31 - 7
+2018-03-12 14:41:05 DEBUG root:31 - Customer found
+2018-03-12 14:41:05 DEBUG root:31 - Customer found
+2018-03-12 14:41:05 DEBUG root:31 - Employee found
+2018-03-12 14:41:05 DEBUG root:31 - Employee found
+2018-03-12 14:41:05 DEBUG root:31 - Admin found
+2018-03-12 14:41:05 DEBUG root:31 - 1Jack12341
+2018-03-12 14:41:05 DEBUG root:31 - Retrieving Customer
+2018-03-12 14:41:05 DEBUG root:31 - 8
+2018-03-12 16:13:52 DEBUG root:31 - Customer found
+2018-03-12 16:13:52 DEBUG root:31 - Customer found
+2018-03-12 16:13:52 DEBUG root:31 - Employee found
+2018-03-12 16:13:52 DEBUG root:31 - Employee found
+2018-03-12 16:13:52 DEBUG root:31 - Admin found
+2018-03-12 16:14:09 TRACE root:36 - Admin Jake logged on
+2018-03-12 16:14:38 TRACE root:36 - Account 8 terminated 
+2018-03-12 16:14:56 TRACE root:36 - Account [accID=4, balance=19990.0, approved=true, owners= [Jack ]]
+2018-03-12 16:14:56 TRACE root:36 - Account [accID=2, balance=0.0, approved=false, owners= [Jack ]]
+2018-03-12 16:14:56 TRACE root:36 - Account [accID=1, balance=315.8, approved=true, owners= [Jack ]]
+2018-03-12 16:14:56 TRACE root:36 - Account [accID=3, balance=290.5, approved=true, owners= []]
+2018-03-12 16:14:56 TRACE root:36 - Customer [name=Chris, password=1111, accounts=[]]
+2018-03-12 16:14:56 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=2, balance=0.0, approved=false, owners= [Jack ]], Account [accID=4, balance=19990.0, approved=true, owners= [Jack ]]]]
+2018-03-12 16:14:56 TRACE root:36 - Employee [customers=[], name=Nick, password=1234]
+2018-03-12 16:14:56 TRACE root:36 - Employee [customers=[], name=Bill, password=word]
+2018-03-12 16:14:56 TRACE root:36 - Admin [customers=[], name=Jake, password=54321]
+2018-03-12 16:25:44 DEBUG root:31 - Customer found
+2018-03-12 16:25:44 DEBUG root:31 - Customer found
+2018-03-12 16:25:44 DEBUG root:31 - Employee found
+2018-03-12 16:25:44 DEBUG root:31 - Employee found
+2018-03-12 16:25:44 DEBUG root:31 - Admin found
+2018-03-12 16:26:05 TRACE root:36 - Admin Jake logged on
+2018-03-12 16:26:43 TRACE root:36 - Account application 2 approved by Jake
+2018-03-12 16:29:01 TRACE root:36 - Account 2 terminated 
+2018-03-12 16:30:45 TRACE root:36 - Account [accID=1, balance=315.8, approved=true, owners= [Jack ]]
+2018-03-12 16:30:45 TRACE root:36 - Account [accID=3, balance=290.5, approved=true, owners= []]
+2018-03-12 16:30:45 TRACE root:36 - Account [accID=4, balance=19990.0, approved=true, owners= [Jack ]]
+2018-03-12 16:30:45 TRACE root:36 - Account [accID=8, balance=0.0, approved=false, owners= []]
+2018-03-12 16:30:45 TRACE root:36 - Customer [name=Chris, password=1111, accounts=[]]
+2018-03-12 16:30:45 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=19990.0, approved=true, owners= [Jack ]]]]
+2018-03-12 16:30:45 TRACE root:36 - Employee [customers=[], name=Nick, password=1234]
+2018-03-12 16:30:45 TRACE root:36 - Employee [customers=[], name=Bill, password=word]
+2018-03-12 16:30:45 TRACE root:36 - Admin [customers=[Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=19990.0, approved=true, owners= [Jack ]]]]], name=Jake, password=54321]
+2018-03-12 16:31:15 DEBUG root:31 - Customer found
+2018-03-12 16:31:15 DEBUG root:31 - Customer found
+2018-03-12 16:31:15 DEBUG root:31 - Employee found
+2018-03-12 16:31:15 DEBUG root:31 - Employee found
+2018-03-12 16:31:15 DEBUG root:31 - Admin found
+2018-03-12 16:31:23 TRACE root:36 - Admin Jake logged on
+2018-03-12 16:31:30 TRACE root:36 - Account 3 terminated 
+2018-03-12 16:31:40 TRACE root:36 - Account 8 terminated 
+2018-03-12 16:32:22 TRACE root:36 - Customer Chris logged on
+2018-03-12 16:32:27 TRACE root:36 - Customer Chris applied for an account
+2018-03-12 16:34:03 TRACE root:36 - Admin Jake logged on
+2018-03-12 16:35:12 TRACE root:36 - Account application 9 approved by Jake
+2018-03-12 16:35:32 TRACE root:36 - Customer Jack logged on
+2018-03-12 16:35:48 TRACE root:36 - Customer Chris logged on
+2018-03-12 16:36:09 TRACE root:36 - Customer Chris logged on
+2018-03-12 16:36:11 TRACE root:36 - Customer Chris applied for an account
+2018-03-12 16:36:13 TRACE root:36 - Customer Chris applied for an account
+2018-03-12 16:36:27 TRACE root:36 - Admin Jake logged on
+2018-03-12 16:43:32 TRACE root:36 - Customer Jack logged on
+2018-03-12 16:43:33 TRACE root:36 - Customer Jack applied for an account
+2018-03-12 16:43:48 TRACE root:36 - Admin Jake logged on
+2018-03-12 16:50:32 TRACE root:36 - Account [accID=1, balance=315.8, approved=true, owners= [Jack ]]
+2018-03-12 16:50:32 TRACE root:36 - Account [accID=4, balance=19990.0, approved=true, owners= [Jack ]]
+2018-03-12 16:50:32 TRACE root:36 - Account [accID=9, balance=0.0, approved=true, owners= [Chris ]]
+2018-03-12 16:50:32 TRACE root:36 - Account [accID=10, balance=0.0, approved=false, owners= []]
+2018-03-12 16:50:32 TRACE root:36 - Account [accID=11, balance=0.0, approved=false, owners= []]
+2018-03-12 16:50:32 TRACE root:36 - Account [accID=12, balance=0.0, approved=false, owners= []]
+2018-03-12 16:50:32 TRACE root:36 - Customer [name=Chris, password=1111, accounts=[Account [accID=9, balance=0.0, approved=true, owners= [Chris ]]]]
+2018-03-12 16:50:32 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=19990.0, approved=true, owners= [Jack ]]]]
+2018-03-12 16:50:32 TRACE root:36 - Employee [customers=[], name=Nick, password=1234]
+2018-03-12 16:50:32 TRACE root:36 - Employee [customers=[], name=Bill, password=word]
+2018-03-12 16:50:32 TRACE root:36 - Admin [customers=[Customer [name=Chris, password=1111, accounts=[Account [accID=9, balance=0.0, approved=true, owners= [Chris ]]]], Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=19990.0, approved=true, owners= [Jack ]]]]], name=Jake, password=54321]
+2018-03-12 16:50:38 DEBUG root:31 - Customer found
+2018-03-12 16:50:38 DEBUG root:31 - Customer found
+2018-03-12 16:50:38 DEBUG root:31 - Employee found
+2018-03-12 16:50:38 DEBUG root:31 - Employee found
+2018-03-12 16:50:38 DEBUG root:31 - Admin found
+2018-03-12 16:50:45 TRACE root:36 - Account [accID=1, balance=315.8, approved=true, owners= [Jack ]]
+2018-03-12 16:50:45 TRACE root:36 - Account [accID=4, balance=19990.0, approved=true, owners= [Jack ]]
+2018-03-12 16:50:45 TRACE root:36 - Account [accID=10, balance=0.0, approved=false, owners= []]
+2018-03-12 16:50:45 TRACE root:36 - Account [accID=11, balance=0.0, approved=false, owners= []]
+2018-03-12 16:50:45 TRACE root:36 - Account [accID=12, balance=0.0, approved=false, owners= []]
+2018-03-12 16:50:45 TRACE root:36 - Account [accID=9, balance=0.0, approved=false, owners= [Chris ]]
+2018-03-12 16:50:45 TRACE root:36 - Customer [name=Chris, password=1111, accounts=[Account [accID=9, balance=0.0, approved=false, owners= [Chris ]]]]
+2018-03-12 16:50:45 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=19990.0, approved=true, owners= [Jack ]]]]
+2018-03-12 16:50:45 TRACE root:36 - Employee [customers=[], name=Nick, password=1234]
+2018-03-12 16:50:45 TRACE root:36 - Employee [customers=[], name=Bill, password=word]
+2018-03-12 16:50:45 TRACE root:36 - Admin [customers=[], name=Jake, password=54321]
+2018-03-12 16:50:51 DEBUG root:31 - Customer found
+2018-03-12 16:50:51 DEBUG root:31 - Customer found
+2018-03-12 16:50:51 DEBUG root:31 - Employee found
+2018-03-12 16:50:51 DEBUG root:31 - Employee found
+2018-03-12 16:50:51 DEBUG root:31 - Admin found
+2018-03-12 16:51:01 TRACE root:36 - Customer Jack logged on
+2018-03-12 16:51:02 TRACE root:36 - Customer Jack applied for an account
+2018-03-12 16:51:13 TRACE root:36 - Admin Jake logged on
+2018-03-12 16:54:11 DEBUG root:31 - Customer found
+2018-03-12 16:54:11 DEBUG root:31 - Customer found
+2018-03-12 16:54:11 DEBUG root:31 - Employee found
+2018-03-12 16:54:11 DEBUG root:31 - Employee found
+2018-03-12 16:54:11 DEBUG root:31 - Admin found
+2018-03-12 16:54:35 TRACE root:36 - Customer Jack logged on
+2018-03-12 16:54:38 TRACE root:36 - Customer Jack applied for an account
+2018-03-12 16:54:51 TRACE root:36 - Admin Jake logged on
+2018-03-12 16:55:02 DEBUG root:31 - 0
+2018-03-12 21:48:06 DEBUG root:31 - Customer found
+2018-03-12 21:48:06 DEBUG root:31 - Customer found
+2018-03-12 21:48:06 DEBUG root:31 - Employee found
+2018-03-12 21:48:06 DEBUG root:31 - Employee found
+2018-03-12 21:48:06 DEBUG root:31 - Admin found
+2018-03-12 21:48:37 TRACE root:36 - Admin Jake logged on
+2018-03-12 21:49:07 TRACE root:36 - Account 10 terminated 
+2018-03-12 21:49:21 TRACE root:36 - Account 11 terminated 
+2018-03-12 21:49:34 TRACE root:36 - Account 12 terminated 
+2018-03-12 21:49:51 TRACE root:36 - Account 13 terminated 
+2018-03-12 21:50:00 TRACE root:36 - Account 14 terminated 
+2018-03-12 21:50:20 TRACE root:36 - Customer Jack logged on
+2018-03-12 21:50:29 TRACE root:36 - Customer Jack applied for an account
+2018-03-12 21:50:46 TRACE root:36 - Admin Jake logged on
+2018-03-12 21:51:28 DEBUG root:31 - 15
+2018-03-12 21:51:34 DEBUG root:31 - 0
+2018-03-12 21:53:04 TRACE root:36 - Customer Chris logged on
+2018-03-12 21:53:07 TRACE root:36 - Customer Chris applied for an account
+2018-03-12 21:54:14 WARN  root:21 - User attempted to access invalid id 4
+2018-03-12 21:55:21 TRACE root:36 - Customer Chris applied for an account
+2018-03-12 21:55:43 TRACE root:36 - Customer Chris logged on
+2018-03-12 21:56:06 TRACE root:36 - Admin Jake logged on
+2018-03-12 21:56:15 DEBUG root:31 - 16
+2018-03-12 21:56:19 DEBUG root:31 - 0
+2018-03-12 21:56:22 TRACE root:36 - Account application 16 approved by Jake
+2018-03-12 21:56:28 DEBUG root:31 - 0
+2018-03-12 21:57:43 TRACE root:36 - Account 9 terminated 
+2018-03-12 21:57:58 TRACE root:36 - Customer Chris logged on
+2018-03-12 21:58:07 TRACE root:36 - Customer Chris deposited 100.0 to account 16
+2018-03-12 21:58:15 TRACE root:36 - Customer Chris deposited 50.0 to account 16
+2018-03-12 21:59:03 TRACE root:36 - Customer Chris transfered 25.0 from account 16 to account 4
+2018-03-12 22:01:16 TRACE root:36 - Account [accID=1, balance=315.8, approved=true, owners= [Jack ]]
+2018-03-12 22:01:16 TRACE root:36 - Account [accID=4, balance=20015.0, approved=true, owners= [Jack ]]
+2018-03-12 22:01:16 TRACE root:36 - Account [accID=16, balance=25.0, approved=true, owners= [Chris ]]
+2018-03-12 22:01:16 TRACE root:36 - Customer [name=Chris, password=1111, accounts=[Account [accID=16, balance=25.0, approved=true, owners= [Chris ]]]]
+2018-03-12 22:01:16 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=20015.0, approved=true, owners= [Jack ]]]]
+2018-03-12 22:01:16 TRACE root:36 - Employee [customers=[], name=Nick, password=1234]
+2018-03-12 22:01:16 TRACE root:36 - Employee [customers=[], name=Bill, password=word]
+2018-03-12 22:01:16 TRACE root:36 - Admin [customers=[Customer [name=Chris, password=1111, accounts=[Account [accID=16, balance=25.0, approved=true, owners= [Chris ]]]], Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=20015.0, approved=true, owners= [Jack ]]]]], name=Jake, password=54321]
+2018-03-12 22:21:53 DEBUG root:31 - Customer found
+2018-03-12 22:21:53 DEBUG root:31 - Customer found
+2018-03-12 22:21:53 DEBUG root:31 - Employee found
+2018-03-12 22:21:53 DEBUG root:31 - Employee found
+2018-03-12 22:21:53 DEBUG root:31 - Admin found
+2018-03-12 22:22:03 TRACE root:36 - Customer Jack logged on
+2018-03-12 22:22:22 TRACE root:36 - Customer Jack deposited 100.0 to account 1
+2018-03-12 22:24:35 DEBUG root:31 - Customer found
+2018-03-12 22:24:35 DEBUG root:31 - Customer found
+2018-03-12 22:24:35 DEBUG root:31 - Employee found
+2018-03-12 22:24:35 DEBUG root:31 - Employee found
+2018-03-12 22:24:35 DEBUG root:31 - Admin found
+2018-03-12 22:24:56 TRACE root:36 - Customer Jack logged on
+2018-03-12 22:25:07 TRACE root:36 - Customer Jack deposited 50.0 to account 1
+2018-03-12 22:26:10 TRACE root:36 - Customer Jack transfered 50.0 from account 1 to account 4
+2018-03-12 22:26:55 TRACE root:36 - Customer Jack applied for an account
+2018-03-12 22:27:24 TRACE root:36 - Account [accID=1, balance=315.8, approved=true, owners= [Jack ]]
+2018-03-12 22:27:24 TRACE root:36 - Account [accID=4, balance=20040.0, approved=true, owners= [Jack ]]
+2018-03-12 22:27:24 TRACE root:36 - Account [accID=16, balance=0.0, approved=false, owners= [Chris ]]
+2018-03-12 22:27:24 TRACE root:36 - Account [accID=18, balance=0.0, approved=false, owners= []]
+2018-03-12 22:27:24 TRACE root:36 - Customer [name=Chris, password=1111, accounts=[Account [accID=16, balance=0.0, approved=false, owners= [Chris ]]]]
+2018-03-12 22:27:24 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=20040.0, approved=true, owners= [Jack ]]]]
+2018-03-12 22:27:24 TRACE root:36 - Employee [customers=[], name=Nick, password=1234]
+2018-03-12 22:27:24 TRACE root:36 - Employee [customers=[], name=Bill, password=word]
+2018-03-12 22:27:24 TRACE root:36 - Admin [customers=[], name=Jake, password=54321]
+2018-03-12 22:27:50 DEBUG root:31 - Customer found
+2018-03-12 22:27:50 DEBUG root:31 - Customer found
+2018-03-12 22:27:50 DEBUG root:31 - Employee found
+2018-03-12 22:27:50 DEBUG root:31 - Employee found
+2018-03-12 22:27:50 DEBUG root:31 - Admin found
+2018-03-12 22:28:05 TRACE root:36 - Customer Chris logged on
+2018-03-12 22:32:36 TRACE root:36 - Account [accID=1, balance=315.8, approved=true, owners= [Jack ]]
+2018-03-12 22:32:36 TRACE root:36 - Account [accID=18, balance=0.0, approved=false, owners= []]
+2018-03-12 22:32:36 TRACE root:36 - Account [accID=4, balance=20040.0, approved=true, owners= [Jack ]]
+2018-03-12 22:32:36 TRACE root:36 - Account [accID=16, balance=0.0, approved=false, owners= [Chris ]]
+2018-03-12 22:32:36 TRACE root:36 - Customer [name=Chris, password=1111, accounts=[Account [accID=16, balance=0.0, approved=false, owners= [Chris ]]]]
+2018-03-12 22:32:36 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=20040.0, approved=true, owners= [Jack ]]]]
+2018-03-12 22:32:36 TRACE root:36 - Employee [customers=[], name=Nick, password=1234]
+2018-03-12 22:32:36 TRACE root:36 - Employee [customers=[], name=Bill, password=word]
+2018-03-12 22:32:36 TRACE root:36 - Admin [customers=[], name=Jake, password=54321]
+2018-03-12 22:32:43 DEBUG root:31 - Customer found
+2018-03-12 22:32:43 DEBUG root:31 - Customer found
+2018-03-12 22:32:43 DEBUG root:31 - Employee found
+2018-03-12 22:32:43 DEBUG root:31 - Employee found
+2018-03-12 22:32:43 DEBUG root:31 - Admin found
+2018-03-12 22:32:55 TRACE root:36 - Account [accID=1, balance=315.8, approved=true, owners= [Jack ]]
+2018-03-12 22:32:55 TRACE root:36 - Account [accID=18, balance=0.0, approved=false, owners= []]
+2018-03-12 22:32:55 TRACE root:36 - Account [accID=4, balance=20040.0, approved=true, owners= [Jack ]]
+2018-03-12 22:32:55 TRACE root:36 - Account [accID=16, balance=0.0, approved=false, owners= [Chris ]]
+2018-03-12 22:32:55 TRACE root:36 - Customer [name=Chris, password=1111, accounts=[Account [accID=16, balance=0.0, approved=false, owners= [Chris ]]]]
+2018-03-12 22:32:55 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=20040.0, approved=true, owners= [Jack ]]]]
+2018-03-12 22:32:55 TRACE root:36 - Employee [customers=[], name=Nick, password=1234]
+2018-03-12 22:32:55 TRACE root:36 - Employee [customers=[], name=Bill, password=word]
+2018-03-12 22:32:55 TRACE root:36 - Admin [customers=[], name=Jake, password=54321]
+2018-03-12 22:34:29 DEBUG root:31 - Customer found
+2018-03-12 22:34:29 DEBUG root:31 - Customer found
+2018-03-12 22:34:29 DEBUG root:31 - Employee found
+2018-03-12 22:34:29 DEBUG root:31 - Employee found
+2018-03-12 22:34:29 DEBUG root:31 - Admin found
+2018-03-12 22:34:56 TRACE root:36 - Customer Jack logged on
+2018-03-12 22:35:03 TRACE root:36 - Customer Jack applied for an account
+2018-03-12 22:35:32 TRACE root:36 - Admin Jake logged on
+2018-03-12 22:35:57 TRACE root:36 - Account 16 terminated 
+2018-03-12 22:36:17 DEBUG root:31 - 0
+2018-03-12 22:36:50 TRACE root:36 - Account 18 terminated 
+2018-03-12 22:38:34 TRACE root:36 - Customer Chris logged on
+2018-03-12 22:38:57 TRACE root:36 - Customer Chris applied for jointAccount with id 4
+2018-03-12 22:39:06 WARN  root:21 - User attempted to access invalid id 4
+2018-03-12 22:40:30 TRACE root:36 - Employee Nick logged on
+2018-03-12 22:40:55 DEBUG root:31 - 0
+2018-03-12 22:40:58 TRACE root:36 - Account application 4 approved by Nick
+2018-03-12 22:42:05 TRACE root:36 - Account [accID=1, balance=315.8, approved=true, owners= [Jack ]]
+2018-03-12 22:42:05 TRACE root:36 - Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]
+2018-03-12 22:42:05 TRACE root:36 - Customer [name=Chris, password=1111, accounts=[Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]]]
+2018-03-12 22:42:05 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]]]
+2018-03-12 22:42:05 TRACE root:36 - Employee [customers=[Customer [name=Chris, password=1111, accounts=[Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]]]], name=Nick, password=1234]
+2018-03-12 22:42:05 TRACE root:36 - Employee [customers=[], name=Bill, password=word]
+2018-03-12 22:42:05 TRACE root:36 - Admin [customers=[Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]]]], name=Jake, password=54321]
+2018-03-12 22:46:33 DEBUG root:31 - Customer found
+2018-03-12 22:46:33 DEBUG root:31 - Customer found
+2018-03-12 22:46:33 DEBUG root:31 - Employee found
+2018-03-12 22:46:33 DEBUG root:31 - Employee found
+2018-03-12 22:46:33 DEBUG root:31 - Admin found
+2018-03-12 22:47:56 TRACE root:36 - New customer created Customer [name=Dave, password=pass, accounts=[]]
+2018-03-12 22:47:56 TRACE root:36 - Customer Dave logged on
+2018-03-12 22:49:56 DEBUG root:31 - Customer found
+2018-03-12 22:49:56 DEBUG root:31 - Customer found
+2018-03-12 22:49:56 DEBUG root:31 - Employee found
+2018-03-12 22:49:56 DEBUG root:31 - Employee found
+2018-03-12 22:49:56 DEBUG root:31 - Admin found
+2018-03-12 22:50:07 TRACE root:36 - New customer created Customer [name=Dave, password=pass, accounts=[]]
+2018-03-12 22:50:07 TRACE root:36 - Customer Dave logged on
+2018-03-12 22:50:15 TRACE root:36 - Customer Dave applied for an account
+2018-03-12 22:50:23 TRACE root:36 - Customer Dave applied for jointAccount with id 4
+2018-03-12 22:50:31 TRACE root:36 - Employee Nick logged on
+2018-03-12 22:50:51 DEBUG root:31 - 0
+2018-03-12 22:50:54 TRACE root:36 - Account application 20 approved by Nick
+2018-03-12 22:59:27 DEBUG root:31 - Customer found
+2018-03-12 22:59:27 DEBUG root:31 - Customer found
+2018-03-12 22:59:27 DEBUG root:31 - Employee found
+2018-03-12 22:59:27 DEBUG root:31 - Employee found
+2018-03-12 22:59:27 DEBUG root:31 - Admin found
+2018-03-12 22:59:27 DEBUG root:31 - Customer found
+2018-03-12 22:59:41 TRACE root:36 - Employee Nick logged on
+2018-03-12 23:00:38 DEBUG root:31 - Customer found
+2018-03-12 23:00:38 DEBUG root:31 - Customer found
+2018-03-12 23:00:38 DEBUG root:31 - Employee found
+2018-03-12 23:00:38 DEBUG root:31 - Employee found
+2018-03-12 23:00:38 DEBUG root:31 - Admin found
+2018-03-12 23:00:38 DEBUG root:31 - Customer found
+2018-03-12 23:00:57 TRACE root:36 - Customer Dave logged on
+2018-03-12 23:01:30 TRACE root:36 - Admin Jake logged on
+2018-03-12 23:03:05 DEBUG root:31 - Customer found
+2018-03-12 23:03:05 DEBUG root:31 - Customer found
+2018-03-12 23:03:05 DEBUG root:31 - Employee found
+2018-03-12 23:03:05 DEBUG root:31 - Employee found
+2018-03-12 23:03:05 DEBUG root:31 - Admin found
+2018-03-12 23:03:05 DEBUG root:31 - Customer found
+2018-03-12 23:03:34 TRACE root:36 - Admin Jake logged on
+2018-03-12 23:07:09 DEBUG root:31 - Customer found
+2018-03-12 23:07:09 DEBUG root:31 - Customer found
+2018-03-12 23:07:09 DEBUG root:31 - Employee found
+2018-03-12 23:07:09 DEBUG root:31 - Employee found
+2018-03-12 23:07:09 DEBUG root:31 - Admin found
+2018-03-12 23:07:09 DEBUG root:31 - Customer found
+2018-03-12 23:07:28 TRACE root:36 - Admin Jake logged on
+2018-03-12 23:12:41 DEBUG root:31 - Customer found
+2018-03-12 23:12:41 DEBUG root:31 - Customer found
+2018-03-12 23:12:41 DEBUG root:31 - Employee found
+2018-03-12 23:12:41 DEBUG root:31 - Employee found
+2018-03-12 23:12:41 DEBUG root:31 - Admin found
+2018-03-12 23:12:41 DEBUG root:31 - Customer found
+2018-03-12 23:12:57 TRACE root:36 - Customer Dave logged on
+2018-03-12 23:13:02 TRACE root:36 - Customer Dave applied for an account
+2018-03-12 23:13:08 TRACE root:36 - Customer Dave applied for jointAccount with id 4
+2018-03-12 23:13:33 DEBUG root:31 - Customer found
+2018-03-12 23:13:33 DEBUG root:31 - Customer found
+2018-03-12 23:13:33 DEBUG root:31 - Employee found
+2018-03-12 23:13:33 DEBUG root:31 - Employee found
+2018-03-12 23:13:33 DEBUG root:31 - Admin found
+2018-03-12 23:13:33 DEBUG root:31 - Customer found
+2018-03-12 23:14:26 TRACE root:36 - Customer Dave logged on
+2018-03-12 23:15:03 DEBUG root:31 - Customer found
+2018-03-12 23:15:03 DEBUG root:31 - Customer found
+2018-03-12 23:15:03 DEBUG root:31 - Employee found
+2018-03-12 23:15:03 DEBUG root:31 - Employee found
+2018-03-12 23:15:03 DEBUG root:31 - Admin found
+2018-03-12 23:15:03 DEBUG root:31 - Customer found
+2018-03-12 23:15:06 TRACE root:36 - Account [accID=1, balance=315.8, approved=true, owners= [Jack ]]
+2018-03-12 23:15:06 TRACE root:36 - Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]
+2018-03-12 23:15:06 TRACE root:36 - Account [accID=21, balance=0.0, approved=false, owners= []]
+2018-03-12 23:15:06 TRACE root:36 - Account [accID=20, balance=0.0, approved=false, owners= [Dave ]]
+2018-03-12 23:15:06 TRACE root:36 - Customer [name=Chris, password=1111, accounts=[Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]]]
+2018-03-12 23:15:06 TRACE root:36 - Customer [name=Dave, password=pass, accounts=[Account [accID=20, balance=0.0, approved=false, owners= [Dave ]]]]
+2018-03-12 23:15:06 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]]]
+2018-03-12 23:15:06 TRACE root:36 - Employee [customers=[], name=Nick, password=1234]
+2018-03-12 23:15:06 TRACE root:36 - Employee [customers=[], name=Bill, password=word]
+2018-03-12 23:15:06 TRACE root:36 - Admin [customers=[], name=Jake, password=54321]
+2018-03-12 23:16:01 DEBUG root:31 - Customer found
+2018-03-12 23:16:01 DEBUG root:31 - Customer found
+2018-03-12 23:16:01 DEBUG root:31 - Employee found
+2018-03-12 23:16:01 DEBUG root:31 - Employee found
+2018-03-12 23:16:01 DEBUG root:31 - Admin found
+2018-03-12 23:16:01 DEBUG root:31 - Customer found
+2018-03-12 23:16:19 TRACE root:36 - Customer Dave logged on
+2018-03-12 23:18:33 TRACE root:36 - Account [accID=1, balance=315.8, approved=true, owners= [Jack ]]
+2018-03-12 23:18:33 TRACE root:36 - Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]
+2018-03-12 23:18:33 TRACE root:36 - Account [accID=21, balance=0.0, approved=false, owners= []]
+2018-03-12 23:18:33 TRACE root:36 - Account [accID=20, balance=0.0, approved=false, owners= [Dave ]]
+2018-03-12 23:18:33 TRACE root:36 - Customer [name=Chris, password=1111, accounts=[Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]]]
+2018-03-12 23:18:33 TRACE root:36 - Customer [name=Dave, password=pass, accounts=[Account [accID=20, balance=0.0, approved=false, owners= [Dave ]]]]
+2018-03-12 23:18:33 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]]]
+2018-03-12 23:18:33 TRACE root:36 - Employee [customers=[], name=Nick, password=1234]
+2018-03-12 23:18:33 TRACE root:36 - Employee [customers=[], name=Bill, password=word]
+2018-03-12 23:18:33 TRACE root:36 - Admin [customers=[], name=Jake, password=54321]
+2018-03-12 23:20:17 DEBUG root:31 - Customer found
+2018-03-12 23:20:17 DEBUG root:31 - Customer found
+2018-03-12 23:20:17 DEBUG root:31 - Employee found
+2018-03-12 23:20:17 DEBUG root:31 - Employee found
+2018-03-12 23:20:17 DEBUG root:31 - Admin found
+2018-03-12 23:20:17 DEBUG root:31 - Customer found
+2018-03-12 23:20:31 TRACE root:36 - Customer Dave logged on
+2018-03-12 23:21:12 TRACE root:36 - Account [accID=1, balance=315.8, approved=true, owners= [Jack ]]
+2018-03-12 23:21:12 TRACE root:36 - Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]
+2018-03-12 23:21:12 TRACE root:36 - Account [accID=21, balance=0.0, approved=false, owners= []]
+2018-03-12 23:21:12 TRACE root:36 - Account [accID=20, balance=0.0, approved=false, owners= [Dave ]]
+2018-03-12 23:21:12 TRACE root:36 - Customer [name=Chris, password=1111, accounts=[Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]]]
+2018-03-12 23:21:12 TRACE root:36 - Customer [name=Dave, password=pass, accounts=[Account [accID=20, balance=0.0, approved=false, owners= [Dave ]]]]
+2018-03-12 23:21:12 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=315.8, approved=true, owners= [Jack ]], Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]]]
+2018-03-12 23:21:12 TRACE root:36 - Employee [customers=[], name=Nick, password=1234]
+2018-03-12 23:21:12 TRACE root:36 - Employee [customers=[], name=Bill, password=word]
+2018-03-12 23:21:12 TRACE root:36 - Admin [customers=[], name=Jake, password=54321]
+2018-03-12 23:21:45 DEBUG root:31 - Customer found
+2018-03-12 23:21:45 DEBUG root:31 - Customer found
+2018-03-12 23:21:45 DEBUG root:31 - Employee found
+2018-03-12 23:21:45 DEBUG root:31 - Employee found
+2018-03-12 23:21:45 DEBUG root:31 - Admin found
+2018-03-12 23:21:45 DEBUG root:31 - Customer found
+2018-03-12 23:21:55 TRACE root:36 - Customer Dave logged on
+2018-03-12 23:23:12 DEBUG root:31 - Customer found
+2018-03-12 23:23:12 DEBUG root:31 - Customer found
+2018-03-12 23:23:12 DEBUG root:31 - Employee found
+2018-03-12 23:23:12 DEBUG root:31 - Employee found
+2018-03-12 23:23:12 DEBUG root:31 - Admin found
+2018-03-12 23:23:12 DEBUG root:31 - Customer found
+2018-03-12 23:23:23 TRACE root:36 - Customer Dave logged on
+2018-03-12 23:23:30 TRACE root:36 - Customer Dave applied for an account
+2018-03-12 23:23:45 TRACE root:36 - Employee Nick logged on
+2018-03-12 23:23:59 DEBUG root:31 - 0
+2018-03-12 23:24:08 DEBUG root:31 - 0
+2018-03-12 23:24:11 TRACE root:36 - Account application 21 approved by Nick
+2018-03-12 23:24:17 DEBUG root:31 - 0
+2018-03-12 23:25:21 TRACE root:36 - Customer Dave logged on
+2018-03-12 23:25:45 TRACE root:36 - Admin Jake logged on
+2018-03-12 23:25:59 TRACE root:36 - Admin Jake deposited 2000.0 to account 21
+2018-03-12 23:26:03 TRACE root:36 - Admin Jake deposited 1000.0 to account 21
+2018-03-12 23:26:19 TRACE root:36 - Admin Jake transfered 500.0 from account 21 to account 1
+2018-03-12 23:26:38 TRACE root:36 - Account [accID=1, balance=815.8, approved=true, owners= [Jack ]]
+2018-03-12 23:26:38 TRACE root:36 - Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]
+2018-03-12 23:26:38 TRACE root:36 - Account [accID=21, balance=500.0, approved=true, owners= [Dave ]]
+2018-03-12 23:26:38 TRACE root:36 - Customer [name=Chris, password=1111, accounts=[Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]]]
+2018-03-12 23:26:38 TRACE root:36 - Customer [name=Dave, password=pass, accounts=[Account [accID=21, balance=500.0, approved=true, owners= [Dave ]]]]
+2018-03-12 23:26:38 TRACE root:36 - Customer [name=Jack, password=1234, accounts=[Account [accID=1, balance=815.8, approved=true, owners= [Jack ]], Account [accID=4, balance=20040.0, approved=true, owners= [Jack Chris ]]]]
+2018-03-12 23:26:38 TRACE root:36 - Employee [customers=[Customer [name=Dave, password=pass, accounts=[Account [accID=21, balance=500.0, approved=true, owners= [Dave ]]]]], name=Nick, password=1234]
+2018-03-12 23:26:38 TRACE root:36 - Employee [customers=[], name=Bill, password=word]
+2018-03-12 23:26:38 TRACE root:36 - Admin [customers=[], name=Jake, password=54321]
+2018-03-13 00:00:34 DEBUG root:31 - Customer found
+2018-03-13 00:00:34 DEBUG root:31 - Customer found
+2018-03-13 00:00:35 DEBUG root:31 - Employee found
+2018-03-13 00:00:35 DEBUG root:31 - Employee found
+2018-03-13 00:00:35 DEBUG root:31 - Admin found
+2018-03-13 00:02:28 DEBUG root:31 - Customer found
+2018-03-13 00:02:28 DEBUG root:31 - Customer found
+2018-03-13 00:02:28 DEBUG root:31 - Employee found
+2018-03-13 00:02:28 DEBUG root:31 - Employee found
+2018-03-13 00:02:28 DEBUG root:31 - Admin found
+2018-03-13 00:12:13 DEBUG root:31 - Customer found
+2018-03-13 00:12:14 DEBUG root:31 - Customer found
+2018-03-13 00:12:14 DEBUG root:31 - Employee found
+2018-03-13 00:12:14 DEBUG root:31 - Employee found
+2018-03-13 00:12:14 DEBUG root:31 - Admin found
+2018-03-13 00:14:13 DEBUG root:31 - Customer found
+2018-03-13 00:14:14 DEBUG root:31 - Customer found
+2018-03-13 00:14:14 DEBUG root:31 - Employee found
+2018-03-13 00:14:14 DEBUG root:31 - Employee found
+2018-03-13 00:14:14 DEBUG root:31 - Admin found
+2018-03-13 00:15:56 DEBUG root:31 - Customer found
+2018-03-13 00:15:56 DEBUG root:31 - Customer found
+2018-03-13 00:15:56 DEBUG root:31 - Employee found
+2018-03-13 00:15:56 DEBUG root:31 - Employee found
+2018-03-13 00:15:56 DEBUG root:31 - Admin found
+2018-03-13 00:16:30 DEBUG root:31 - Customer found
+2018-03-13 00:16:30 DEBUG root:31 - Customer found
+2018-03-13 00:16:30 DEBUG root:31 - Employee found
+2018-03-13 00:16:31 DEBUG root:31 - Employee found
+2018-03-13 00:16:31 DEBUG root:31 - Admin found
+2018-03-13 00:25:11 DEBUG root:31 - Customer found
+2018-03-13 00:25:12 DEBUG root:31 - Customer found
+2018-03-13 00:25:12 DEBUG root:31 - Employee found
+2018-03-13 00:25:12 DEBUG root:31 - Employee found
+2018-03-13 00:25:12 DEBUG root:31 - Admin found
+2018-03-13 00:25:34 DEBUG root:31 - Customer found
+2018-03-13 00:25:35 DEBUG root:31 - Customer found
+2018-03-13 00:25:35 DEBUG root:31 - Employee found
+2018-03-13 00:25:35 DEBUG root:31 - Employee found
+2018-03-13 00:25:35 DEBUG root:31 - Admin found

@@ -92,7 +92,7 @@ public class Account implements Serializable{
 
 	@Override
 	public String toString() {
-		String string = "Account [uniqueID="+accId +", balance=" + balance + ", approved=" + approved + ", owners= [";
+		String string = "Account [accID="+accId +", balance=" + balance + ", approved=" + approved + ", owners= [";
 		for(Customer o: owners) {
 			String temp = o.getName()+ " ";
 			string = string.concat(temp);

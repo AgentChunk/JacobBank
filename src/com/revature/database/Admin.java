@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.revature.dao.BankDao;
+import com.revature.dao.BankDaoImp;
 import com.revature.io.LoggingUtil;
 
 import javafx.util.Pair;
@@ -39,30 +41,37 @@ public class Admin extends Employee {
 	//Use this to create a new Admin
 	//returns a new Admin and adds it to the bank
 	public static Admin createAdmin(String name,String password) {
-		Admin admin = new Admin(Bank.newUserId(0),name,password);
+		BankDao bd = new BankDaoImp();
+		Admin admin = new Admin(name,password);
+		//add admin to users table and gets its id
+		int id = bd.createUserPreparedStmt(admin);
+		admin.setId(id);
+		
+		//add admin to bank's admins
 		Bank.getAdmins().add(admin);
 		return admin;
 	}
 	
-	//Throws exception if the id is already being used in the bank. 
-	public static Admin createAdmin(int id, String name, String password) throws IllegalArgumentException {
-		if(!Bank.validUserId(id)) throw new IllegalArgumentException();
-		Admin admin = new Admin(Bank.newUserId(id),name,password);
+	public static Admin createAdmin(int id, String name, String password) {
+		Admin admin = new Admin(id,name,password);
 		Bank.getAdmins().add(admin);
 		return admin;
 	}
 	
 	
+	//remove account from database and bank
 	public void cancelAccount(Account account) {
+		BankDao bd = new BankDaoImp();
 		Bank.getAccounts().remove(account);
 		List<Customer> customers = account.getOwners();
 		for(Customer c: customers){
 			c.getAccounts().remove(account);
 		}
+		bd.deleteAccount(account.getID());
 	}
 	
 	public void printAccounts() {
-		Set<Account> accounts = Bank.getAccounts();
+		List<Account> accounts = Bank.getAccounts();
 		for(Account a: accounts) {
 			System.out.println(a.toString());
 		}
@@ -76,16 +85,22 @@ public class Admin extends Employee {
 	}
 	
 	public void withdraw(double amount,Account acc) throws IllegalArgumentException {
+		BankDao bd = new BankDaoImp();
+		bd.withdraw(acc.getID(), amount);
 		acc.withdraw(amount);
 		LoggingUtil.logTrace("Admin "+getName()+" deposited "+ amount+" to account "+acc.getID());
 	}
 	
-	public void deposit(double amount, Account acc) throws IllegalArgumentException {
+	public void deposit(double amount, Account acc) throws IllegalArgumentException {		
+		BankDao bd = new BankDaoImp();
+		bd.deposit(acc.getID(), amount);
 		acc.deposit(amount);
 		LoggingUtil.logTrace("Admin "+getName()+" deposited "+ amount +" to account "+ acc.getID());
 	}
 	
 	public void transfer(double amount, Account a1, Account a2) throws IllegalArgumentException {
+		BankDao bd = new BankDaoImp();
+		bd.transfer(a1.getID(), a2.getID(), amount);
 		a1.transfer(amount,a2);
 		LoggingUtil.logTrace("Admin "+getName()+" transfered "+ amount+" from account "+ a1.getID()+" to account "+a2.getID());
 	}

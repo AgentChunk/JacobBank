@@ -15,6 +15,7 @@ import com.revature.dao.BankDaoImp;
 import com.revature.database.Account;
 import com.revature.database.Bank;
 import com.revature.database.Login;
+import com.revature.io.LoggingUtil;
 
 public class BankDaoImpTest {
 
@@ -71,6 +72,13 @@ public class BankDaoImpTest {
 		assertEquals(5,list.size());
 	}
 	
+	@Test
+	public void testCreateAccountPreparedStmt() {
+		BankDaoImp bd = new BankDaoImp();
+		Account acc = new Account();
+		int test = bd.createAccountPreparedStmt(acc);
+		LoggingUtil.logDebug(""+test);
+	}
 	
 
 }
