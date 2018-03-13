@@ -277,7 +277,7 @@ public class BankDaoImp implements BankDao {
 		String sql = "UPDATE ACCOUNTS SET BALANCE =?, APPROVED =? WHERE ACCOUNT_ID =?";
 		Connection conn = null;
 		Savepoint s = null;
-		
+		LoggingUtil.logDebug(""+acc.isApproved() + ", " +acc.getID());
 		try {
 			conn = ConnectionFactory.getInstance().getConnection();
 			conn.setAutoCommit(false);
@@ -286,9 +286,18 @@ public class BankDaoImp implements BankDao {
 			PreparedStatement ps = 
 					conn.prepareStatement(sql);
 			ps.setDouble(1, acc.getBalance());
-			ps.setBoolean(2, acc.isApproved());
-			ps.setInt(3, acc.getID());
+			if(acc.isApproved()) {
+				ps.setInt(2, 1);
+				LoggingUtil.logDebug("Set account approved");
+			}else {
+				ps.setInt(2, 0);
+			}
 			
+			
+			
+			
+			ps.setInt(3, acc.getID());
+			ps.executeQuery();
 	
 			conn.commit();
 			

@@ -225,9 +225,15 @@ public class Customer implements Serializable, Login{
 					
 					do {
 						System.out.println("Enter the account id of the account applying for");
-						id = scan.nextInt();
-						if(!Bank.bankHasAccountId(id,Bank.getAccounts())) {
-							System.out.println("Invalid ID");
+						if(scan.hasNextInt()) {
+							id = scan.nextInt();
+							if(!Bank.bankHasAccountId(id,Bank.getAccounts())) {
+								System.out.println("Invalid ID");
+							}
+						}
+						else {
+							System.out.println("Invalid input");
+							scan.next();
 						}
 					}while(!Bank.bankHasAccountId(id,Bank.getAccounts()));
 					
@@ -254,61 +260,69 @@ public class Customer implements Serializable, Login{
 	private void selectAccount(Scanner scan) {
 		boolean acc =true;
 		char cmd;
-		
-		System.out.println("Enter the id of the account you wish to select :");
-		
-		int id = scan.nextInt();
-		boolean exists = false;
-		Account a1 = null;
-		for(Account a: accounts) {
-			if(a.getID()==id) {
-				exists = true;
-				a1=a;
-			}
-		}
-		
-		if(exists) {
-			//Once account is found it is printed
-			System.out.println("Account "+ id +" selected");
-			System.out.println(a1);
-			//Then the user is asked what they want to do with the account
-			
-			
-			while(acc) {
-				System.out.println("Enter D to deposit, W to withdraw, T to transfer, or Q to go back");
-				cmd = scan.next().charAt(0);
-				scan.nextLine();
-				
-				switch(cmd) {
-					case 'D':
-						double deposit = Account.scanDeposit(a1, scan);
-						deposit(deposit, a1);
-						System.out.println("Succefully deposited. New balance is :"+ String.format("%.2f",a1.getBalance()));
-						break;
-						
-					case 'W':
-						double withdraw= Account.scanWithdraw(a1,scan);
-						withdraw(withdraw,a1);				
-						System.out.println("Succefully withdrew. New balance is :"+String.format("%.2f",a1.getBalance()));
-						break;
-						
-					case 'T':
-						Pair<Double,Account> transfer = Account.scanTransfer(a1, scan);
-						transfer(transfer.getKey(), a1, transfer.getValue());
-						System.out.println("Succefully transfered. New balance is :"+ String.format("%.2f",a1.getBalance()));
-						break;
-					
-					case 'Q':		
-						acc = false;
-						break;
-					default:
-						System.out.println("Invalid Command");
+		if(this.getAccounts().size()>0) {
+			System.out.println("Enter the id of the account you wish to select :");
+			int id =0;
+			boolean exists = false;
+			Account a1 = null;
+			if(scan.hasNext()) {
+				id = scan.nextInt();
+				for(Account a: accounts) {
+					if(a.getID()==id) {
+						exists = true;
+						a1=a;
+					}
 				}
+				if(exists) {
+					//Once account is found it is printed
+					System.out.println("Account "+ id +" selected");
+					System.out.println(a1);
+					//Then the user is asked what they want to do with the account
+					
+					
+					while(acc) {
+						System.out.println("Enter D to deposit, W to withdraw, T to transfer, or Q to go back");
+						cmd = scan.next().charAt(0);
+						scan.nextLine();
+						
+						switch(cmd) {
+							case 'D':
+								double deposit = Account.scanDeposit(a1, scan);
+								deposit(deposit, a1);
+								System.out.println("Succefully deposited. New balance is :"+ String.format("%.2f",a1.getBalance()));
+								break;
+								
+							case 'W':
+								double withdraw= Account.scanWithdraw(a1,scan);
+								withdraw(withdraw,a1);				
+								System.out.println("Succefully withdrew. New balance is :"+String.format("%.2f",a1.getBalance()));
+								break;
+								
+							case 'T':
+								Pair<Double,Account> transfer = Account.scanTransfer(a1, scan);
+								transfer(transfer.getKey(), a1, transfer.getValue());
+								System.out.println("Succefully transfered. New balance is :"+ String.format("%.2f",a1.getBalance()));
+								break;
+							
+							case 'Q':		
+								acc = false;
+								break;
+							default:
+								System.out.println("Invalid Command");
+						}
+					}
+					
+				}else {
+					System.out.println("Invalid id");
+					LoggingUtil.logWarn("User attempted to access invalid id " +id);
+				}
+			}else {
+				System.out.println("Invalid input");
+				scan.next();
 			}
 			
 		}else {
-			System.out.println("Invalid id");
-			LoggingUtil.logWarn("User attempted to access invalid id " +id);
+			System.out.println("You have no approved accounts");
 		}
 	}
 	

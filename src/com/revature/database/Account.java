@@ -3,6 +3,7 @@ package com.revature.database;
 import java.io.Serializable;
 import javafx.util.Pair;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
@@ -112,12 +113,18 @@ public class Account implements Serializable{
 	
 	//gets amount to deposit
 	public static double scanDeposit(Account acc, Scanner scan) {
-		double deposit;
+		double deposit=-1;
 		do {
-			System.out.println("Enter amount to deposit :");
-			deposit = scan.nextDouble();
-			if(deposit<0) {
-				System.out.println("Invalid amount");
+			System.out.println("Enter amount to withdraw :");
+			
+			if(scan.hasNextDouble()) {
+				deposit = scan.nextDouble();
+				if(deposit<0) {
+					System.out.println("Invalid amount");
+				}
+			}else {
+				System.out.println("Invalid input");
+				scan.next();
 			}
 		}while(deposit<0);
 		
@@ -125,34 +132,53 @@ public class Account implements Serializable{
 	}
 	
 	public static double scanWithdraw(Account acc, Scanner scan) {
-		double withdraw;
+		double withdraw =-1;
 		do {
+			
+			
 			System.out.println("Enter amount to withdraw :");
-			withdraw = scan.nextDouble();
-			if(withdraw<0 || withdraw>acc.getBalance()) {
-				System.out.println("Invalid amount");
+			
+			if(scan.hasNextDouble()) {
+				withdraw = scan.nextDouble();
+				if(withdraw<0 || withdraw>acc.getBalance()) {
+					System.out.println("Invalid amount");
+				}
+			}else {
+				System.out.println("Invalid input");
+				scan.next();
 			}
+				
 		}while(withdraw<0 || withdraw>acc.getBalance());
+		
 		return withdraw;
 	}
 	
 	public static Pair<Double,Account> scanTransfer(Account acc, Scanner scan){
-		int id;
-		double transfer;
+		int id=0;
+		double transfer=-1;
 		do {
 			System.out.println("Enter amount to transfer :");
-			transfer = scan.nextDouble();
-			scan.nextLine();
-			if(transfer<0 || transfer>acc.getBalance()) {
-				System.out.println("Invalid amount");
+			if(scan.hasNextDouble()) {
+				transfer = scan.nextDouble();
+				if(transfer <0 || transfer >acc.getBalance()) {
+					System.out.println("Invalid amount");
+				}
+			}else {
+				System.out.println("Invalid input");
+				scan.next();
 			}
+			
 		}while(transfer<0 || transfer>acc.getBalance());
 		do {
 			System.out.println("Enter id of account to transfer too :");
-			
-			id = scan.nextInt();
-			if(!Bank.bankHasAccountId(id,Bank.getAccounts())) {
-				System.out.println("Invalid account id");
+			if(scan.hasNextInt()) {
+				id = scan.nextInt();
+				if(!Bank.bankHasAccountId(id,Bank.getAccounts())) {
+					System.out.println("Invalid account id");
+				}
+			}else {
+				System.out.println("Invalid input");
+				scan.next();
 			}
 		}while(!Bank.bankHasAccountId(id,Bank.getAccounts()));
 		Account acc1 = Bank.accountWithId(id, Bank.getAccounts());
